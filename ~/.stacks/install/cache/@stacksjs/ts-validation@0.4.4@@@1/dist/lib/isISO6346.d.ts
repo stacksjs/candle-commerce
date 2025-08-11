@@ -1,1 +1,0 @@
-export declare function isISO6346(str: string): boolean;

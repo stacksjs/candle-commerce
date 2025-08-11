@@ -1,1 +1,0 @@
-declare function isValidDate(str: string): void;
