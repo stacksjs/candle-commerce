@@ -1,0 +1,162 @@
+import { SENSITIVE_STRING } from "@smithy/smithy-client";
+import { VerifiedAccessTrustProviderFilterSensitiveLog, } from "./models_0";
+import { ResponseLaunchTemplateDataFilterSensitiveLog, } from "./models_2";
+import { VpnConnectionFilterSensitiveLog, } from "./models_3";
+export const ImageBlockPublicAccessDisabledState = {
+    unblocked: "unblocked",
+};
+export const RouteServerPropagationState = {
+    AVAILABLE: "available",
+    DELETING: "deleting",
+    PENDING: "pending",
+};
+export const SnapshotBlockPublicAccessState = {
+    block_all_sharing: "block-all-sharing",
+    block_new_sharing: "block-new-sharing",
+    unblocked: "unblocked",
+};
+export const TransitGatewayPropagationState = {
+    disabled: "disabled",
+    disabling: "disabling",
+    enabled: "enabled",
+    enabling: "enabling",
+};
+export const ImageBlockPublicAccessEnabledState = {
+    block_new_sharing: "block-new-sharing",
+};
+export const ClientCertificateRevocationListStatusCode = {
+    active: "active",
+    pending: "pending",
+};
+export const UnlimitedSupportedInstanceFamily = {
+    t2: "t2",
+    t3: "t3",
+    t3a: "t3a",
+    t4g: "t4g",
+};
+export const PartitionLoadFrequency = {
+    DAILY: "daily",
+    MONTHLY: "monthly",
+    NONE: "none",
+    WEEKLY: "weekly",
+};
+export const EkPubKeyFormat = {
+    der: "der",
+    tpmt: "tpmt",
+};
+export const EkPubKeyType = {
+    ECC_SEC_P384: "ecc-sec-p384",
+    RSA_2048: "rsa-2048",
+};
+export const IpamComplianceStatus = {
+    compliant: "compliant",
+    ignored: "ignored",
+    noncompliant: "noncompliant",
+    unmanaged: "unmanaged",
+};
+export const IpamOverlapStatus = {
+    ignored: "ignored",
+    nonoverlapping: "nonoverlapping",
+    overlapping: "overlapping",
+};
+export const IpamAddressHistoryResourceType = {
+    eip: "eip",
+    instance: "instance",
+    network_interface: "network-interface",
+    subnet: "subnet",
+    vpc: "vpc",
+};
+export const IpamDiscoveryFailureCode = {
+    assume_role_failure: "assume-role-failure",
+    throttling_failure: "throttling-failure",
+    unauthorized_failure: "unauthorized-failure",
+};
+export const IpamPublicAddressType = {
+    AMAZON_OWNED_CONTIG: "amazon-owned-contig",
+    AMAZON_OWNED_EIP: "amazon-owned-eip",
+    BYOIP: "byoip",
+    EC2_PUBLIC_IP: "ec2-public-ip",
+    SERVICE_MANAGED_BYOIP: "service-managed-byoip",
+    SERVICE_MANAGED_IP: "service-managed-ip",
+};
+export const IpamPublicAddressAssociationStatus = {
+    ASSOCIATED: "associated",
+    DISASSOCIATED: "disassociated",
+};
+export const IpamPublicAddressAwsService = {
+    AGA: "global-accelerator",
+    DMS: "database-migration-service",
+    EC2_LB: "load-balancer",
+    ECS: "elastic-container-service",
+    NAT_GATEWAY: "nat-gateway",
+    OTHER: "other",
+    RDS: "relational-database-service",
+    REDSHIFT: "redshift",
+    S2S_VPN: "site-to-site-vpn",
+};
+export const IpamResourceCidrIpSource = {
+    amazon: "amazon",
+    byoip: "byoip",
+    none: "none",
+};
+export const IpamNetworkInterfaceAttachmentStatus = {
+    available: "available",
+    in_use: "in-use",
+};
+export const IpamResourceType = {
+    eip: "eip",
+    eni: "eni",
+    ipv6_pool: "ipv6-pool",
+    public_ipv4_pool: "public-ipv4-pool",
+    subnet: "subnet",
+    vpc: "vpc",
+};
+export const IpamManagementState = {
+    ignored: "ignored",
+    managed: "managed",
+    unmanaged: "unmanaged",
+};
+export const RouteServerRouteInstallationStatus = {
+    INSTALLED: "installed",
+    REJECTED: "rejected",
+};
+export const RouteServerRouteStatus = {
+    IN_FIB: "in-fib",
+    IN_RIB: "in-rib",
+};
+export const DescribeVpnConnectionsResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.VpnConnections && {
+        VpnConnections: obj.VpnConnections.map((item) => VpnConnectionFilterSensitiveLog(item)),
+    }),
+});
+export const DetachVerifiedAccessTrustProviderResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.VerifiedAccessTrustProvider && {
+        VerifiedAccessTrustProvider: VerifiedAccessTrustProviderFilterSensitiveLog(obj.VerifiedAccessTrustProvider),
+    }),
+});
+export const VerifiedAccessInstanceUserTrustProviderClientConfigurationFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.ClientSecret && { ClientSecret: SENSITIVE_STRING }),
+});
+export const ExportVerifiedAccessInstanceClientConfigurationResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.UserTrustProvider && {
+        UserTrustProvider: VerifiedAccessInstanceUserTrustProviderClientConfigurationFilterSensitiveLog(obj.UserTrustProvider),
+    }),
+});
+export const GetInstanceTpmEkPubResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.KeyValue && { KeyValue: SENSITIVE_STRING }),
+});
+export const GetLaunchTemplateDataResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.LaunchTemplateData && {
+        LaunchTemplateData: ResponseLaunchTemplateDataFilterSensitiveLog(obj.LaunchTemplateData),
+    }),
+});
+export const GetPasswordDataResultFilterSensitiveLog = (obj) => ({
+    ...obj,
+    ...(obj.PasswordData && { PasswordData: SENSITIVE_STRING }),
+});

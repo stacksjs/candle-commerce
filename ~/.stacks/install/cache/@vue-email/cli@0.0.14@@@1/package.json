@@ -1,0 +1,94 @@
+{
+  "name": "@vue-email/cli",
+  "type": "module",
+  "version": "0.0.14",
+  "packageManager": "pnpm@8.11.0",
+  "description": "⚡️ Vue Email Generation CLI Experience",
+  "author": "Younes Barrad <younesbarraddev@gmail.com>",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Dave136",
+      "email": "davejs136@gmail.com",
+      "url": "https://github.com/Dave136"
+    },
+    {
+      "name": "Flowko",
+      "email": "younesbarraddev@gmail.com",
+      "url": "https://github.com/Flowko"
+    }
+  ],
+  "homepage": "https://vuemail.net/plugins/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vue-email/cli.git"
+  },
+  "bugs": "https://github.com/vue-email/cli/issues",
+  "keywords": [
+    "vue",
+    "vue-email",
+    "templates",
+    "mailing",
+    "vue-templates"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./cli": "./bin/vue-email.mjs"
+  },
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "vue-email": "./bin/vue-email.mjs",
+    "vue-email-cli": "./bin/vue-email.mjs",
+    "vuemail": "./bin/vue-email.mjs"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks",
+    "vue-email": "node ./bin/vue-email.mjs"
+  },
+  "dependencies": {
+    "@vue-email/compiler": "^0.8.14"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.3",
+    "@antfu/ni": "^0.21.12",
+    "@antfu/utils": "^0.7.7",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.5",
+    "@types/pretty": "^2.0.3",
+    "bumpp": "^9.3.0",
+    "citty": "^0.1.5",
+    "consola": "^3.2.3",
+    "eslint": "^8.56.0",
+    "esno": "^4.0.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "jiti": "^1.21.0",
+    "lint-staged": "^15.2.0",
+    "pathe": "^1.1.2",
+    "pnpm": "^8.15.1",
+    "pretty": "^2.0.0",
+    "scule": "^1.2.0",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}

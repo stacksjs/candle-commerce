@@ -1,0 +1,86 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
+import { DeleteDistributionTenantRequest } from "../models/models_1";
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+export { $Command };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDistributionTenantCommand}.
+ */
+export interface DeleteDistributionTenantCommandInput extends DeleteDistributionTenantRequest {
+}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDistributionTenantCommand}.
+ */
+export interface DeleteDistributionTenantCommandOutput extends __MetadataBearer {
+}
+declare const DeleteDistributionTenantCommand_base: {
+    new (input: DeleteDistributionTenantCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteDistributionTenantCommandInput, DeleteDistributionTenantCommandOutput, CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    new (input: DeleteDistributionTenantCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteDistributionTenantCommandInput, DeleteDistributionTenantCommandOutput, CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+/**
+ * <p>Deletes a distribution tenant. If you use this API operation to delete a distribution tenant that is currently enabled, the request will fail.</p> <p>To delete a distribution tenant, you must first disable the distribution tenant by using the <code>UpdateDistributionTenant</code> API operation.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudFrontClient, DeleteDistributionTenantCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
+ * // const { CloudFrontClient, DeleteDistributionTenantCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * const client = new CloudFrontClient(config);
+ * const input = { // DeleteDistributionTenantRequest
+ *   Id: "STRING_VALUE", // required
+ *   IfMatch: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteDistributionTenantCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteDistributionTenantCommandInput - {@link DeleteDistributionTenantCommandInput}
+ * @returns {@link DeleteDistributionTenantCommandOutput}
+ * @see {@link DeleteDistributionTenantCommandInput} for command's `input` shape.
+ * @see {@link DeleteDistributionTenantCommandOutput} for command's `response` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
+ *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link EntityNotFound} (client fault)
+ *  <p>The entity was not found.</p>
+ *
+ * @throws {@link InvalidIfMatchVersion} (client fault)
+ *  <p>The <code>If-Match</code> version is missing or not valid.</p>
+ *
+ * @throws {@link PreconditionFailed} (client fault)
+ *  <p>The precondition in one or more of the request fields evaluated to <code>false</code>.</p>
+ *
+ * @throws {@link ResourceNotDisabled} (client fault)
+ *  <p>The specified CloudFront resource hasn't been disabled yet.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
+ */
+export declare class DeleteDistributionTenantCommand extends DeleteDistributionTenantCommand_base {
+    /** @internal type navigation helper, not in runtime. */
+    protected static __types: {
+        api: {
+            input: DeleteDistributionTenantRequest;
+            output: {};
+        };
+        sdk: {
+            input: DeleteDistributionTenantCommandInput;
+            output: DeleteDistributionTenantCommandOutput;
+        };
+    };
+}

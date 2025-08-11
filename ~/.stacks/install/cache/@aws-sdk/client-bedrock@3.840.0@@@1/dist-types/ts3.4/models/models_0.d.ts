@@ -1,0 +1,2229 @@
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
+import { DocumentType as __DocumentType } from "@smithy/types";
+import { BedrockServiceException as __BaseException } from "./BedrockServiceException";
+export declare class AccessDeniedException extends __BaseException {
+  readonly name: "AccessDeniedException";
+  readonly $fault: "client";
+  constructor(
+    opts: __ExceptionOptionType<AccessDeniedException, __BaseException>
+  );
+}
+export declare const AgreementStatus: {
+  readonly AVAILABLE: "AVAILABLE";
+  readonly ERROR: "ERROR";
+  readonly NOT_AVAILABLE: "NOT_AVAILABLE";
+  readonly PENDING: "PENDING";
+};
+export type AgreementStatus =
+  (typeof AgreementStatus)[keyof typeof AgreementStatus];
+export interface AgreementAvailability {
+  status: AgreementStatus | undefined;
+  errorMessage?: string | undefined;
+}
+export interface GetUseCaseForModelAccessRequest {}
+export interface GetUseCaseForModelAccessResponse {
+  formData: Uint8Array | undefined;
+}
+export declare class InternalServerException extends __BaseException {
+  readonly name: "InternalServerException";
+  readonly $fault: "server";
+  constructor(
+    opts: __ExceptionOptionType<InternalServerException, __BaseException>
+  );
+}
+export declare class ResourceNotFoundException extends __BaseException {
+  readonly name: "ResourceNotFoundException";
+  readonly $fault: "client";
+  constructor(
+    opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>
+  );
+}
+export declare class ThrottlingException extends __BaseException {
+  readonly name: "ThrottlingException";
+  readonly $fault: "client";
+  constructor(
+    opts: __ExceptionOptionType<ThrottlingException, __BaseException>
+  );
+}
+export declare class ValidationException extends __BaseException {
+  readonly name: "ValidationException";
+  readonly $fault: "client";
+  constructor(
+    opts: __ExceptionOptionType<ValidationException, __BaseException>
+  );
+}
+export interface PutUseCaseForModelAccessRequest {
+  formData: Uint8Array | undefined;
+}
+export interface PutUseCaseForModelAccessResponse {}
+export declare class ConflictException extends __BaseException {
+  readonly name: "ConflictException";
+  readonly $fault: "client";
+  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>);
+}
+export interface VpcConfig {
+  subnetIds: string[] | undefined;
+  securityGroupIds: string[] | undefined;
+}
+export interface SageMakerEndpoint {
+  initialInstanceCount: number | undefined;
+  instanceType: string | undefined;
+  executionRole: string | undefined;
+  kmsEncryptionKey?: string | undefined;
+  vpc?: VpcConfig | undefined;
+}
+export type EndpointConfig =
+  | EndpointConfig.SageMakerMember
+  | EndpointConfig.$UnknownMember;
+export declare namespace EndpointConfig {
+  interface SageMakerMember {
+    sageMaker: SageMakerEndpoint;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    sageMaker?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    sageMaker: (value: SageMakerEndpoint) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: EndpointConfig, visitor: Visitor<T>) => T;
+}
+export interface Tag {
+  key: string | undefined;
+  value: string | undefined;
+}
+export interface CreateMarketplaceModelEndpointRequest {
+  modelSourceIdentifier: string | undefined;
+  endpointConfig: EndpointConfig | undefined;
+  acceptEula?: boolean | undefined;
+  endpointName: string | undefined;
+  clientRequestToken?: string | undefined;
+  tags?: Tag[] | undefined;
+}
+export declare const Status: {
+  readonly INCOMPATIBLE_ENDPOINT: "INCOMPATIBLE_ENDPOINT";
+  readonly REGISTERED: "REGISTERED";
+};
+export type Status = (typeof Status)[keyof typeof Status];
+export interface MarketplaceModelEndpoint {
+  endpointArn: string | undefined;
+  modelSourceIdentifier: string | undefined;
+  status?: Status | undefined;
+  statusMessage?: string | undefined;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
+  endpointConfig: EndpointConfig | undefined;
+  endpointStatus: string | undefined;
+  endpointStatusMessage?: string | undefined;
+}
+export interface CreateMarketplaceModelEndpointResponse {
+  marketplaceModelEndpoint: MarketplaceModelEndpoint | undefined;
+}
+export declare class ServiceQuotaExceededException extends __BaseException {
+  readonly name: "ServiceQuotaExceededException";
+  readonly $fault: "client";
+  constructor(
+    opts: __ExceptionOptionType<ServiceQuotaExceededException, __BaseException>
+  );
+}
+export interface DeleteMarketplaceModelEndpointRequest {
+  endpointArn: string | undefined;
+}
+export interface DeleteMarketplaceModelEndpointResponse {}
+export interface DeregisterMarketplaceModelEndpointRequest {
+  endpointArn: string | undefined;
+}
+export interface DeregisterMarketplaceModelEndpointResponse {}
+export declare class ServiceUnavailableException extends __BaseException {
+  readonly name: "ServiceUnavailableException";
+  readonly $fault: "server";
+  constructor(
+    opts: __ExceptionOptionType<ServiceUnavailableException, __BaseException>
+  );
+}
+export interface GetMarketplaceModelEndpointRequest {
+  endpointArn: string | undefined;
+}
+export interface GetMarketplaceModelEndpointResponse {
+  marketplaceModelEndpoint?: MarketplaceModelEndpoint | undefined;
+}
+export interface ListMarketplaceModelEndpointsRequest {
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  modelSourceEquals?: string | undefined;
+}
+export interface MarketplaceModelEndpointSummary {
+  endpointArn: string | undefined;
+  modelSourceIdentifier: string | undefined;
+  status?: Status | undefined;
+  statusMessage?: string | undefined;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
+}
+export interface ListMarketplaceModelEndpointsResponse {
+  marketplaceModelEndpoints?: MarketplaceModelEndpointSummary[] | undefined;
+  nextToken?: string | undefined;
+}
+export interface RegisterMarketplaceModelEndpointRequest {
+  endpointIdentifier: string | undefined;
+  modelSourceIdentifier: string | undefined;
+}
+export interface RegisterMarketplaceModelEndpointResponse {
+  marketplaceModelEndpoint: MarketplaceModelEndpoint | undefined;
+}
+export interface UpdateMarketplaceModelEndpointRequest {
+  endpointArn: string | undefined;
+  endpointConfig: EndpointConfig | undefined;
+  clientRequestToken?: string | undefined;
+}
+export interface UpdateMarketplaceModelEndpointResponse {
+  marketplaceModelEndpoint: MarketplaceModelEndpoint | undefined;
+}
+export interface S3DataSource {
+  s3Uri: string | undefined;
+}
+export type ModelDataSource =
+  | ModelDataSource.S3DataSourceMember
+  | ModelDataSource.$UnknownMember;
+export declare namespace ModelDataSource {
+  interface S3DataSourceMember {
+    s3DataSource: S3DataSource;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    s3DataSource?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    s3DataSource: (value: S3DataSource) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: ModelDataSource, visitor: Visitor<T>) => T;
+}
+export interface CreateCustomModelRequest {
+  modelName: string | undefined;
+  modelSourceConfig: ModelDataSource | undefined;
+  modelKmsKeyArn?: string | undefined;
+  roleArn?: string | undefined;
+  modelTags?: Tag[] | undefined;
+  clientRequestToken?: string | undefined;
+}
+export interface CreateCustomModelResponse {
+  modelArn: string | undefined;
+}
+export declare class TooManyTagsException extends __BaseException {
+  readonly name: "TooManyTagsException";
+  readonly $fault: "client";
+  resourceName?: string | undefined;
+  constructor(
+    opts: __ExceptionOptionType<TooManyTagsException, __BaseException>
+  );
+}
+export interface DeleteCustomModelRequest {
+  modelIdentifier: string | undefined;
+}
+export interface DeleteCustomModelResponse {}
+export interface GetCustomModelRequest {
+  modelIdentifier: string | undefined;
+}
+export interface TeacherModelConfig {
+  teacherModelIdentifier: string | undefined;
+  maxResponseLengthForInference?: number | undefined;
+}
+export interface DistillationConfig {
+  teacherModelConfig: TeacherModelConfig | undefined;
+}
+export type CustomizationConfig =
+  | CustomizationConfig.DistillationConfigMember
+  | CustomizationConfig.$UnknownMember;
+export declare namespace CustomizationConfig {
+  interface DistillationConfigMember {
+    distillationConfig: DistillationConfig;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    distillationConfig?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    distillationConfig: (value: DistillationConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: CustomizationConfig, visitor: Visitor<T>) => T;
+}
+export declare const CustomizationType: {
+  readonly CONTINUED_PRE_TRAINING: "CONTINUED_PRE_TRAINING";
+  readonly DISTILLATION: "DISTILLATION";
+  readonly FINE_TUNING: "FINE_TUNING";
+  readonly IMPORTED: "IMPORTED";
+};
+export type CustomizationType =
+  (typeof CustomizationType)[keyof typeof CustomizationType];
+export declare const ModelStatus: {
+  readonly ACTIVE: "Active";
+  readonly CREATING: "Creating";
+  readonly FAILED: "Failed";
+};
+export type ModelStatus = (typeof ModelStatus)[keyof typeof ModelStatus];
+export interface OutputDataConfig {
+  s3Uri: string | undefined;
+}
+export type InvocationLogSource =
+  | InvocationLogSource.S3UriMember
+  | InvocationLogSource.$UnknownMember;
+export declare namespace InvocationLogSource {
+  interface S3UriMember {
+    s3Uri: string;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    s3Uri?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    s3Uri: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: InvocationLogSource, visitor: Visitor<T>) => T;
+}
+export interface RequestMetadataBaseFilters {
+  equals?: Record<string, string> | undefined;
+  notEquals?: Record<string, string> | undefined;
+}
+export type RequestMetadataFilters =
+  | RequestMetadataFilters.AndAllMember
+  | RequestMetadataFilters.EqualsMember
+  | RequestMetadataFilters.NotEqualsMember
+  | RequestMetadataFilters.OrAllMember
+  | RequestMetadataFilters.$UnknownMember;
+export declare namespace RequestMetadataFilters {
+  interface EqualsMember {
+    equals: Record<string, string>;
+    notEquals?: never;
+    andAll?: never;
+    orAll?: never;
+    $unknown?: never;
+  }
+  interface NotEqualsMember {
+    equals?: never;
+    notEquals: Record<string, string>;
+    andAll?: never;
+    orAll?: never;
+    $unknown?: never;
+  }
+  interface AndAllMember {
+    equals?: never;
+    notEquals?: never;
+    andAll: RequestMetadataBaseFilters[];
+    orAll?: never;
+    $unknown?: never;
+  }
+  interface OrAllMember {
+    equals?: never;
+    notEquals?: never;
+    andAll?: never;
+    orAll: RequestMetadataBaseFilters[];
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    equals?: never;
+    notEquals?: never;
+    andAll?: never;
+    orAll?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    equals: (value: Record<string, string>) => T;
+    notEquals: (value: Record<string, string>) => T;
+    andAll: (value: RequestMetadataBaseFilters[]) => T;
+    orAll: (value: RequestMetadataBaseFilters[]) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: RequestMetadataFilters, visitor: Visitor<T>) => T;
+}
+export interface InvocationLogsConfig {
+  usePromptResponse?: boolean | undefined;
+  invocationLogSource: InvocationLogSource | undefined;
+  requestMetadataFilters?: RequestMetadataFilters | undefined;
+}
+export interface TrainingDataConfig {
+  s3Uri?: string | undefined;
+  invocationLogsConfig?: InvocationLogsConfig | undefined;
+}
+export interface TrainingMetrics {
+  trainingLoss?: number | undefined;
+}
+export interface Validator {
+  s3Uri: string | undefined;
+}
+export interface ValidationDataConfig {
+  validators: Validator[] | undefined;
+}
+export interface ValidatorMetric {
+  validationLoss?: number | undefined;
+}
+export interface GetCustomModelResponse {
+  modelArn: string | undefined;
+  modelName: string | undefined;
+  jobName?: string | undefined;
+  jobArn?: string | undefined;
+  baseModelArn?: string | undefined;
+  customizationType?: CustomizationType | undefined;
+  modelKmsKeyArn?: string | undefined;
+  hyperParameters?: Record<string, string> | undefined;
+  trainingDataConfig?: TrainingDataConfig | undefined;
+  validationDataConfig?: ValidationDataConfig | undefined;
+  outputDataConfig?: OutputDataConfig | undefined;
+  trainingMetrics?: TrainingMetrics | undefined;
+  validationMetrics?: ValidatorMetric[] | undefined;
+  creationTime: Date | undefined;
+  customizationConfig?: CustomizationConfig | undefined;
+  modelStatus?: ModelStatus | undefined;
+  failureMessage?: string | undefined;
+}
+export declare const SortModelsBy: {
+  readonly CREATION_TIME: "CreationTime";
+};
+export type SortModelsBy = (typeof SortModelsBy)[keyof typeof SortModelsBy];
+export declare const SortOrder: {
+  readonly ASCENDING: "Ascending";
+  readonly DESCENDING: "Descending";
+};
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
+export interface ListCustomModelsRequest {
+  creationTimeBefore?: Date | undefined;
+  creationTimeAfter?: Date | undefined;
+  nameContains?: string | undefined;
+  baseModelArnEquals?: string | undefined;
+  foundationModelArnEquals?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortModelsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+  isOwned?: boolean | undefined;
+  modelStatus?: ModelStatus | undefined;
+}
+export interface CustomModelSummary {
+  modelArn: string | undefined;
+  modelName: string | undefined;
+  creationTime: Date | undefined;
+  baseModelArn: string | undefined;
+  baseModelName: string | undefined;
+  customizationType?: CustomizationType | undefined;
+  ownerAccountId?: string | undefined;
+  modelStatus?: ModelStatus | undefined;
+}
+export interface ListCustomModelsResponse {
+  nextToken?: string | undefined;
+  modelSummaries?: CustomModelSummary[] | undefined;
+}
+export interface BatchDeleteEvaluationJobRequest {
+  jobIdentifiers: string[] | undefined;
+}
+export interface BatchDeleteEvaluationJobError {
+  jobIdentifier: string | undefined;
+  code: string | undefined;
+  message?: string | undefined;
+}
+export declare const EvaluationJobStatus: {
+  readonly COMPLETED: "Completed";
+  readonly DELETING: "Deleting";
+  readonly FAILED: "Failed";
+  readonly IN_PROGRESS: "InProgress";
+  readonly STOPPED: "Stopped";
+  readonly STOPPING: "Stopping";
+};
+export type EvaluationJobStatus =
+  (typeof EvaluationJobStatus)[keyof typeof EvaluationJobStatus];
+export interface BatchDeleteEvaluationJobItem {
+  jobIdentifier: string | undefined;
+  jobStatus: EvaluationJobStatus | undefined;
+}
+export interface BatchDeleteEvaluationJobResponse {
+  errors: BatchDeleteEvaluationJobError[] | undefined;
+  evaluationJobs: BatchDeleteEvaluationJobItem[] | undefined;
+}
+export declare const ApplicationType: {
+  readonly MODEL_EVALUATION: "ModelEvaluation";
+  readonly RAG_EVALUATION: "RagEvaluation";
+};
+export type ApplicationType =
+  (typeof ApplicationType)[keyof typeof ApplicationType];
+export type RatingScaleItemValue =
+  | RatingScaleItemValue.FloatValueMember
+  | RatingScaleItemValue.StringValueMember
+  | RatingScaleItemValue.$UnknownMember;
+export declare namespace RatingScaleItemValue {
+  interface StringValueMember {
+    stringValue: string;
+    floatValue?: never;
+    $unknown?: never;
+  }
+  interface FloatValueMember {
+    stringValue?: never;
+    floatValue: number;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    stringValue?: never;
+    floatValue?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    stringValue: (value: string) => T;
+    floatValue: (value: number) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: RatingScaleItemValue, visitor: Visitor<T>) => T;
+}
+export interface RatingScaleItem {
+  definition: string | undefined;
+  value: RatingScaleItemValue | undefined;
+}
+export interface CustomMetricDefinition {
+  name: string | undefined;
+  instructions: string | undefined;
+  ratingScale?: RatingScaleItem[] | undefined;
+}
+export type AutomatedEvaluationCustomMetricSource =
+  | AutomatedEvaluationCustomMetricSource.CustomMetricDefinitionMember
+  | AutomatedEvaluationCustomMetricSource.$UnknownMember;
+export declare namespace AutomatedEvaluationCustomMetricSource {
+  interface CustomMetricDefinitionMember {
+    customMetricDefinition: CustomMetricDefinition;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    customMetricDefinition?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    customMetricDefinition: (value: CustomMetricDefinition) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: AutomatedEvaluationCustomMetricSource,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface CustomMetricBedrockEvaluatorModel {
+  modelIdentifier: string | undefined;
+}
+export interface CustomMetricEvaluatorModelConfig {
+  bedrockEvaluatorModels: CustomMetricBedrockEvaluatorModel[] | undefined;
+}
+export interface AutomatedEvaluationCustomMetricConfig {
+  customMetrics: AutomatedEvaluationCustomMetricSource[] | undefined;
+  evaluatorModelConfig: CustomMetricEvaluatorModelConfig | undefined;
+}
+export type EvaluationDatasetLocation =
+  | EvaluationDatasetLocation.S3UriMember
+  | EvaluationDatasetLocation.$UnknownMember;
+export declare namespace EvaluationDatasetLocation {
+  interface S3UriMember {
+    s3Uri: string;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    s3Uri?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    s3Uri: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: EvaluationDatasetLocation, visitor: Visitor<T>) => T;
+}
+export interface EvaluationDataset {
+  name: string | undefined;
+  datasetLocation?: EvaluationDatasetLocation | undefined;
+}
+export declare const EvaluationTaskType: {
+  readonly CLASSIFICATION: "Classification";
+  readonly CUSTOM: "Custom";
+  readonly GENERATION: "Generation";
+  readonly QUESTION_AND_ANSWER: "QuestionAndAnswer";
+  readonly SUMMARIZATION: "Summarization";
+};
+export type EvaluationTaskType =
+  (typeof EvaluationTaskType)[keyof typeof EvaluationTaskType];
+export interface EvaluationDatasetMetricConfig {
+  taskType: EvaluationTaskType | undefined;
+  dataset: EvaluationDataset | undefined;
+  metricNames: string[] | undefined;
+}
+export interface BedrockEvaluatorModel {
+  modelIdentifier: string | undefined;
+}
+export type EvaluatorModelConfig =
+  | EvaluatorModelConfig.BedrockEvaluatorModelsMember
+  | EvaluatorModelConfig.$UnknownMember;
+export declare namespace EvaluatorModelConfig {
+  interface BedrockEvaluatorModelsMember {
+    bedrockEvaluatorModels: BedrockEvaluatorModel[];
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    bedrockEvaluatorModels?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    bedrockEvaluatorModels: (value: BedrockEvaluatorModel[]) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: EvaluatorModelConfig, visitor: Visitor<T>) => T;
+}
+export interface AutomatedEvaluationConfig {
+  datasetMetricConfigs: EvaluationDatasetMetricConfig[] | undefined;
+  evaluatorModelConfig?: EvaluatorModelConfig | undefined;
+  customMetricConfig?: AutomatedEvaluationCustomMetricConfig | undefined;
+}
+export interface HumanEvaluationCustomMetric {
+  name: string | undefined;
+  description?: string | undefined;
+  ratingMethod: string | undefined;
+}
+export interface HumanWorkflowConfig {
+  flowDefinitionArn: string | undefined;
+  instructions?: string | undefined;
+}
+export interface HumanEvaluationConfig {
+  humanWorkflowConfig?: HumanWorkflowConfig | undefined;
+  customMetrics?: HumanEvaluationCustomMetric[] | undefined;
+  datasetMetricConfigs: EvaluationDatasetMetricConfig[] | undefined;
+}
+export type EvaluationConfig =
+  | EvaluationConfig.AutomatedMember
+  | EvaluationConfig.HumanMember
+  | EvaluationConfig.$UnknownMember;
+export declare namespace EvaluationConfig {
+  interface AutomatedMember {
+    automated: AutomatedEvaluationConfig;
+    human?: never;
+    $unknown?: never;
+  }
+  interface HumanMember {
+    automated?: never;
+    human: HumanEvaluationConfig;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    automated?: never;
+    human?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    automated: (value: AutomatedEvaluationConfig) => T;
+    human: (value: HumanEvaluationConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: EvaluationConfig, visitor: Visitor<T>) => T;
+}
+export declare const PerformanceConfigLatency: {
+  readonly OPTIMIZED: "optimized";
+  readonly STANDARD: "standard";
+};
+export type PerformanceConfigLatency =
+  (typeof PerformanceConfigLatency)[keyof typeof PerformanceConfigLatency];
+export interface PerformanceConfiguration {
+  latency?: PerformanceConfigLatency | undefined;
+}
+export interface EvaluationBedrockModel {
+  modelIdentifier: string | undefined;
+  inferenceParams?: string | undefined;
+  performanceConfig?: PerformanceConfiguration | undefined;
+}
+export interface EvaluationPrecomputedInferenceSource {
+  inferenceSourceIdentifier: string | undefined;
+}
+export type EvaluationModelConfig =
+  | EvaluationModelConfig.BedrockModelMember
+  | EvaluationModelConfig.PrecomputedInferenceSourceMember
+  | EvaluationModelConfig.$UnknownMember;
+export declare namespace EvaluationModelConfig {
+  interface BedrockModelMember {
+    bedrockModel: EvaluationBedrockModel;
+    precomputedInferenceSource?: never;
+    $unknown?: never;
+  }
+  interface PrecomputedInferenceSourceMember {
+    bedrockModel?: never;
+    precomputedInferenceSource: EvaluationPrecomputedInferenceSource;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    bedrockModel?: never;
+    precomputedInferenceSource?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    bedrockModel: (value: EvaluationBedrockModel) => T;
+    precomputedInferenceSource: (
+      value: EvaluationPrecomputedInferenceSource
+    ) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(value: EvaluationModelConfig, visitor: Visitor<T>) => T;
+}
+export interface GuardrailConfiguration {
+  guardrailId: string | undefined;
+  guardrailVersion: string | undefined;
+}
+export interface TextInferenceConfig {
+  temperature?: number | undefined;
+  topP?: number | undefined;
+  maxTokens?: number | undefined;
+  stopSequences?: string[] | undefined;
+}
+export interface KbInferenceConfig {
+  textInferenceConfig?: TextInferenceConfig | undefined;
+}
+export interface PromptTemplate {
+  textPromptTemplate?: string | undefined;
+}
+export interface ExternalSourcesGenerationConfiguration {
+  promptTemplate?: PromptTemplate | undefined;
+  guardrailConfiguration?: GuardrailConfiguration | undefined;
+  kbInferenceConfig?: KbInferenceConfig | undefined;
+  additionalModelRequestFields?: Record<string, __DocumentType> | undefined;
+}
+export interface ByteContentDoc {
+  identifier: string | undefined;
+  contentType: string | undefined;
+  data: Uint8Array | undefined;
+}
+export interface S3ObjectDoc {
+  uri: string | undefined;
+}
+export declare const ExternalSourceType: {
+  readonly BYTE_CONTENT: "BYTE_CONTENT";
+  readonly S3: "S3";
+};
+export type ExternalSourceType =
+  (typeof ExternalSourceType)[keyof typeof ExternalSourceType];
+export interface ExternalSource {
+  sourceType: ExternalSourceType | undefined;
+  s3Location?: S3ObjectDoc | undefined;
+  byteContent?: ByteContentDoc | undefined;
+}
+export interface ExternalSourcesRetrieveAndGenerateConfiguration {
+  modelArn: string | undefined;
+  sources: ExternalSource[] | undefined;
+  generationConfiguration?: ExternalSourcesGenerationConfiguration | undefined;
+}
+export interface GenerationConfiguration {
+  promptTemplate?: PromptTemplate | undefined;
+  guardrailConfiguration?: GuardrailConfiguration | undefined;
+  kbInferenceConfig?: KbInferenceConfig | undefined;
+  additionalModelRequestFields?: Record<string, __DocumentType> | undefined;
+}
+export declare const QueryTransformationType: {
+  readonly QUERY_DECOMPOSITION: "QUERY_DECOMPOSITION";
+};
+export type QueryTransformationType =
+  (typeof QueryTransformationType)[keyof typeof QueryTransformationType];
+export interface QueryTransformationConfiguration {
+  type: QueryTransformationType | undefined;
+}
+export interface OrchestrationConfiguration {
+  queryTransformationConfiguration:
+    | QueryTransformationConfiguration
+    | undefined;
+}
+export interface FilterAttribute {
+  key: string | undefined;
+  value: __DocumentType | undefined;
+}
+export declare const AttributeType: {
+  readonly BOOLEAN: "BOOLEAN";
+  readonly NUMBER: "NUMBER";
+  readonly STRING: "STRING";
+  readonly STRING_LIST: "STRING_LIST";
+};
+export type AttributeType = (typeof AttributeType)[keyof typeof AttributeType];
+export interface MetadataAttributeSchema {
+  key: string | undefined;
+  type: AttributeType | undefined;
+  description: string | undefined;
+}
+export interface ImplicitFilterConfiguration {
+  metadataAttributes: MetadataAttributeSchema[] | undefined;
+  modelArn: string | undefined;
+}
+export declare const SearchType: {
+  readonly HYBRID: "HYBRID";
+  readonly SEMANTIC: "SEMANTIC";
+};
+export type SearchType = (typeof SearchType)[keyof typeof SearchType];
+export declare const RerankingMetadataSelectionMode: {
+  readonly ALL: "ALL";
+  readonly SELECTIVE: "SELECTIVE";
+};
+export type RerankingMetadataSelectionMode =
+  (typeof RerankingMetadataSelectionMode)[keyof typeof RerankingMetadataSelectionMode];
+export interface FieldForReranking {
+  fieldName: string | undefined;
+}
+export type RerankingMetadataSelectiveModeConfiguration =
+  | RerankingMetadataSelectiveModeConfiguration.FieldsToExcludeMember
+  | RerankingMetadataSelectiveModeConfiguration.FieldsToIncludeMember
+  | RerankingMetadataSelectiveModeConfiguration.$UnknownMember;
+export declare namespace RerankingMetadataSelectiveModeConfiguration {
+  interface FieldsToIncludeMember {
+    fieldsToInclude: FieldForReranking[];
+    fieldsToExclude?: never;
+    $unknown?: never;
+  }
+  interface FieldsToExcludeMember {
+    fieldsToInclude?: never;
+    fieldsToExclude: FieldForReranking[];
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    fieldsToInclude?: never;
+    fieldsToExclude?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    fieldsToInclude: (value: FieldForReranking[]) => T;
+    fieldsToExclude: (value: FieldForReranking[]) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: RerankingMetadataSelectiveModeConfiguration,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface MetadataConfigurationForReranking {
+  selectionMode: RerankingMetadataSelectionMode | undefined;
+  selectiveModeConfiguration?:
+    | RerankingMetadataSelectiveModeConfiguration
+    | undefined;
+}
+export interface VectorSearchBedrockRerankingModelConfiguration {
+  modelArn: string | undefined;
+  additionalModelRequestFields?: Record<string, __DocumentType> | undefined;
+}
+export interface VectorSearchBedrockRerankingConfiguration {
+  modelConfiguration:
+    | VectorSearchBedrockRerankingModelConfiguration
+    | undefined;
+  numberOfRerankedResults?: number | undefined;
+  metadataConfiguration?: MetadataConfigurationForReranking | undefined;
+}
+export declare const VectorSearchRerankingConfigurationType: {
+  readonly BEDROCK_RERANKING_MODEL: "BEDROCK_RERANKING_MODEL";
+};
+export type VectorSearchRerankingConfigurationType =
+  (typeof VectorSearchRerankingConfigurationType)[keyof typeof VectorSearchRerankingConfigurationType];
+export interface VectorSearchRerankingConfiguration {
+  type: VectorSearchRerankingConfigurationType | undefined;
+  bedrockRerankingConfiguration?:
+    | VectorSearchBedrockRerankingConfiguration
+    | undefined;
+}
+export declare const RetrieveAndGenerateType: {
+  readonly EXTERNAL_SOURCES: "EXTERNAL_SOURCES";
+  readonly KNOWLEDGE_BASE: "KNOWLEDGE_BASE";
+};
+export type RetrieveAndGenerateType =
+  (typeof RetrieveAndGenerateType)[keyof typeof RetrieveAndGenerateType];
+export interface EvaluationPrecomputedRetrieveAndGenerateSourceConfig {
+  ragSourceIdentifier: string | undefined;
+}
+export interface EvaluationPrecomputedRetrieveSourceConfig {
+  ragSourceIdentifier: string | undefined;
+}
+export type EvaluationPrecomputedRagSourceConfig =
+  | EvaluationPrecomputedRagSourceConfig.RetrieveAndGenerateSourceConfigMember
+  | EvaluationPrecomputedRagSourceConfig.RetrieveSourceConfigMember
+  | EvaluationPrecomputedRagSourceConfig.$UnknownMember;
+export declare namespace EvaluationPrecomputedRagSourceConfig {
+  interface RetrieveSourceConfigMember {
+    retrieveSourceConfig: EvaluationPrecomputedRetrieveSourceConfig;
+    retrieveAndGenerateSourceConfig?: never;
+    $unknown?: never;
+  }
+  interface RetrieveAndGenerateSourceConfigMember {
+    retrieveSourceConfig?: never;
+    retrieveAndGenerateSourceConfig: EvaluationPrecomputedRetrieveAndGenerateSourceConfig;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    retrieveSourceConfig?: never;
+    retrieveAndGenerateSourceConfig?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    retrieveSourceConfig: (
+      value: EvaluationPrecomputedRetrieveSourceConfig
+    ) => T;
+    retrieveAndGenerateSourceConfig: (
+      value: EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+    ) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: EvaluationPrecomputedRagSourceConfig,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface EvaluationOutputDataConfig {
+  s3Uri: string | undefined;
+}
+export interface CreateEvaluationJobResponse {
+  jobArn: string | undefined;
+}
+export interface GetEvaluationJobRequest {
+  jobIdentifier: string | undefined;
+}
+export declare const EvaluationJobType: {
+  readonly AUTOMATED: "Automated";
+  readonly HUMAN: "Human";
+};
+export type EvaluationJobType =
+  (typeof EvaluationJobType)[keyof typeof EvaluationJobType];
+export declare const SortJobsBy: {
+  readonly CREATION_TIME: "CreationTime";
+};
+export type SortJobsBy = (typeof SortJobsBy)[keyof typeof SortJobsBy];
+export interface ListEvaluationJobsRequest {
+  creationTimeAfter?: Date | undefined;
+  creationTimeBefore?: Date | undefined;
+  statusEquals?: EvaluationJobStatus | undefined;
+  applicationTypeEquals?: ApplicationType | undefined;
+  nameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortJobsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface EvaluationModelConfigSummary {
+  bedrockModelIdentifiers?: string[] | undefined;
+  precomputedInferenceSourceIdentifiers?: string[] | undefined;
+}
+export interface EvaluationRagConfigSummary {
+  bedrockKnowledgeBaseIdentifiers?: string[] | undefined;
+  precomputedRagSourceIdentifiers?: string[] | undefined;
+}
+export interface EvaluationInferenceConfigSummary {
+  modelConfigSummary?: EvaluationModelConfigSummary | undefined;
+  ragConfigSummary?: EvaluationRagConfigSummary | undefined;
+}
+export interface EvaluationSummary {
+  jobArn: string | undefined;
+  jobName: string | undefined;
+  status: EvaluationJobStatus | undefined;
+  creationTime: Date | undefined;
+  jobType: EvaluationJobType | undefined;
+  evaluationTaskTypes: EvaluationTaskType[] | undefined;
+  modelIdentifiers?: string[] | undefined;
+  ragIdentifiers?: string[] | undefined;
+  evaluatorModelIdentifiers?: string[] | undefined;
+  customMetricsEvaluatorModelIdentifiers?: string[] | undefined;
+  inferenceConfigSummary?: EvaluationInferenceConfigSummary | undefined;
+  applicationType?: ApplicationType | undefined;
+}
+export interface ListEvaluationJobsResponse {
+  nextToken?: string | undefined;
+  jobSummaries?: EvaluationSummary[] | undefined;
+}
+export interface StopEvaluationJobRequest {
+  jobIdentifier: string | undefined;
+}
+export interface StopEvaluationJobResponse {}
+export declare const GuardrailContentFilterAction: {
+  readonly BLOCK: "BLOCK";
+  readonly NONE: "NONE";
+};
+export type GuardrailContentFilterAction =
+  (typeof GuardrailContentFilterAction)[keyof typeof GuardrailContentFilterAction];
+export declare const GuardrailModality: {
+  readonly IMAGE: "IMAGE";
+  readonly TEXT: "TEXT";
+};
+export type GuardrailModality =
+  (typeof GuardrailModality)[keyof typeof GuardrailModality];
+export declare const GuardrailFilterStrength: {
+  readonly HIGH: "HIGH";
+  readonly LOW: "LOW";
+  readonly MEDIUM: "MEDIUM";
+  readonly NONE: "NONE";
+};
+export type GuardrailFilterStrength =
+  (typeof GuardrailFilterStrength)[keyof typeof GuardrailFilterStrength];
+export declare const GuardrailContentFilterType: {
+  readonly HATE: "HATE";
+  readonly INSULTS: "INSULTS";
+  readonly MISCONDUCT: "MISCONDUCT";
+  readonly PROMPT_ATTACK: "PROMPT_ATTACK";
+  readonly SEXUAL: "SEXUAL";
+  readonly VIOLENCE: "VIOLENCE";
+};
+export type GuardrailContentFilterType =
+  (typeof GuardrailContentFilterType)[keyof typeof GuardrailContentFilterType];
+export interface GuardrailContentFilterConfig {
+  type: GuardrailContentFilterType | undefined;
+  inputStrength: GuardrailFilterStrength | undefined;
+  outputStrength: GuardrailFilterStrength | undefined;
+  inputModalities?: GuardrailModality[] | undefined;
+  outputModalities?: GuardrailModality[] | undefined;
+  inputAction?: GuardrailContentFilterAction | undefined;
+  outputAction?: GuardrailContentFilterAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export declare const GuardrailContentFiltersTierName: {
+  readonly CLASSIC: "CLASSIC";
+  readonly STANDARD: "STANDARD";
+};
+export type GuardrailContentFiltersTierName =
+  (typeof GuardrailContentFiltersTierName)[keyof typeof GuardrailContentFiltersTierName];
+export interface GuardrailContentFiltersTierConfig {
+  tierName: GuardrailContentFiltersTierName | undefined;
+}
+export interface GuardrailContentPolicyConfig {
+  filtersConfig: GuardrailContentFilterConfig[] | undefined;
+  tierConfig?: GuardrailContentFiltersTierConfig | undefined;
+}
+export declare const GuardrailContextualGroundingAction: {
+  readonly BLOCK: "BLOCK";
+  readonly NONE: "NONE";
+};
+export type GuardrailContextualGroundingAction =
+  (typeof GuardrailContextualGroundingAction)[keyof typeof GuardrailContextualGroundingAction];
+export declare const GuardrailContextualGroundingFilterType: {
+  readonly GROUNDING: "GROUNDING";
+  readonly RELEVANCE: "RELEVANCE";
+};
+export type GuardrailContextualGroundingFilterType =
+  (typeof GuardrailContextualGroundingFilterType)[keyof typeof GuardrailContextualGroundingFilterType];
+export interface GuardrailContextualGroundingFilterConfig {
+  type: GuardrailContextualGroundingFilterType | undefined;
+  threshold: number | undefined;
+  action?: GuardrailContextualGroundingAction | undefined;
+  enabled?: boolean | undefined;
+}
+export interface GuardrailContextualGroundingPolicyConfig {
+  filtersConfig: GuardrailContextualGroundingFilterConfig[] | undefined;
+}
+export interface GuardrailCrossRegionConfig {
+  guardrailProfileIdentifier: string | undefined;
+}
+export declare const GuardrailSensitiveInformationAction: {
+  readonly ANONYMIZE: "ANONYMIZE";
+  readonly BLOCK: "BLOCK";
+  readonly NONE: "NONE";
+};
+export type GuardrailSensitiveInformationAction =
+  (typeof GuardrailSensitiveInformationAction)[keyof typeof GuardrailSensitiveInformationAction];
+export declare const GuardrailPiiEntityType: {
+  readonly ADDRESS: "ADDRESS";
+  readonly AGE: "AGE";
+  readonly AWS_ACCESS_KEY: "AWS_ACCESS_KEY";
+  readonly AWS_SECRET_KEY: "AWS_SECRET_KEY";
+  readonly CA_HEALTH_NUMBER: "CA_HEALTH_NUMBER";
+  readonly CA_SOCIAL_INSURANCE_NUMBER: "CA_SOCIAL_INSURANCE_NUMBER";
+  readonly CREDIT_DEBIT_CARD_CVV: "CREDIT_DEBIT_CARD_CVV";
+  readonly CREDIT_DEBIT_CARD_EXPIRY: "CREDIT_DEBIT_CARD_EXPIRY";
+  readonly CREDIT_DEBIT_CARD_NUMBER: "CREDIT_DEBIT_CARD_NUMBER";
+  readonly DRIVER_ID: "DRIVER_ID";
+  readonly EMAIL: "EMAIL";
+  readonly INTERNATIONAL_BANK_ACCOUNT_NUMBER: "INTERNATIONAL_BANK_ACCOUNT_NUMBER";
+  readonly IP_ADDRESS: "IP_ADDRESS";
+  readonly LICENSE_PLATE: "LICENSE_PLATE";
+  readonly MAC_ADDRESS: "MAC_ADDRESS";
+  readonly NAME: "NAME";
+  readonly PASSWORD: "PASSWORD";
+  readonly PHONE: "PHONE";
+  readonly PIN: "PIN";
+  readonly SWIFT_CODE: "SWIFT_CODE";
+  readonly UK_NATIONAL_HEALTH_SERVICE_NUMBER: "UK_NATIONAL_HEALTH_SERVICE_NUMBER";
+  readonly UK_NATIONAL_INSURANCE_NUMBER: "UK_NATIONAL_INSURANCE_NUMBER";
+  readonly UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER";
+  readonly URL: "URL";
+  readonly USERNAME: "USERNAME";
+  readonly US_BANK_ACCOUNT_NUMBER: "US_BANK_ACCOUNT_NUMBER";
+  readonly US_BANK_ROUTING_NUMBER: "US_BANK_ROUTING_NUMBER";
+  readonly US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER";
+  readonly US_PASSPORT_NUMBER: "US_PASSPORT_NUMBER";
+  readonly US_SOCIAL_SECURITY_NUMBER: "US_SOCIAL_SECURITY_NUMBER";
+  readonly VEHICLE_IDENTIFICATION_NUMBER: "VEHICLE_IDENTIFICATION_NUMBER";
+};
+export type GuardrailPiiEntityType =
+  (typeof GuardrailPiiEntityType)[keyof typeof GuardrailPiiEntityType];
+export interface GuardrailPiiEntityConfig {
+  type: GuardrailPiiEntityType | undefined;
+  action: GuardrailSensitiveInformationAction | undefined;
+  inputAction?: GuardrailSensitiveInformationAction | undefined;
+  outputAction?: GuardrailSensitiveInformationAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailRegexConfig {
+  name: string | undefined;
+  description?: string | undefined;
+  pattern: string | undefined;
+  action: GuardrailSensitiveInformationAction | undefined;
+  inputAction?: GuardrailSensitiveInformationAction | undefined;
+  outputAction?: GuardrailSensitiveInformationAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailSensitiveInformationPolicyConfig {
+  piiEntitiesConfig?: GuardrailPiiEntityConfig[] | undefined;
+  regexesConfig?: GuardrailRegexConfig[] | undefined;
+}
+export declare const GuardrailTopicsTierName: {
+  readonly CLASSIC: "CLASSIC";
+  readonly STANDARD: "STANDARD";
+};
+export type GuardrailTopicsTierName =
+  (typeof GuardrailTopicsTierName)[keyof typeof GuardrailTopicsTierName];
+export interface GuardrailTopicsTierConfig {
+  tierName: GuardrailTopicsTierName | undefined;
+}
+export declare const GuardrailTopicAction: {
+  readonly BLOCK: "BLOCK";
+  readonly NONE: "NONE";
+};
+export type GuardrailTopicAction =
+  (typeof GuardrailTopicAction)[keyof typeof GuardrailTopicAction];
+export declare const GuardrailTopicType: {
+  readonly DENY: "DENY";
+};
+export type GuardrailTopicType =
+  (typeof GuardrailTopicType)[keyof typeof GuardrailTopicType];
+export interface GuardrailTopicConfig {
+  name: string | undefined;
+  definition: string | undefined;
+  examples?: string[] | undefined;
+  type: GuardrailTopicType | undefined;
+  inputAction?: GuardrailTopicAction | undefined;
+  outputAction?: GuardrailTopicAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailTopicPolicyConfig {
+  topicsConfig: GuardrailTopicConfig[] | undefined;
+  tierConfig?: GuardrailTopicsTierConfig | undefined;
+}
+export declare const GuardrailWordAction: {
+  readonly BLOCK: "BLOCK";
+  readonly NONE: "NONE";
+};
+export type GuardrailWordAction =
+  (typeof GuardrailWordAction)[keyof typeof GuardrailWordAction];
+export declare const GuardrailManagedWordsType: {
+  readonly PROFANITY: "PROFANITY";
+};
+export type GuardrailManagedWordsType =
+  (typeof GuardrailManagedWordsType)[keyof typeof GuardrailManagedWordsType];
+export interface GuardrailManagedWordsConfig {
+  type: GuardrailManagedWordsType | undefined;
+  inputAction?: GuardrailWordAction | undefined;
+  outputAction?: GuardrailWordAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailWordConfig {
+  text: string | undefined;
+  inputAction?: GuardrailWordAction | undefined;
+  outputAction?: GuardrailWordAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailWordPolicyConfig {
+  wordsConfig?: GuardrailWordConfig[] | undefined;
+  managedWordListsConfig?: GuardrailManagedWordsConfig[] | undefined;
+}
+export interface CreateGuardrailRequest {
+  name: string | undefined;
+  description?: string | undefined;
+  topicPolicyConfig?: GuardrailTopicPolicyConfig | undefined;
+  contentPolicyConfig?: GuardrailContentPolicyConfig | undefined;
+  wordPolicyConfig?: GuardrailWordPolicyConfig | undefined;
+  sensitiveInformationPolicyConfig?:
+    | GuardrailSensitiveInformationPolicyConfig
+    | undefined;
+  contextualGroundingPolicyConfig?:
+    | GuardrailContextualGroundingPolicyConfig
+    | undefined;
+  crossRegionConfig?: GuardrailCrossRegionConfig | undefined;
+  blockedInputMessaging: string | undefined;
+  blockedOutputsMessaging: string | undefined;
+  kmsKeyId?: string | undefined;
+  tags?: Tag[] | undefined;
+  clientRequestToken?: string | undefined;
+}
+export interface CreateGuardrailResponse {
+  guardrailId: string | undefined;
+  guardrailArn: string | undefined;
+  version: string | undefined;
+  createdAt: Date | undefined;
+}
+export interface CreateGuardrailVersionRequest {
+  guardrailIdentifier: string | undefined;
+  description?: string | undefined;
+  clientRequestToken?: string | undefined;
+}
+export interface CreateGuardrailVersionResponse {
+  guardrailId: string | undefined;
+  version: string | undefined;
+}
+export interface DeleteGuardrailRequest {
+  guardrailIdentifier: string | undefined;
+  guardrailVersion?: string | undefined;
+}
+export interface DeleteGuardrailResponse {}
+export interface GetGuardrailRequest {
+  guardrailIdentifier: string | undefined;
+  guardrailVersion?: string | undefined;
+}
+export interface GuardrailContentFilter {
+  type: GuardrailContentFilterType | undefined;
+  inputStrength: GuardrailFilterStrength | undefined;
+  outputStrength: GuardrailFilterStrength | undefined;
+  inputModalities?: GuardrailModality[] | undefined;
+  outputModalities?: GuardrailModality[] | undefined;
+  inputAction?: GuardrailContentFilterAction | undefined;
+  outputAction?: GuardrailContentFilterAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailContentFiltersTier {
+  tierName: GuardrailContentFiltersTierName | undefined;
+}
+export interface GuardrailContentPolicy {
+  filters?: GuardrailContentFilter[] | undefined;
+  tier?: GuardrailContentFiltersTier | undefined;
+}
+export interface GuardrailContextualGroundingFilter {
+  type: GuardrailContextualGroundingFilterType | undefined;
+  threshold: number | undefined;
+  action?: GuardrailContextualGroundingAction | undefined;
+  enabled?: boolean | undefined;
+}
+export interface GuardrailContextualGroundingPolicy {
+  filters: GuardrailContextualGroundingFilter[] | undefined;
+}
+export interface GuardrailCrossRegionDetails {
+  guardrailProfileId?: string | undefined;
+  guardrailProfileArn?: string | undefined;
+}
+export interface GuardrailPiiEntity {
+  type: GuardrailPiiEntityType | undefined;
+  action: GuardrailSensitiveInformationAction | undefined;
+  inputAction?: GuardrailSensitiveInformationAction | undefined;
+  outputAction?: GuardrailSensitiveInformationAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailRegex {
+  name: string | undefined;
+  description?: string | undefined;
+  pattern: string | undefined;
+  action: GuardrailSensitiveInformationAction | undefined;
+  inputAction?: GuardrailSensitiveInformationAction | undefined;
+  outputAction?: GuardrailSensitiveInformationAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailSensitiveInformationPolicy {
+  piiEntities?: GuardrailPiiEntity[] | undefined;
+  regexes?: GuardrailRegex[] | undefined;
+}
+export declare const GuardrailStatus: {
+  readonly CREATING: "CREATING";
+  readonly DELETING: "DELETING";
+  readonly FAILED: "FAILED";
+  readonly READY: "READY";
+  readonly UPDATING: "UPDATING";
+  readonly VERSIONING: "VERSIONING";
+};
+export type GuardrailStatus =
+  (typeof GuardrailStatus)[keyof typeof GuardrailStatus];
+export interface GuardrailTopicsTier {
+  tierName: GuardrailTopicsTierName | undefined;
+}
+export interface GuardrailTopic {
+  name: string | undefined;
+  definition: string | undefined;
+  examples?: string[] | undefined;
+  type?: GuardrailTopicType | undefined;
+  inputAction?: GuardrailTopicAction | undefined;
+  outputAction?: GuardrailTopicAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailTopicPolicy {
+  topics: GuardrailTopic[] | undefined;
+  tier?: GuardrailTopicsTier | undefined;
+}
+export interface GuardrailManagedWords {
+  type: GuardrailManagedWordsType | undefined;
+  inputAction?: GuardrailWordAction | undefined;
+  outputAction?: GuardrailWordAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailWord {
+  text: string | undefined;
+  inputAction?: GuardrailWordAction | undefined;
+  outputAction?: GuardrailWordAction | undefined;
+  inputEnabled?: boolean | undefined;
+  outputEnabled?: boolean | undefined;
+}
+export interface GuardrailWordPolicy {
+  words?: GuardrailWord[] | undefined;
+  managedWordLists?: GuardrailManagedWords[] | undefined;
+}
+export interface GetGuardrailResponse {
+  name: string | undefined;
+  description?: string | undefined;
+  guardrailId: string | undefined;
+  guardrailArn: string | undefined;
+  version: string | undefined;
+  status: GuardrailStatus | undefined;
+  topicPolicy?: GuardrailTopicPolicy | undefined;
+  contentPolicy?: GuardrailContentPolicy | undefined;
+  wordPolicy?: GuardrailWordPolicy | undefined;
+  sensitiveInformationPolicy?: GuardrailSensitiveInformationPolicy | undefined;
+  contextualGroundingPolicy?: GuardrailContextualGroundingPolicy | undefined;
+  crossRegionDetails?: GuardrailCrossRegionDetails | undefined;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
+  statusReasons?: string[] | undefined;
+  failureRecommendations?: string[] | undefined;
+  blockedInputMessaging: string | undefined;
+  blockedOutputsMessaging: string | undefined;
+  kmsKeyArn?: string | undefined;
+}
+export interface ListGuardrailsRequest {
+  guardrailIdentifier?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+}
+export interface GuardrailSummary {
+  id: string | undefined;
+  arn: string | undefined;
+  status: GuardrailStatus | undefined;
+  name: string | undefined;
+  description?: string | undefined;
+  version: string | undefined;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
+  crossRegionDetails?: GuardrailCrossRegionDetails | undefined;
+}
+export interface ListGuardrailsResponse {
+  guardrails: GuardrailSummary[] | undefined;
+  nextToken?: string | undefined;
+}
+export interface UpdateGuardrailRequest {
+  guardrailIdentifier: string | undefined;
+  name: string | undefined;
+  description?: string | undefined;
+  topicPolicyConfig?: GuardrailTopicPolicyConfig | undefined;
+  contentPolicyConfig?: GuardrailContentPolicyConfig | undefined;
+  wordPolicyConfig?: GuardrailWordPolicyConfig | undefined;
+  sensitiveInformationPolicyConfig?:
+    | GuardrailSensitiveInformationPolicyConfig
+    | undefined;
+  contextualGroundingPolicyConfig?:
+    | GuardrailContextualGroundingPolicyConfig
+    | undefined;
+  crossRegionConfig?: GuardrailCrossRegionConfig | undefined;
+  blockedInputMessaging: string | undefined;
+  blockedOutputsMessaging: string | undefined;
+  kmsKeyId?: string | undefined;
+}
+export interface UpdateGuardrailResponse {
+  guardrailId: string | undefined;
+  guardrailArn: string | undefined;
+  version: string | undefined;
+  updatedAt: Date | undefined;
+}
+export type InferenceProfileModelSource =
+  | InferenceProfileModelSource.CopyFromMember
+  | InferenceProfileModelSource.$UnknownMember;
+export declare namespace InferenceProfileModelSource {
+  interface CopyFromMember {
+    copyFrom: string;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    copyFrom?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    copyFrom: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: InferenceProfileModelSource,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface CreateInferenceProfileRequest {
+  inferenceProfileName: string | undefined;
+  description?: string | undefined;
+  clientRequestToken?: string | undefined;
+  modelSource: InferenceProfileModelSource | undefined;
+  tags?: Tag[] | undefined;
+}
+export declare const InferenceProfileStatus: {
+  readonly ACTIVE: "ACTIVE";
+};
+export type InferenceProfileStatus =
+  (typeof InferenceProfileStatus)[keyof typeof InferenceProfileStatus];
+export interface CreateInferenceProfileResponse {
+  inferenceProfileArn: string | undefined;
+  status?: InferenceProfileStatus | undefined;
+}
+export interface DeleteInferenceProfileRequest {
+  inferenceProfileIdentifier: string | undefined;
+}
+export interface DeleteInferenceProfileResponse {}
+export interface GetInferenceProfileRequest {
+  inferenceProfileIdentifier: string | undefined;
+}
+export interface InferenceProfileModel {
+  modelArn?: string | undefined;
+}
+export declare const InferenceProfileType: {
+  readonly APPLICATION: "APPLICATION";
+  readonly SYSTEM_DEFINED: "SYSTEM_DEFINED";
+};
+export type InferenceProfileType =
+  (typeof InferenceProfileType)[keyof typeof InferenceProfileType];
+export interface GetInferenceProfileResponse {
+  inferenceProfileName: string | undefined;
+  description?: string | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  inferenceProfileArn: string | undefined;
+  models: InferenceProfileModel[] | undefined;
+  inferenceProfileId: string | undefined;
+  status: InferenceProfileStatus | undefined;
+  type: InferenceProfileType | undefined;
+}
+export interface ListInferenceProfilesRequest {
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  typeEquals?: InferenceProfileType | undefined;
+}
+export interface InferenceProfileSummary {
+  inferenceProfileName: string | undefined;
+  description?: string | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  inferenceProfileArn: string | undefined;
+  models: InferenceProfileModel[] | undefined;
+  inferenceProfileId: string | undefined;
+  status: InferenceProfileStatus | undefined;
+  type: InferenceProfileType | undefined;
+}
+export interface ListInferenceProfilesResponse {
+  inferenceProfileSummaries?: InferenceProfileSummary[] | undefined;
+  nextToken?: string | undefined;
+}
+export interface DeleteModelInvocationLoggingConfigurationRequest {}
+export interface DeleteModelInvocationLoggingConfigurationResponse {}
+export interface GetModelInvocationLoggingConfigurationRequest {}
+export interface S3Config {
+  bucketName: string | undefined;
+  keyPrefix?: string | undefined;
+}
+export interface CloudWatchConfig {
+  logGroupName: string | undefined;
+  roleArn: string | undefined;
+  largeDataDeliveryS3Config?: S3Config | undefined;
+}
+export interface LoggingConfig {
+  cloudWatchConfig?: CloudWatchConfig | undefined;
+  s3Config?: S3Config | undefined;
+  textDataDeliveryEnabled?: boolean | undefined;
+  imageDataDeliveryEnabled?: boolean | undefined;
+  embeddingDataDeliveryEnabled?: boolean | undefined;
+  videoDataDeliveryEnabled?: boolean | undefined;
+}
+export interface GetModelInvocationLoggingConfigurationResponse {
+  loggingConfig?: LoggingConfig | undefined;
+}
+export interface PutModelInvocationLoggingConfigurationRequest {
+  loggingConfig: LoggingConfig | undefined;
+}
+export interface PutModelInvocationLoggingConfigurationResponse {}
+export interface CreateModelCopyJobRequest {
+  sourceModelArn: string | undefined;
+  targetModelName: string | undefined;
+  modelKmsKeyId?: string | undefined;
+  targetModelTags?: Tag[] | undefined;
+  clientRequestToken?: string | undefined;
+}
+export interface CreateModelCopyJobResponse {
+  jobArn: string | undefined;
+}
+export interface GetModelCopyJobRequest {
+  jobArn: string | undefined;
+}
+export declare const ModelCopyJobStatus: {
+  readonly COMPLETED: "Completed";
+  readonly FAILED: "Failed";
+  readonly IN_PROGRESS: "InProgress";
+};
+export type ModelCopyJobStatus =
+  (typeof ModelCopyJobStatus)[keyof typeof ModelCopyJobStatus];
+export interface GetModelCopyJobResponse {
+  jobArn: string | undefined;
+  status: ModelCopyJobStatus | undefined;
+  creationTime: Date | undefined;
+  targetModelArn: string | undefined;
+  targetModelName?: string | undefined;
+  sourceAccountId: string | undefined;
+  sourceModelArn: string | undefined;
+  targetModelKmsKeyArn?: string | undefined;
+  targetModelTags?: Tag[] | undefined;
+  failureMessage?: string | undefined;
+  sourceModelName?: string | undefined;
+}
+export interface ListModelCopyJobsRequest {
+  creationTimeAfter?: Date | undefined;
+  creationTimeBefore?: Date | undefined;
+  statusEquals?: ModelCopyJobStatus | undefined;
+  sourceAccountEquals?: string | undefined;
+  sourceModelArnEquals?: string | undefined;
+  targetModelNameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortJobsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface ModelCopyJobSummary {
+  jobArn: string | undefined;
+  status: ModelCopyJobStatus | undefined;
+  creationTime: Date | undefined;
+  targetModelArn: string | undefined;
+  targetModelName?: string | undefined;
+  sourceAccountId: string | undefined;
+  sourceModelArn: string | undefined;
+  targetModelKmsKeyArn?: string | undefined;
+  targetModelTags?: Tag[] | undefined;
+  failureMessage?: string | undefined;
+  sourceModelName?: string | undefined;
+}
+export interface ListModelCopyJobsResponse {
+  nextToken?: string | undefined;
+  modelCopyJobSummaries?: ModelCopyJobSummary[] | undefined;
+}
+export interface CreateModelImportJobRequest {
+  jobName: string | undefined;
+  importedModelName: string | undefined;
+  roleArn: string | undefined;
+  modelDataSource: ModelDataSource | undefined;
+  jobTags?: Tag[] | undefined;
+  importedModelTags?: Tag[] | undefined;
+  clientRequestToken?: string | undefined;
+  vpcConfig?: VpcConfig | undefined;
+  importedModelKmsKeyId?: string | undefined;
+}
+export interface CreateModelImportJobResponse {
+  jobArn: string | undefined;
+}
+export interface DeleteImportedModelRequest {
+  modelIdentifier: string | undefined;
+}
+export interface DeleteImportedModelResponse {}
+export interface GetImportedModelRequest {
+  modelIdentifier: string | undefined;
+}
+export interface CustomModelUnits {
+  customModelUnitsPerModelCopy?: number | undefined;
+  customModelUnitsVersion?: string | undefined;
+}
+export interface GetImportedModelResponse {
+  modelArn?: string | undefined;
+  modelName?: string | undefined;
+  jobName?: string | undefined;
+  jobArn?: string | undefined;
+  modelDataSource?: ModelDataSource | undefined;
+  creationTime?: Date | undefined;
+  modelArchitecture?: string | undefined;
+  modelKmsKeyArn?: string | undefined;
+  instructSupported?: boolean | undefined;
+  customModelUnits?: CustomModelUnits | undefined;
+}
+export interface GetModelImportJobRequest {
+  jobIdentifier: string | undefined;
+}
+export declare const ModelImportJobStatus: {
+  readonly COMPLETED: "Completed";
+  readonly FAILED: "Failed";
+  readonly IN_PROGRESS: "InProgress";
+};
+export type ModelImportJobStatus =
+  (typeof ModelImportJobStatus)[keyof typeof ModelImportJobStatus];
+export interface GetModelImportJobResponse {
+  jobArn?: string | undefined;
+  jobName?: string | undefined;
+  importedModelName?: string | undefined;
+  importedModelArn?: string | undefined;
+  roleArn?: string | undefined;
+  modelDataSource?: ModelDataSource | undefined;
+  status?: ModelImportJobStatus | undefined;
+  failureMessage?: string | undefined;
+  creationTime?: Date | undefined;
+  lastModifiedTime?: Date | undefined;
+  endTime?: Date | undefined;
+  vpcConfig?: VpcConfig | undefined;
+  importedModelKmsKeyArn?: string | undefined;
+}
+export interface ListImportedModelsRequest {
+  creationTimeBefore?: Date | undefined;
+  creationTimeAfter?: Date | undefined;
+  nameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortModelsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface ImportedModelSummary {
+  modelArn: string | undefined;
+  modelName: string | undefined;
+  creationTime: Date | undefined;
+  instructSupported?: boolean | undefined;
+  modelArchitecture?: string | undefined;
+}
+export interface ListImportedModelsResponse {
+  nextToken?: string | undefined;
+  modelSummaries?: ImportedModelSummary[] | undefined;
+}
+export interface ListModelImportJobsRequest {
+  creationTimeAfter?: Date | undefined;
+  creationTimeBefore?: Date | undefined;
+  statusEquals?: ModelImportJobStatus | undefined;
+  nameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortJobsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface ModelImportJobSummary {
+  jobArn: string | undefined;
+  jobName: string | undefined;
+  status: ModelImportJobStatus | undefined;
+  lastModifiedTime?: Date | undefined;
+  creationTime: Date | undefined;
+  endTime?: Date | undefined;
+  importedModelArn?: string | undefined;
+  importedModelName?: string | undefined;
+}
+export interface ListModelImportJobsResponse {
+  nextToken?: string | undefined;
+  modelImportJobSummaries?: ModelImportJobSummary[] | undefined;
+}
+export declare const S3InputFormat: {
+  readonly JSONL: "JSONL";
+};
+export type S3InputFormat = (typeof S3InputFormat)[keyof typeof S3InputFormat];
+export interface ModelInvocationJobS3InputDataConfig {
+  s3InputFormat?: S3InputFormat | undefined;
+  s3Uri: string | undefined;
+  s3BucketOwner?: string | undefined;
+}
+export type ModelInvocationJobInputDataConfig =
+  | ModelInvocationJobInputDataConfig.S3InputDataConfigMember
+  | ModelInvocationJobInputDataConfig.$UnknownMember;
+export declare namespace ModelInvocationJobInputDataConfig {
+  interface S3InputDataConfigMember {
+    s3InputDataConfig: ModelInvocationJobS3InputDataConfig;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    s3InputDataConfig?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    s3InputDataConfig: (value: ModelInvocationJobS3InputDataConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: ModelInvocationJobInputDataConfig,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface ModelInvocationJobS3OutputDataConfig {
+  s3Uri: string | undefined;
+  s3EncryptionKeyId?: string | undefined;
+  s3BucketOwner?: string | undefined;
+}
+export type ModelInvocationJobOutputDataConfig =
+  | ModelInvocationJobOutputDataConfig.S3OutputDataConfigMember
+  | ModelInvocationJobOutputDataConfig.$UnknownMember;
+export declare namespace ModelInvocationJobOutputDataConfig {
+  interface S3OutputDataConfigMember {
+    s3OutputDataConfig: ModelInvocationJobS3OutputDataConfig;
+    $unknown?: never;
+  }
+  interface $UnknownMember {
+    s3OutputDataConfig?: never;
+    $unknown: [string, any];
+  }
+  interface Visitor<T> {
+    s3OutputDataConfig: (value: ModelInvocationJobS3OutputDataConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+  const visit: <T>(
+    value: ModelInvocationJobOutputDataConfig,
+    visitor: Visitor<T>
+  ) => T;
+}
+export interface CreateModelInvocationJobRequest {
+  jobName: string | undefined;
+  roleArn: string | undefined;
+  clientRequestToken?: string | undefined;
+  modelId: string | undefined;
+  inputDataConfig: ModelInvocationJobInputDataConfig | undefined;
+  outputDataConfig: ModelInvocationJobOutputDataConfig | undefined;
+  vpcConfig?: VpcConfig | undefined;
+  timeoutDurationInHours?: number | undefined;
+  tags?: Tag[] | undefined;
+}
+export interface CreateModelInvocationJobResponse {
+  jobArn: string | undefined;
+}
+export interface GetModelInvocationJobRequest {
+  jobIdentifier: string | undefined;
+}
+export declare const ModelInvocationJobStatus: {
+  readonly COMPLETED: "Completed";
+  readonly EXPIRED: "Expired";
+  readonly FAILED: "Failed";
+  readonly IN_PROGRESS: "InProgress";
+  readonly PARTIALLY_COMPLETED: "PartiallyCompleted";
+  readonly SCHEDULED: "Scheduled";
+  readonly STOPPED: "Stopped";
+  readonly STOPPING: "Stopping";
+  readonly SUBMITTED: "Submitted";
+  readonly VALIDATING: "Validating";
+};
+export type ModelInvocationJobStatus =
+  (typeof ModelInvocationJobStatus)[keyof typeof ModelInvocationJobStatus];
+export interface GetModelInvocationJobResponse {
+  jobArn: string | undefined;
+  jobName?: string | undefined;
+  modelId: string | undefined;
+  clientRequestToken?: string | undefined;
+  roleArn: string | undefined;
+  status?: ModelInvocationJobStatus | undefined;
+  message?: string | undefined;
+  submitTime: Date | undefined;
+  lastModifiedTime?: Date | undefined;
+  endTime?: Date | undefined;
+  inputDataConfig: ModelInvocationJobInputDataConfig | undefined;
+  outputDataConfig: ModelInvocationJobOutputDataConfig | undefined;
+  vpcConfig?: VpcConfig | undefined;
+  timeoutDurationInHours?: number | undefined;
+  jobExpirationTime?: Date | undefined;
+}
+export interface ListModelInvocationJobsRequest {
+  submitTimeAfter?: Date | undefined;
+  submitTimeBefore?: Date | undefined;
+  statusEquals?: ModelInvocationJobStatus | undefined;
+  nameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortJobsBy | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface ModelInvocationJobSummary {
+  jobArn: string | undefined;
+  jobName: string | undefined;
+  modelId: string | undefined;
+  clientRequestToken?: string | undefined;
+  roleArn: string | undefined;
+  status?: ModelInvocationJobStatus | undefined;
+  message?: string | undefined;
+  submitTime: Date | undefined;
+  lastModifiedTime?: Date | undefined;
+  endTime?: Date | undefined;
+  inputDataConfig: ModelInvocationJobInputDataConfig | undefined;
+  outputDataConfig: ModelInvocationJobOutputDataConfig | undefined;
+  vpcConfig?: VpcConfig | undefined;
+  timeoutDurationInHours?: number | undefined;
+  jobExpirationTime?: Date | undefined;
+}
+export interface ListModelInvocationJobsResponse {
+  nextToken?: string | undefined;
+  invocationJobSummaries?: ModelInvocationJobSummary[] | undefined;
+}
+export interface StopModelInvocationJobRequest {
+  jobIdentifier: string | undefined;
+}
+export interface StopModelInvocationJobResponse {}
+export interface GetFoundationModelRequest {
+  modelIdentifier: string | undefined;
+}
+export declare const ModelCustomization: {
+  readonly CONTINUED_PRE_TRAINING: "CONTINUED_PRE_TRAINING";
+  readonly DISTILLATION: "DISTILLATION";
+  readonly FINE_TUNING: "FINE_TUNING";
+};
+export type ModelCustomization =
+  (typeof ModelCustomization)[keyof typeof ModelCustomization];
+export declare const InferenceType: {
+  readonly ON_DEMAND: "ON_DEMAND";
+  readonly PROVISIONED: "PROVISIONED";
+};
+export type InferenceType = (typeof InferenceType)[keyof typeof InferenceType];
+export declare const ModelModality: {
+  readonly EMBEDDING: "EMBEDDING";
+  readonly IMAGE: "IMAGE";
+  readonly TEXT: "TEXT";
+};
+export type ModelModality = (typeof ModelModality)[keyof typeof ModelModality];
+export declare const FoundationModelLifecycleStatus: {
+  readonly ACTIVE: "ACTIVE";
+  readonly LEGACY: "LEGACY";
+};
+export type FoundationModelLifecycleStatus =
+  (typeof FoundationModelLifecycleStatus)[keyof typeof FoundationModelLifecycleStatus];
+export interface FoundationModelLifecycle {
+  status: FoundationModelLifecycleStatus | undefined;
+}
+export interface FoundationModelDetails {
+  modelArn: string | undefined;
+  modelId: string | undefined;
+  modelName?: string | undefined;
+  providerName?: string | undefined;
+  inputModalities?: ModelModality[] | undefined;
+  outputModalities?: ModelModality[] | undefined;
+  responseStreamingSupported?: boolean | undefined;
+  customizationsSupported?: ModelCustomization[] | undefined;
+  inferenceTypesSupported?: InferenceType[] | undefined;
+  modelLifecycle?: FoundationModelLifecycle | undefined;
+}
+export interface GetFoundationModelResponse {
+  modelDetails?: FoundationModelDetails | undefined;
+}
+export interface ListFoundationModelsRequest {
+  byProvider?: string | undefined;
+  byCustomizationType?: ModelCustomization | undefined;
+  byOutputModality?: ModelModality | undefined;
+  byInferenceType?: InferenceType | undefined;
+}
+export interface FoundationModelSummary {
+  modelArn: string | undefined;
+  modelId: string | undefined;
+  modelName?: string | undefined;
+  providerName?: string | undefined;
+  inputModalities?: ModelModality[] | undefined;
+  outputModalities?: ModelModality[] | undefined;
+  responseStreamingSupported?: boolean | undefined;
+  customizationsSupported?: ModelCustomization[] | undefined;
+  inferenceTypesSupported?: InferenceType[] | undefined;
+  modelLifecycle?: FoundationModelLifecycle | undefined;
+}
+export interface ListFoundationModelsResponse {
+  modelSummaries?: FoundationModelSummary[] | undefined;
+}
+export interface PromptRouterTargetModel {
+  modelArn: string | undefined;
+}
+export interface RoutingCriteria {
+  responseQualityDifference: number | undefined;
+}
+export interface CreatePromptRouterRequest {
+  clientRequestToken?: string | undefined;
+  promptRouterName: string | undefined;
+  models: PromptRouterTargetModel[] | undefined;
+  description?: string | undefined;
+  routingCriteria: RoutingCriteria | undefined;
+  fallbackModel: PromptRouterTargetModel | undefined;
+  tags?: Tag[] | undefined;
+}
+export interface CreatePromptRouterResponse {
+  promptRouterArn?: string | undefined;
+}
+export interface DeletePromptRouterRequest {
+  promptRouterArn: string | undefined;
+}
+export interface DeletePromptRouterResponse {}
+export interface GetPromptRouterRequest {
+  promptRouterArn: string | undefined;
+}
+export declare const PromptRouterStatus: {
+  readonly AVAILABLE: "AVAILABLE";
+};
+export type PromptRouterStatus =
+  (typeof PromptRouterStatus)[keyof typeof PromptRouterStatus];
+export declare const PromptRouterType: {
+  readonly CUSTOM: "custom";
+  readonly DEFAULT: "default";
+};
+export type PromptRouterType =
+  (typeof PromptRouterType)[keyof typeof PromptRouterType];
+export interface GetPromptRouterResponse {
+  promptRouterName: string | undefined;
+  routingCriteria: RoutingCriteria | undefined;
+  description?: string | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  promptRouterArn: string | undefined;
+  models: PromptRouterTargetModel[] | undefined;
+  fallbackModel: PromptRouterTargetModel | undefined;
+  status: PromptRouterStatus | undefined;
+  type: PromptRouterType | undefined;
+}
+export interface ListPromptRoutersRequest {
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  type?: PromptRouterType | undefined;
+}
+export interface PromptRouterSummary {
+  promptRouterName: string | undefined;
+  routingCriteria: RoutingCriteria | undefined;
+  description?: string | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  promptRouterArn: string | undefined;
+  models: PromptRouterTargetModel[] | undefined;
+  fallbackModel: PromptRouterTargetModel | undefined;
+  status: PromptRouterStatus | undefined;
+  type: PromptRouterType | undefined;
+}
+export interface ListPromptRoutersResponse {
+  promptRouterSummaries?: PromptRouterSummary[] | undefined;
+  nextToken?: string | undefined;
+}
+export declare const CommitmentDuration: {
+  readonly ONE_MONTH: "OneMonth";
+  readonly SIX_MONTHS: "SixMonths";
+};
+export type CommitmentDuration =
+  (typeof CommitmentDuration)[keyof typeof CommitmentDuration];
+export interface CreateProvisionedModelThroughputRequest {
+  clientRequestToken?: string | undefined;
+  modelUnits: number | undefined;
+  provisionedModelName: string | undefined;
+  modelId: string | undefined;
+  commitmentDuration?: CommitmentDuration | undefined;
+  tags?: Tag[] | undefined;
+}
+export interface CreateProvisionedModelThroughputResponse {
+  provisionedModelArn: string | undefined;
+}
+export interface DeleteProvisionedModelThroughputRequest {
+  provisionedModelId: string | undefined;
+}
+export interface DeleteProvisionedModelThroughputResponse {}
+export interface GetProvisionedModelThroughputRequest {
+  provisionedModelId: string | undefined;
+}
+export declare const ProvisionedModelStatus: {
+  readonly CREATING: "Creating";
+  readonly FAILED: "Failed";
+  readonly IN_SERVICE: "InService";
+  readonly UPDATING: "Updating";
+};
+export type ProvisionedModelStatus =
+  (typeof ProvisionedModelStatus)[keyof typeof ProvisionedModelStatus];
+export interface GetProvisionedModelThroughputResponse {
+  modelUnits: number | undefined;
+  desiredModelUnits: number | undefined;
+  provisionedModelName: string | undefined;
+  provisionedModelArn: string | undefined;
+  modelArn: string | undefined;
+  desiredModelArn: string | undefined;
+  foundationModelArn: string | undefined;
+  status: ProvisionedModelStatus | undefined;
+  creationTime: Date | undefined;
+  lastModifiedTime: Date | undefined;
+  failureMessage?: string | undefined;
+  commitmentDuration?: CommitmentDuration | undefined;
+  commitmentExpirationTime?: Date | undefined;
+}
+export declare const SortByProvisionedModels: {
+  readonly CREATION_TIME: "CreationTime";
+};
+export type SortByProvisionedModels =
+  (typeof SortByProvisionedModels)[keyof typeof SortByProvisionedModels];
+export interface ListProvisionedModelThroughputsRequest {
+  creationTimeAfter?: Date | undefined;
+  creationTimeBefore?: Date | undefined;
+  statusEquals?: ProvisionedModelStatus | undefined;
+  modelArnEquals?: string | undefined;
+  nameContains?: string | undefined;
+  maxResults?: number | undefined;
+  nextToken?: string | undefined;
+  sortBy?: SortByProvisionedModels | undefined;
+  sortOrder?: SortOrder | undefined;
+}
+export interface ProvisionedModelSummary {
+  provisionedModelName: string | undefined;
+  provisionedModelArn: string | undefined;
+  modelArn: string | undefined;
+  desiredModelArn: string | undefined;
+  foundationModelArn: string | undefined;
+  modelUnits: number | undefined;
+  desiredModelUnits: number | undefined;
+  status: ProvisionedModelStatus | undefined;
+  commitmentDuration?: CommitmentDuration | undefined;
+  commitmentExpirationTime?: Date | undefined;
+  creationTime: Date | undefined;
+  lastModifiedTime: Date | undefined;
+}
+export interface ListProvisionedModelThroughputsResponse {
+  nextToken?: string | undefined;
+  provisionedModelSummaries?: ProvisionedModelSummary[] | undefined;
+}
+export interface UpdateProvisionedModelThroughputRequest {
+  provisionedModelId: string | undefined;
+  desiredProvisionedModelName?: string | undefined;
+  desiredModelId?: string | undefined;
+}
+export interface UpdateProvisionedModelThroughputResponse {}
+export interface CreateFoundationModelAgreementRequest {
+  offerToken: string | undefined;
+  modelId: string | undefined;
+}
+export interface CreateFoundationModelAgreementResponse {
+  modelId: string | undefined;
+}
+export interface DeleteFoundationModelAgreementRequest {
+  modelId: string | undefined;
+}
+export interface DeleteFoundationModelAgreementResponse {}
+export interface GetFoundationModelAvailabilityRequest {
+  modelId: string | undefined;
+}
+export declare const AuthorizationStatus: {
+  readonly AUTHORIZED: "AUTHORIZED";
+  readonly NOT_AUTHORIZED: "NOT_AUTHORIZED";
+};
+export type AuthorizationStatus =
+  (typeof AuthorizationStatus)[keyof typeof AuthorizationStatus];
+export declare const RequestMetadataBaseFiltersFilterSensitiveLog: (
+  obj: RequestMetadataBaseFilters
+) => any;
+export declare const RequestMetadataFiltersFilterSensitiveLog: (
+  obj: RequestMetadataFilters
+) => any;
+export declare const InvocationLogsConfigFilterSensitiveLog: (
+  obj: InvocationLogsConfig
+) => any;
+export declare const TrainingDataConfigFilterSensitiveLog: (
+  obj: TrainingDataConfig
+) => any;
+export declare const GetCustomModelResponseFilterSensitiveLog: (
+  obj: GetCustomModelResponse
+) => any;
+export declare const BatchDeleteEvaluationJobRequestFilterSensitiveLog: (
+  obj: BatchDeleteEvaluationJobRequest
+) => any;
+export declare const BatchDeleteEvaluationJobErrorFilterSensitiveLog: (
+  obj: BatchDeleteEvaluationJobError
+) => any;
+export declare const BatchDeleteEvaluationJobItemFilterSensitiveLog: (
+  obj: BatchDeleteEvaluationJobItem
+) => any;
+export declare const BatchDeleteEvaluationJobResponseFilterSensitiveLog: (
+  obj: BatchDeleteEvaluationJobResponse
+) => any;
+export declare const CustomMetricDefinitionFilterSensitiveLog: (
+  obj: CustomMetricDefinition
+) => any;
+export declare const AutomatedEvaluationCustomMetricSourceFilterSensitiveLog: (
+  obj: AutomatedEvaluationCustomMetricSource
+) => any;
+export declare const AutomatedEvaluationCustomMetricConfigFilterSensitiveLog: (
+  obj: AutomatedEvaluationCustomMetricConfig
+) => any;
+export declare const EvaluationDatasetFilterSensitiveLog: (
+  obj: EvaluationDataset
+) => any;
+export declare const EvaluationDatasetMetricConfigFilterSensitiveLog: (
+  obj: EvaluationDatasetMetricConfig
+) => any;
+export declare const AutomatedEvaluationConfigFilterSensitiveLog: (
+  obj: AutomatedEvaluationConfig
+) => any;
+export declare const HumanEvaluationCustomMetricFilterSensitiveLog: (
+  obj: HumanEvaluationCustomMetric
+) => any;
+export declare const HumanWorkflowConfigFilterSensitiveLog: (
+  obj: HumanWorkflowConfig
+) => any;
+export declare const HumanEvaluationConfigFilterSensitiveLog: (
+  obj: HumanEvaluationConfig
+) => any;
+export declare const EvaluationConfigFilterSensitiveLog: (
+  obj: EvaluationConfig
+) => any;
+export declare const EvaluationBedrockModelFilterSensitiveLog: (
+  obj: EvaluationBedrockModel
+) => any;
+export declare const EvaluationModelConfigFilterSensitiveLog: (
+  obj: EvaluationModelConfig
+) => any;
+export declare const PromptTemplateFilterSensitiveLog: (
+  obj: PromptTemplate
+) => any;
+export declare const ExternalSourcesGenerationConfigurationFilterSensitiveLog: (
+  obj: ExternalSourcesGenerationConfiguration
+) => any;
+export declare const ByteContentDocFilterSensitiveLog: (
+  obj: ByteContentDoc
+) => any;
+export declare const ExternalSourceFilterSensitiveLog: (
+  obj: ExternalSource
+) => any;
+export declare const ExternalSourcesRetrieveAndGenerateConfigurationFilterSensitiveLog: (
+  obj: ExternalSourcesRetrieveAndGenerateConfiguration
+) => any;
+export declare const GenerationConfigurationFilterSensitiveLog: (
+  obj: GenerationConfiguration
+) => any;
+export declare const MetadataAttributeSchemaFilterSensitiveLog: (
+  obj: MetadataAttributeSchema
+) => any;
+export declare const ImplicitFilterConfigurationFilterSensitiveLog: (
+  obj: ImplicitFilterConfiguration
+) => any;
+export declare const RerankingMetadataSelectiveModeConfigurationFilterSensitiveLog: (
+  obj: RerankingMetadataSelectiveModeConfiguration
+) => any;
+export declare const MetadataConfigurationForRerankingFilterSensitiveLog: (
+  obj: MetadataConfigurationForReranking
+) => any;
+export declare const VectorSearchBedrockRerankingConfigurationFilterSensitiveLog: (
+  obj: VectorSearchBedrockRerankingConfiguration
+) => any;
+export declare const VectorSearchRerankingConfigurationFilterSensitiveLog: (
+  obj: VectorSearchRerankingConfiguration
+) => any;
+export declare const GetEvaluationJobRequestFilterSensitiveLog: (
+  obj: GetEvaluationJobRequest
+) => any;
+export declare const StopEvaluationJobRequestFilterSensitiveLog: (
+  obj: StopEvaluationJobRequest
+) => any;
+export declare const GuardrailContentFilterConfigFilterSensitiveLog: (
+  obj: GuardrailContentFilterConfig
+) => any;
+export declare const GuardrailContentFiltersTierConfigFilterSensitiveLog: (
+  obj: GuardrailContentFiltersTierConfig
+) => any;
+export declare const GuardrailContentPolicyConfigFilterSensitiveLog: (
+  obj: GuardrailContentPolicyConfig
+) => any;
+export declare const GuardrailContextualGroundingFilterConfigFilterSensitiveLog: (
+  obj: GuardrailContextualGroundingFilterConfig
+) => any;
+export declare const GuardrailContextualGroundingPolicyConfigFilterSensitiveLog: (
+  obj: GuardrailContextualGroundingPolicyConfig
+) => any;
+export declare const GuardrailTopicsTierConfigFilterSensitiveLog: (
+  obj: GuardrailTopicsTierConfig
+) => any;
+export declare const GuardrailTopicConfigFilterSensitiveLog: (
+  obj: GuardrailTopicConfig
+) => any;
+export declare const GuardrailTopicPolicyConfigFilterSensitiveLog: (
+  obj: GuardrailTopicPolicyConfig
+) => any;
+export declare const GuardrailManagedWordsConfigFilterSensitiveLog: (
+  obj: GuardrailManagedWordsConfig
+) => any;
+export declare const GuardrailWordConfigFilterSensitiveLog: (
+  obj: GuardrailWordConfig
+) => any;
+export declare const GuardrailWordPolicyConfigFilterSensitiveLog: (
+  obj: GuardrailWordPolicyConfig
+) => any;
+export declare const CreateGuardrailRequestFilterSensitiveLog: (
+  obj: CreateGuardrailRequest
+) => any;
+export declare const CreateGuardrailVersionRequestFilterSensitiveLog: (
+  obj: CreateGuardrailVersionRequest
+) => any;
+export declare const GuardrailContentFilterFilterSensitiveLog: (
+  obj: GuardrailContentFilter
+) => any;
+export declare const GuardrailContentFiltersTierFilterSensitiveLog: (
+  obj: GuardrailContentFiltersTier
+) => any;
+export declare const GuardrailContentPolicyFilterSensitiveLog: (
+  obj: GuardrailContentPolicy
+) => any;
+export declare const GuardrailContextualGroundingFilterFilterSensitiveLog: (
+  obj: GuardrailContextualGroundingFilter
+) => any;
+export declare const GuardrailContextualGroundingPolicyFilterSensitiveLog: (
+  obj: GuardrailContextualGroundingPolicy
+) => any;
+export declare const GuardrailTopicsTierFilterSensitiveLog: (
+  obj: GuardrailTopicsTier
+) => any;
+export declare const GuardrailTopicFilterSensitiveLog: (
+  obj: GuardrailTopic
+) => any;
+export declare const GuardrailTopicPolicyFilterSensitiveLog: (
+  obj: GuardrailTopicPolicy
+) => any;
+export declare const GuardrailManagedWordsFilterSensitiveLog: (
+  obj: GuardrailManagedWords
+) => any;
+export declare const GuardrailWordFilterSensitiveLog: (
+  obj: GuardrailWord
+) => any;
+export declare const GuardrailWordPolicyFilterSensitiveLog: (
+  obj: GuardrailWordPolicy
+) => any;
+export declare const GetGuardrailResponseFilterSensitiveLog: (
+  obj: GetGuardrailResponse
+) => any;
+export declare const GuardrailSummaryFilterSensitiveLog: (
+  obj: GuardrailSummary
+) => any;
+export declare const ListGuardrailsResponseFilterSensitiveLog: (
+  obj: ListGuardrailsResponse
+) => any;
+export declare const UpdateGuardrailRequestFilterSensitiveLog: (
+  obj: UpdateGuardrailRequest
+) => any;
+export declare const CreateInferenceProfileRequestFilterSensitiveLog: (
+  obj: CreateInferenceProfileRequest
+) => any;
+export declare const GetInferenceProfileResponseFilterSensitiveLog: (
+  obj: GetInferenceProfileResponse
+) => any;
+export declare const InferenceProfileSummaryFilterSensitiveLog: (
+  obj: InferenceProfileSummary
+) => any;
+export declare const ListInferenceProfilesResponseFilterSensitiveLog: (
+  obj: ListInferenceProfilesResponse
+) => any;
+export declare const GetModelInvocationJobResponseFilterSensitiveLog: (
+  obj: GetModelInvocationJobResponse
+) => any;
+export declare const ModelInvocationJobSummaryFilterSensitiveLog: (
+  obj: ModelInvocationJobSummary
+) => any;
+export declare const ListModelInvocationJobsResponseFilterSensitiveLog: (
+  obj: ListModelInvocationJobsResponse
+) => any;
+export declare const CreatePromptRouterRequestFilterSensitiveLog: (
+  obj: CreatePromptRouterRequest
+) => any;
+export declare const GetPromptRouterResponseFilterSensitiveLog: (
+  obj: GetPromptRouterResponse
+) => any;
+export declare const PromptRouterSummaryFilterSensitiveLog: (
+  obj: PromptRouterSummary
+) => any;
+export declare const ListPromptRoutersResponseFilterSensitiveLog: (
+  obj: ListPromptRoutersResponse
+) => any;

@@ -1,0 +1,2 @@
+// @bun
+function A(k){if(!k)k=new Map;return{all:k,on(q,j){let b=k.get(q);if(b)b.push(j);else k.set(q,[j])},off(q,j){let b=k.get(q);if(b)if(j){let w=b.indexOf(j);if(w>-1)b.splice(w,1)}else k.set(q,[])},emit(q,j){let b=k.get(q);if(b)b.slice().forEach((w)=>{if(j!==void 0)w(j)});if(b=k.get("*"),b)b.slice().forEach((w)=>{if(j!==void 0)w(q,j)})}}}var B=A(),z=B,F=B,C=z.emit,G=C,H=z.all,I=z.on,J=z.on,K=z.off;export{J as useListen,F as useEvents,G as useEvent,K as off,A as mitt,I as listen,B as events,z as emitter,C as dispatch,A as default,H as all};

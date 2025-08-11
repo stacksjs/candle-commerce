@@ -1,0 +1,29 @@
+import type { LengthValidator, Validator } from './base';
+
+export declare interface IsIntOptions {
+  allow_leading_zeroes?: boolean
+  min?: number
+  max?: number
+  lt?: number
+  gt?: number
+}
+export declare interface NumericOptions {
+  no_symbols?: boolean
+  locale?: string
+}
+export declare interface NumberValidatorType extends Validator<number>, LengthValidator<NumberValidatorType> {
+  integer: (options?: IsIntOptions) => NumberValidatorType
+  positive: () => NumberValidatorType
+  negative: () => NumberValidatorType
+  divisibleBy: (divisor: number) => NumberValidatorType
+  custom: (fn: (value: number | null | undefined) => boolean, message: string) => NumberValidatorType
+}
+export declare interface BigintValidatorType extends Validator<bigint> {
+  min: (min: bigint) => BigintValidatorType
+  max: (max: bigint) => BigintValidatorType
+  length: (length: number) => BigintValidatorType
+  positive: () => BigintValidatorType
+  negative: () => BigintValidatorType
+  divisibleBy: (divisor: bigint) => BigintValidatorType
+  custom: (fn: (value: bigint) => boolean, message: string) => BigintValidatorType
+}
