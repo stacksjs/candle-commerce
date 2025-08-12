@@ -1,5 +1,968 @@
-function e(e){if(!e||typeof document>`u`)return;let t=document.head||document.getElementsByTagName(`head`)[0],n=document.createElement(`style`);n.type=`text/css`,t.appendChild(n),n.styleSheet?n.styleSheet.cssText=e:n.appendChild(document.createTextNode(e))}e(``);import*as t from"vue";import{Fragment as n,cloneVNode as r,computed as i,defineComponent as a,h as o,inject as s,nextTick as c,onMounted as l,onUnmounted as u,provide as d,ref as f,toRaw as p,watch as m,watchEffect as h}from"vue";function g(e,t,n){let r=f(n?.value),a=i(()=>e.value!==void 0);return[i(()=>a.value?e.value:r.value),function(e){return a.value||(r.value=e),t?.(e)}]}var _;let v=Symbol(`headlessui.useid`),y=0;const b=(_=t.useId)??function(){return t.inject(v,()=>`${++y}`)()};function x(e){var t;if(e==null||e.value==null)return null;let n=(t=e.value.$el)??e.value;return n instanceof Node?n:null}function S(e,t,...n){if(e in t){let r=t[e];return typeof r==`function`?r(...n):r}let r=Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map(e=>`"${e}"`).join(`, `)}.`);throw Error.captureStackTrace&&Error.captureStackTrace(r,S),r}var C=Object.defineProperty,w=(e,t,n)=>t in e?C(e,t,{enumerable:!0,configurable:!0,writable:!0,value:n}):e[t]=n,T=(e,t,n)=>(w(e,typeof t==`symbol`?t:t+``,n),n),E=class{constructor(){T(this,`current`,this.detect()),T(this,`currentId`,0)}set(e){this.current!==e&&(this.currentId=0,this.current=e)}reset(){this.set(this.detect())}nextId(){return++this.currentId}get isServer(){return this.current===`server`}get isClient(){return this.current===`client`}detect(){return typeof window>`u`||typeof document>`u`?`server`:`client`}};let D=new E;function O(e){if(D.isServer)return null;if(e instanceof Node)return e.ownerDocument;if(e!=null&&e.hasOwnProperty(`value`)){let t=x(e);if(t)return t.ownerDocument}return document}let k=[`[contentEditable=true]`,`[tabindex]`,`a[href]`,`area[href]`,`button:not([disabled])`,`iframe`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`].map(e=>`${e}:not([tabindex='-1'])`).join(`,`);var ee=(e=>(e[e.First=1]=`First`,e[e.Previous=2]=`Previous`,e[e.Next=4]=`Next`,e[e.Last=8]=`Last`,e[e.WrapAround=16]=`WrapAround`,e[e.NoScroll=32]=`NoScroll`,e))(ee||{}),te=(e=>(e[e.Error=0]=`Error`,e[e.Overflow=1]=`Overflow`,e[e.Success=2]=`Success`,e[e.Underflow=3]=`Underflow`,e))(te||{}),ne=(e=>(e[e.Previous=-1]=`Previous`,e[e.Next=1]=`Next`,e))(ne||{}),A=(e=>(e[e.Strict=0]=`Strict`,e[e.Loose=1]=`Loose`,e))(A||{});function j(e,t=0){var n;return e===(n=O(e))?.body?!1:S(t,{0(){return e.matches(k)},1(){let t=e;for(;t!==null;){if(t.matches(k))return!0;t=t.parentElement}return!1}})}var re=(e=>(e[e.Keyboard=0]=`Keyboard`,e[e.Mouse=1]=`Mouse`,e))(re||{});typeof window<`u`&&typeof document<`u`&&(document.addEventListener(`keydown`,e=>{e.metaKey||e.altKey||e.ctrlKey||(document.documentElement.dataset.headlessuiFocusVisible=``)},!0),document.addEventListener(`click`,e=>{e.detail===1?delete document.documentElement.dataset.headlessuiFocusVisible:e.detail===0&&(document.documentElement.dataset.headlessuiFocusVisible=``)},!0));let ie=[`textarea`,`input`].join(`,`);function ae(e,t=e=>e){return e.slice().sort((e,n)=>{let r=t(e),i=t(n);if(r===null||i===null)return 0;let a=r.compareDocumentPosition(i);return a&Node.DOCUMENT_POSITION_FOLLOWING?-1:a&Node.DOCUMENT_POSITION_PRECEDING?1:0})}function oe(){return/iPhone/gi.test(window.navigator.platform)||/Mac/gi.test(window.navigator.platform)&&window.navigator.maxTouchPoints>0}function se(){return/Android/gi.test(window.navigator.userAgent)}function ce(){return oe()||se()}function M(e,t,n){D.isServer||h(r=>{document.addEventListener(e,t,n),r(()=>document.removeEventListener(e,t,n))})}function le(e,t,n){D.isServer||h(r=>{window.addEventListener(e,t,n),r(()=>window.removeEventListener(e,t,n))})}function ue(e,t,n=i(()=>!0)){function r(r,i){if(!n.value||r.defaultPrevented)return;let a=i(r);if(a===null||!a.getRootNode().contains(a))return;let o=function e(t){return typeof t==`function`?e(t()):Array.isArray(t)||t instanceof Set?t:[t]}(e);for(let e of o){if(e===null)continue;let t=e instanceof HTMLElement?e:x(e);if(t!=null&&t.contains(a)||r.composed&&r.composedPath().includes(t))return}return!j(a,A.Loose)&&a.tabIndex!==-1&&r.preventDefault(),t(r,a)}let a=f(null);M(`pointerdown`,e=>{var t,r;n.value&&(a.value=(r=(t=e.composedPath)?.call(e))?.[0]||e.target)},!0),M(`mousedown`,e=>{var t,r;n.value&&(a.value=(r=(t=e.composedPath)?.call(e))?.[0]||e.target)},!0),M(`click`,e=>{ce()||a.value&&(r(e,()=>a.value),a.value=null)},!0),M(`touchend`,e=>r(e,()=>e.target instanceof HTMLElement?e.target:null),!0),le(`blur`,e=>r(e,()=>window.document.activeElement instanceof HTMLIFrameElement?window.document.activeElement:null),!0)}function N(e,t){if(e)return e;let n=t??`button`;if(typeof n==`string`&&n.toLowerCase()===`button`)return`button`}function de(e,t){let n=f(N(e.value.type,e.value.as));return l(()=>{n.value=N(e.value.type,e.value.as)}),h(()=>{var e;n.value||x(t)&&x(t)instanceof HTMLButtonElement&&!((e=x(t))!=null&&e.hasAttribute(`type`))&&(n.value=`button`)}),n}function P(e){return[e.screenX,e.screenY]}function fe(){let e=f([-1,-1]);return{wasMoved(t){let n=P(t);return e.value[0]===n[0]&&e.value[1]===n[1]?!1:(e.value=n,!0)},update(t){e.value=P(t)}}}var F=(e=>(e[e.None=0]=`None`,e[e.RenderStrategy=1]=`RenderStrategy`,e[e.Static=2]=`Static`,e))(F||{}),pe=(e=>(e[e.Unmount=0]=`Unmount`,e[e.Hidden=1]=`Hidden`,e))(pe||{});function I({visible:e=!0,features:t=0,ourProps:n,theirProps:r,...i}){var a;let o=z(r,n),s=Object.assign(i,{props:o});if(e||t&2&&o.static)return L(s);if(t&1){let e=(a=o.unmount)==null||a?0:1;return S(e,{0(){return null},1(){return L({...i,props:{...o,hidden:!0,style:{display:`none`}}})}})}return L(s)}function L({props:e,attrs:t,slots:n,slot:i,name:a}){var s,c;let{as:l,...u}=B(e,[`unmount`,`static`]),d=(s=n.default)?.call(n,i),f={};if(i){let e=!1,t=[];for(let[n,r]of Object.entries(i))typeof r==`boolean`&&(e=!0),r===!0&&t.push(n);e&&(f[`data-headlessui-state`]=t.join(` `))}if(l===`template`){if(d=R(d??[]),Object.keys(u).length>0||Object.keys(t).length>0){let[e,...n]=d??[];if(!he(e)||n.length>0)throw Error([`Passing props on "template"!`,``,`The current component <${a} /> is rendering a "template".`,`However we need to passthrough the following props:`,Object.keys(u).concat(Object.keys(t)).map(e=>e.trim()).filter((e,t,n)=>n.indexOf(e)===t).sort((e,t)=>e.localeCompare(t)).map(e=>`  - ${e}`).join(`
-`),``,`You can apply a few solutions:`,['Add an `as="..."` prop, to ensure that we render an actual element instead of a "template".',`Render a single element as the child so that we can forward the props onto that element.`].map(e=>`  - ${e}`).join(`
-`)].join(`
-`));let i=z((c=e.props)??{},u,f),o=r(e,i,!0);for(let e in i)e.startsWith(`on`)&&(o.props||={},o.props[e]=i[e]);return o}return Array.isArray(d)&&d.length===1?d[0]:d}return o(l,Object.assign({},u,f),{default:()=>d})}function R(e){return e.flatMap(e=>e.type===n?R(e.children):[e])}function z(...e){var t;if(e.length===0)return{};if(e.length===1)return e[0];let n={},r={};for(let i of e)for(let e in i)e.startsWith(`on`)&&typeof i[e]==`function`?((t=r[e])??(r[e]=[]),r[e].push(i[e])):n[e]=i[e];if(n.disabled||n[`aria-disabled`])return Object.assign(n,Object.fromEntries(Object.keys(r).map(e=>[e,void 0])));for(let e in r)Object.assign(n,{[e](t,...n){let i=r[e];for(let e of i){if(t instanceof Event&&t.defaultPrevented)return;e(t,...n)}}});return n}function me(e){let t=Object.assign({},e);for(let e in t)t[e]===void 0&&delete t[e];return t}function B(e,t=[]){let n=Object.assign({},e);for(let e of t)e in n&&delete n[e];return n}function he(e){return e==null?!1:typeof e.type==`string`||typeof e.type==`object`||typeof e.type==`function`}var V=(e=>(e[e.None=1]=`None`,e[e.Focusable=2]=`Focusable`,e[e.Hidden=4]=`Hidden`,e))(V||{});let ge=a({name:`Hidden`,props:{as:{type:[Object,String],default:`div`},features:{type:Number,default:1}},setup(e,{slots:t,attrs:n}){return()=>{var r;let{features:i,...a}=e,o={"aria-hidden":(i&2)==2?!0:(r=a[`aria-hidden`])??void 0,hidden:(i&4)==4?!0:void 0,style:{position:`fixed`,top:1,left:1,width:1,height:0,padding:0,margin:-1,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,borderWidth:`0`,...(i&4)==4&&(i&2)!=2&&{display:`none`}}};return I({ourProps:o,theirProps:a,slot:{},attrs:n,slots:t,name:`Hidden`})}}}),H=Symbol(`Context`);var U=(e=>(e[e.Open=1]=`Open`,e[e.Closed=2]=`Closed`,e[e.Closing=4]=`Closing`,e[e.Opening=8]=`Opening`,e))(U||{});function _e(){return s(H,null)}function ve(e){d(H,e)}var W=(e=>(e.Space=` `,e.Enter=`Enter`,e.Escape=`Escape`,e.Backspace=`Backspace`,e.Delete=`Delete`,e.ArrowLeft=`ArrowLeft`,e.ArrowUp=`ArrowUp`,e.ArrowRight=`ArrowRight`,e.ArrowDown=`ArrowDown`,e.Home=`Home`,e.End=`End`,e.PageUp=`PageUp`,e.PageDown=`PageDown`,e.Tab=`Tab`,e))(W||{});function ye(e){throw Error(`Unexpected object: `+e)}var G=(e=>(e[e.First=0]=`First`,e[e.Previous=1]=`Previous`,e[e.Next=2]=`Next`,e[e.Last=3]=`Last`,e[e.Specific=4]=`Specific`,e[e.Nothing=5]=`Nothing`,e))(G||{});function be(e,t){let n=t.resolveItems();if(n.length<=0)return null;let r=t.resolveActiveIndex(),i=r??-1;switch(e.focus){case 0:for(let e=0;e<n.length;++e)if(!t.resolveDisabled(n[e],e,n))return e;return r;case 1:i===-1&&(i=n.length);for(let e=i-1;e>=0;--e)if(!t.resolveDisabled(n[e],e,n))return e;return r;case 2:for(let e=i+1;e<n.length;++e)if(!t.resolveDisabled(n[e],e,n))return e;return r;case 3:for(let e=n.length-1;e>=0;--e)if(!t.resolveDisabled(n[e],e,n))return e;return r;case 4:for(let r=0;r<n.length;++r)if(t.resolveId(n[r],r,n)===e.id)return r;return r;case 5:return null;default:ye(e)}}function K(e={},t=null,n=[]){for(let[r,i]of Object.entries(e))J(n,q(t,r),i);return n}function q(e,t){return e?e+`[`+t+`]`:t}function J(e,t,n){if(Array.isArray(n))for(let[r,i]of n.entries())J(e,q(t,r.toString()),i);else n instanceof Date?e.push([t,n.toISOString()]):typeof n==`boolean`?e.push([t,n?`1`:`0`]):typeof n==`string`?e.push([t,n]):typeof n==`number`?e.push([t,`${n}`]):n==null?e.push([t,``]):K(n,t,e)}let Y=/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;function X(e){var t,n;let r=(t=e.innerText)??``,i=e.cloneNode(!0);if(!(i instanceof HTMLElement))return r;let a=!1;for(let e of i.querySelectorAll(`[hidden],[aria-hidden],[role="img"]`))e.remove(),a=!0;let o=a?(n=i.innerText)??``:r;return Y.test(o)&&(o=o.replace(Y,``)),o}function xe(e){let t=e.getAttribute(`aria-label`);if(typeof t==`string`)return t.trim();let n=e.getAttribute(`aria-labelledby`);if(n){let e=n.split(` `).map(e=>{let t=document.getElementById(e);if(t){let e=t.getAttribute(`aria-label`);return typeof e==`string`?e.trim():X(t).trim()}return null}).filter(Boolean);if(e.length>0)return e.join(`, `)}return X(e).trim()}function Se(e){let t=f(``),n=f(``);return()=>{let r=x(e);if(!r)return``;let i=r.innerText;if(t.value===i)return n.value;let a=xe(r).trim().toLowerCase();return t.value=i,n.value=a,a}}function Ce(e,t){return e===t}var we=(e=>(e[e.Open=0]=`Open`,e[e.Closed=1]=`Closed`,e))(we||{}),Te=(e=>(e[e.Single=0]=`Single`,e[e.Multi=1]=`Multi`,e))(Te||{}),Ee=(e=>(e[e.Pointer=0]=`Pointer`,e[e.Other=1]=`Other`,e))(Ee||{});function De(e){requestAnimationFrame(()=>requestAnimationFrame(e))}let Z=Symbol(`ListboxContext`);function Q(e){let t=s(Z,null);if(t===null){let t=Error(`<${e} /> is missing a parent <Listbox /> component.`);throw Error.captureStackTrace&&Error.captureStackTrace(t,Q),t}return t}let Oe=a({name:`Listbox`,emits:{"update:modelValue":e=>!0},props:{as:{type:[Object,String],default:`template`},disabled:{type:[Boolean],default:!1},by:{type:[String,Function],default:()=>Ce},horizontal:{type:[Boolean],default:!1},modelValue:{type:[Object,String,Number,Boolean],default:void 0},defaultValue:{type:[Object,String,Number,Boolean],default:void 0},form:{type:String,optional:!0},name:{type:String,optional:!0},multiple:{type:[Boolean],default:!1}},inheritAttrs:!1,setup(e,{slots:t,attrs:r,emit:a}){let s=f(1),c=f(null),u=f(null),h=f(null),_=f([]),v=f(``),y=f(null),b=f(1);function C(e=e=>e){let t=y.value===null?null:_.value[y.value],n=ae(e(_.value.slice()),e=>x(e.dataRef.domRef)),r=t?n.indexOf(t):null;return r===-1&&(r=null),{options:n,activeOptionIndex:r}}let w=i(()=>e.multiple?1:0),[T,E]=g(i(()=>e.modelValue),e=>a(`update:modelValue`,e),i(()=>e.defaultValue)),D=i(()=>T.value===void 0?S(w.value,{1:[],0:void 0}):T.value),O={listboxState:s,value:D,mode:w,compare(t,n){if(typeof e.by==`string`){let r=e.by;return t?.[r]===n?.[r]}return e.by(t,n)},orientation:i(()=>e.horizontal?`horizontal`:`vertical`),labelRef:c,buttonRef:u,optionsRef:h,disabled:i(()=>e.disabled),options:_,searchQuery:v,activeOptionIndex:y,activationTrigger:b,closeListbox(){e.disabled||s.value!==1&&(s.value=1,y.value=null)},openListbox(){e.disabled||s.value!==0&&(s.value=0)},goToOption(t,n,r){if(e.disabled||s.value===1)return;let i=C(),a=be(t===G.Specific?{focus:G.Specific,id:n}:{focus:t},{resolveItems:()=>i.options,resolveActiveIndex:()=>i.activeOptionIndex,resolveId:e=>e.id,resolveDisabled:e=>e.dataRef.disabled});v.value=``,y.value=a,b.value=r??1,_.value=i.options},search(t){if(e.disabled||s.value===1)return;let n=v.value===``?1:0;v.value+=t.toLowerCase();let r=(y.value===null?_.value:_.value.slice(y.value+n).concat(_.value.slice(0,y.value+n))).find(e=>e.dataRef.textValue.startsWith(v.value)&&!e.dataRef.disabled),i=r?_.value.indexOf(r):-1;i===-1||i===y.value||(y.value=i,b.value=1)},clearSearch(){e.disabled||s.value!==1&&v.value!==``&&(v.value=``)},registerOption(e,t){let n=C(n=>[...n,{id:e,dataRef:t}]);_.value=n.options,y.value=n.activeOptionIndex},unregisterOption(e){let t=C(t=>{let n=t.findIndex(t=>t.id===e);return n!==-1&&t.splice(n,1),t});_.value=t.options,y.value=t.activeOptionIndex,b.value=1},theirOnChange(t){e.disabled||E(t)},select(t){e.disabled||E(S(w.value,{0:()=>t,1:()=>{let e=p(O.value.value).slice(),n=p(t),r=e.findIndex(e=>O.compare(n,p(e)));return r===-1?e.push(n):e.splice(r,1),e}}))}};ue([u,h],(e,t)=>{var n;O.closeListbox(),j(t,A.Loose)||(e.preventDefault(),(n=x(u))==null||n.focus())},i(()=>s.value===0)),d(Z,O),ve(i(()=>S(s.value,{0:U.Open,1:U.Closed})));let k=i(()=>{var e;return(e=x(u))?.closest(`form`)});return l(()=>{m([k],()=>{if(!k.value||e.defaultValue===void 0)return;function t(){O.theirOnChange(e.defaultValue)}return k.value.addEventListener(`reset`,t),()=>{var e;(e=k.value)==null||e.removeEventListener(`reset`,t)}},{immediate:!0})}),()=>{let{name:i,modelValue:a,disabled:c,form:l,...u}=e,d={open:s.value===0,disabled:c,value:D.value};return o(n,[...i!=null&&D.value!=null?K({[i]:D.value}).map(([e,t])=>o(ge,me({features:V.Hidden,key:e,as:`input`,type:`hidden`,hidden:!0,readOnly:!0,form:l,disabled:c,name:e,value:t}))):[],I({ourProps:{},theirProps:{...r,...B(u,[`defaultValue`,`onUpdate:modelValue`,`horizontal`,`multiple`,`by`])},slot:d,slots:t,attrs:r,name:`Listbox`})])}}}),ke=a({name:`ListboxLabel`,props:{as:{type:[Object,String],default:`label`},id:{type:String,default:null}},setup(e,{attrs:t,slots:n}){var r;let i=(r=e.id)??`headlessui-listbox-label-${b()}`,a=Q(`ListboxLabel`);function o(){var e;(e=x(a.buttonRef))==null||e.focus({preventScroll:!0})}return()=>{let r={open:a.listboxState.value===0,disabled:a.disabled.value},{...s}=e,c={id:i,ref:a.labelRef,onClick:o};return I({ourProps:c,theirProps:s,slot:r,attrs:t,slots:n,name:`ListboxLabel`})}}}),Ae=a({name:`ListboxButton`,props:{as:{type:[Object,String],default:`button`},id:{type:String,default:null}},setup(e,{attrs:t,slots:n,expose:r}){var a;let o=(a=e.id)??`headlessui-listbox-button-${b()}`,s=Q(`ListboxButton`);r({el:s.buttonRef,$el:s.buttonRef});function l(e){switch(e.key){case W.Space:case W.Enter:case W.ArrowDown:e.preventDefault(),s.openListbox(),c(()=>{var e;(e=x(s.optionsRef))==null||e.focus({preventScroll:!0}),s.value.value||s.goToOption(G.First)});break;case W.ArrowUp:e.preventDefault(),s.openListbox(),c(()=>{var e;(e=x(s.optionsRef))==null||e.focus({preventScroll:!0}),s.value.value||s.goToOption(G.Last)});break}}function u(e){switch(e.key){case W.Space:e.preventDefault();break}}function d(e){s.disabled.value||(s.listboxState.value===0?(s.closeListbox(),c(()=>{var e;return(e=x(s.buttonRef))?.focus({preventScroll:!0})})):(e.preventDefault(),s.openListbox(),De(()=>{var e;return(e=x(s.optionsRef))?.focus({preventScroll:!0})})))}let f=de(i(()=>({as:e.as,type:t.type})),s.buttonRef);return()=>{var r,i;let a={open:s.listboxState.value===0,disabled:s.disabled.value,value:s.value.value},{...c}=e,p={ref:s.buttonRef,id:o,type:f.value,"aria-haspopup":`listbox`,"aria-controls":(r=x(s.optionsRef))?.id,"aria-expanded":s.listboxState.value===0,"aria-labelledby":s.labelRef.value?[(i=x(s.labelRef))?.id,o].join(` `):void 0,disabled:s.disabled.value===!0?!0:void 0,onKeydown:l,onKeyup:u,onClick:d};return I({ourProps:p,theirProps:c,slot:a,attrs:t,slots:n,name:`ListboxButton`})}}}),je=a({name:`ListboxOptions`,props:{as:{type:[Object,String],default:`ul`},static:{type:Boolean,default:!1},unmount:{type:Boolean,default:!0},id:{type:String,default:null}},setup(e,{attrs:t,slots:n,expose:r}){var a;let o=(a=e.id)??`headlessui-listbox-options-${b()}`,s=Q(`ListboxOptions`),l=f(null);r({el:s.optionsRef,$el:s.optionsRef});function u(e){switch(l.value&&clearTimeout(l.value),e.key){case W.Space:if(s.searchQuery.value!==``)return e.preventDefault(),e.stopPropagation(),s.search(e.key);case W.Enter:if(e.preventDefault(),e.stopPropagation(),s.activeOptionIndex.value!==null){let e=s.options.value[s.activeOptionIndex.value];s.select(e.dataRef.value)}s.mode.value===0&&(s.closeListbox(),c(()=>{var e;return(e=x(s.buttonRef))?.focus({preventScroll:!0})}));break;case S(s.orientation.value,{vertical:W.ArrowDown,horizontal:W.ArrowRight}):return e.preventDefault(),e.stopPropagation(),s.goToOption(G.Next);case S(s.orientation.value,{vertical:W.ArrowUp,horizontal:W.ArrowLeft}):return e.preventDefault(),e.stopPropagation(),s.goToOption(G.Previous);case W.Home:case W.PageUp:return e.preventDefault(),e.stopPropagation(),s.goToOption(G.First);case W.End:case W.PageDown:return e.preventDefault(),e.stopPropagation(),s.goToOption(G.Last);case W.Escape:e.preventDefault(),e.stopPropagation(),s.closeListbox(),c(()=>{var e;return(e=x(s.buttonRef))?.focus({preventScroll:!0})});break;case W.Tab:e.preventDefault(),e.stopPropagation();break;default:e.key.length===1&&(s.search(e.key),l.value=setTimeout(()=>s.clearSearch(),350));break}}let d=_e(),p=i(()=>d===null?s.listboxState.value===0:(d.value&U.Open)===U.Open);return()=>{var r,i;let a={open:s.listboxState.value===0},{...c}=e,l={"aria-activedescendant":s.activeOptionIndex.value===null||(r=s.options.value[s.activeOptionIndex.value])==null?void 0:r.id,"aria-multiselectable":s.mode.value===1?!0:void 0,"aria-labelledby":(i=x(s.buttonRef))?.id,"aria-orientation":s.orientation.value,id:o,onKeydown:u,role:`listbox`,tabIndex:0,ref:s.optionsRef};return I({ourProps:l,theirProps:c,slot:a,attrs:t,slots:n,features:F.RenderStrategy|F.Static,visible:p.value,name:`ListboxOptions`})}}}),$=a({name:`ListboxOption`,props:{as:{type:[Object,String],default:`li`},value:{type:[Object,String,Number,Boolean]},disabled:{type:Boolean,default:!1},id:{type:String,default:null}},setup(e,{slots:t,attrs:n,expose:r}){var a;let o=(a=e.id)??`headlessui-listbox-option-${b()}`,s=Q(`ListboxOption`),d=f(null);r({el:d,$el:d});let g=i(()=>s.activeOptionIndex.value===null?!1:s.options.value[s.activeOptionIndex.value].id===o),_=i(()=>S(s.mode.value,{0:()=>s.compare(p(s.value.value),p(e.value)),1:()=>p(s.value.value).some(t=>s.compare(p(t),p(e.value)))})),v=i(()=>S(s.mode.value,{1:()=>{var e;let t=p(s.value.value);return(e=s.options.value.find(e=>t.some(t=>s.compare(p(t),p(e.dataRef.value)))))?.id===o},0:()=>_.value})),y=Se(d),C=i(()=>({disabled:e.disabled,value:e.value,get textValue(){return y()},domRef:d}));l(()=>s.registerOption(o,C)),u(()=>s.unregisterOption(o)),l(()=>{m([s.listboxState,_],()=>{s.listboxState.value===0&&_.value&&S(s.mode.value,{1:()=>{v.value&&s.goToOption(G.Specific,o)},0:()=>{s.goToOption(G.Specific,o)}})},{immediate:!0})}),h(()=>{s.listboxState.value===0&&g.value&&s.activationTrigger.value!==0&&c(()=>{var e,t;return(t=(e=x(d))?.scrollIntoView)?.call(e,{block:`nearest`})})});function w(t){if(e.disabled)return t.preventDefault();s.select(e.value),s.mode.value===0&&(s.closeListbox(),c(()=>{var e;return(e=x(s.buttonRef))?.focus({preventScroll:!0})}))}function T(){if(e.disabled)return s.goToOption(G.Nothing);s.goToOption(G.Specific,o)}let E=fe();function D(e){E.update(e)}function O(t){E.wasMoved(t)&&(e.disabled||g.value||s.goToOption(G.Specific,o,0))}function k(t){E.wasMoved(t)&&(e.disabled||g.value&&s.goToOption(G.Nothing))}return()=>{let{disabled:r}=e,i={active:g.value,selected:_.value,disabled:r},{value:a,disabled:s,...c}=e,l={id:o,ref:d,role:`option`,tabIndex:r===!0?void 0:-1,"aria-disabled":r===!0?!0:void 0,"aria-selected":_.value,disabled:void 0,onClick:w,onFocus:T,onPointerenter:D,onMouseenter:D,onPointermove:O,onMousemove:O,onPointerleave:k,onMouseleave:k};return I({ourProps:l,theirProps:c,slot:i,attrs:n,slots:t,name:`ListboxOption`})}}});const Me={install(e){Object.entries({Listbox:Oe,ListboxButton:Ae,ListboxOptions:je,ListboxOption:$}).forEach(([t,n])=>{e.component(t,n)})}};var Ne=Me;export{Oe as Listbox,Ae as ListboxButton,$ as ListboxOption,je as ListboxOptions,Ne as default};
+function e(e) {
+	if (!e || typeof document > "u") return;
+	let t = document.head || document.getElementsByTagName("head")[0], n = document.createElement("style");
+	n.type = "text/css", t.appendChild(n), n.styleSheet ? n.styleSheet.cssText = e : n.appendChild(document.createTextNode(e));
+}
+e("");
+import * as t from "vue";
+import { Fragment as n, cloneVNode as r, computed as i, defineComponent as a, h as o, inject as s, nextTick as c, onMounted as l, onUnmounted as u, provide as d, ref as f, toRaw as p, watch as m, watchEffect as h } from "vue";
+function g(e, t, n) {
+	let r = f(n?.value), a = i(() => e.value !== void 0);
+	return [i(() => a.value ? e.value : r.value), function(e) {
+		return a.value || (r.value = e), t?.(e);
+	}];
+}
+var _;
+let v = Symbol("headlessui.useid"), y = 0;
+const b = (_ = t.useId) ?? function() {
+	return t.inject(v, () => `${++y}`)();
+};
+function x(e) {
+	var t;
+	if (e == null || e.value == null) return null;
+	let n = (t = e.value.$el) ?? e.value;
+	return n instanceof Node ? n : null;
+}
+function S(e, t, ...n) {
+	if (e in t) {
+		let r = t[e];
+		return typeof r == "function" ? r(...n) : r;
+	}
+	let r = /* @__PURE__ */ Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map((e) => `"${e}"`).join(", ")}.`);
+	throw Error.captureStackTrace && Error.captureStackTrace(r, S), r;
+}
+var C = Object.defineProperty, w = (e, t, n) => t in e ? C(e, t, {
+	enumerable: !0,
+	configurable: !0,
+	writable: !0,
+	value: n
+}) : e[t] = n, T = (e, t, n) => (w(e, typeof t == "symbol" ? t : t + "", n), n), E = class {
+	constructor() {
+		T(this, "current", this.detect()), T(this, "currentId", 0);
+	}
+	set(e) {
+		this.current !== e && (this.currentId = 0, this.current = e);
+	}
+	reset() {
+		this.set(this.detect());
+	}
+	nextId() {
+		return ++this.currentId;
+	}
+	get isServer() {
+		return this.current === "server";
+	}
+	get isClient() {
+		return this.current === "client";
+	}
+	detect() {
+		return typeof window > "u" || typeof document > "u" ? "server" : "client";
+	}
+};
+let D = new E();
+function O(e) {
+	if (D.isServer) return null;
+	if (e instanceof Node) return e.ownerDocument;
+	if (e != null && e.hasOwnProperty("value")) {
+		let t = x(e);
+		if (t) return t.ownerDocument;
+	}
+	return document;
+}
+let k = [
+	"[contentEditable=true]",
+	"[tabindex]",
+	"a[href]",
+	"area[href]",
+	"button:not([disabled])",
+	"iframe",
+	"input:not([disabled])",
+	"select:not([disabled])",
+	"textarea:not([disabled])"
+].map((e) => `${e}:not([tabindex='-1'])`).join(",");
+var ee = ((e) => (e[e.First = 1] = "First", e[e.Previous = 2] = "Previous", e[e.Next = 4] = "Next", e[e.Last = 8] = "Last", e[e.WrapAround = 16] = "WrapAround", e[e.NoScroll = 32] = "NoScroll", e))(ee || {}), te = ((e) => (e[e.Error = 0] = "Error", e[e.Overflow = 1] = "Overflow", e[e.Success = 2] = "Success", e[e.Underflow = 3] = "Underflow", e))(te || {}), ne = ((e) => (e[e.Previous = -1] = "Previous", e[e.Next = 1] = "Next", e))(ne || {}), A = ((e) => (e[e.Strict = 0] = "Strict", e[e.Loose = 1] = "Loose", e))(A || {});
+function j(e, t = 0) {
+	var n;
+	return e === (n = O(e))?.body ? !1 : S(t, {
+		0() {
+			return e.matches(k);
+		},
+		1() {
+			let t = e;
+			for (; t !== null;) {
+				if (t.matches(k)) return !0;
+				t = t.parentElement;
+			}
+			return !1;
+		}
+	});
+}
+var re = ((e) => (e[e.Keyboard = 0] = "Keyboard", e[e.Mouse = 1] = "Mouse", e))(re || {});
+typeof window < "u" && typeof document < "u" && (document.addEventListener("keydown", (e) => {
+	e.metaKey || e.altKey || e.ctrlKey || (document.documentElement.dataset.headlessuiFocusVisible = "");
+}, !0), document.addEventListener("click", (e) => {
+	e.detail === 1 ? delete document.documentElement.dataset.headlessuiFocusVisible : e.detail === 0 && (document.documentElement.dataset.headlessuiFocusVisible = "");
+}, !0)), ["textarea", "input"].join(",");
+function ie(e, t = (e) => e) {
+	return e.slice().sort((e, n) => {
+		let r = t(e), i = t(n);
+		if (r === null || i === null) return 0;
+		let a = r.compareDocumentPosition(i);
+		return a & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : a & Node.DOCUMENT_POSITION_PRECEDING ? 1 : 0;
+	});
+}
+function ae() {
+	return /iPhone/gi.test(window.navigator.platform) || /Mac/gi.test(window.navigator.platform) && window.navigator.maxTouchPoints > 0;
+}
+function oe() {
+	return /Android/gi.test(window.navigator.userAgent);
+}
+function se() {
+	return ae() || oe();
+}
+function M(e, t, n) {
+	D.isServer || h((r) => {
+		document.addEventListener(e, t, n), r(() => document.removeEventListener(e, t, n));
+	});
+}
+function ce(e, t, n) {
+	D.isServer || h((r) => {
+		window.addEventListener(e, t, n), r(() => window.removeEventListener(e, t, n));
+	});
+}
+function le(e, t, n = i(() => !0)) {
+	function r(r, i) {
+		if (!n.value || r.defaultPrevented) return;
+		let a = i(r);
+		if (a === null || !a.getRootNode().contains(a)) return;
+		let o = function e(t) {
+			return typeof t == "function" ? e(t()) : Array.isArray(t) || t instanceof Set ? t : [t];
+		}(e);
+		for (let e of o) {
+			if (e === null) continue;
+			let t = e instanceof HTMLElement ? e : x(e);
+			if (t != null && t.contains(a) || r.composed && r.composedPath().includes(t)) return;
+		}
+		return !j(a, A.Loose) && a.tabIndex !== -1 && r.preventDefault(), t(r, a);
+	}
+	let a = f(null);
+	M("pointerdown", (e) => {
+		var t, r;
+		n.value && (a.value = (r = (t = e.composedPath)?.call(e))?.[0] || e.target);
+	}, !0), M("mousedown", (e) => {
+		var t, r;
+		n.value && (a.value = (r = (t = e.composedPath)?.call(e))?.[0] || e.target);
+	}, !0), M("click", (e) => {
+		se() || a.value && (r(e, () => a.value), a.value = null);
+	}, !0), M("touchend", (e) => r(e, () => e.target instanceof HTMLElement ? e.target : null), !0), ce("blur", (e) => r(e, () => window.document.activeElement instanceof HTMLIFrameElement ? window.document.activeElement : null), !0);
+}
+function N(e, t) {
+	if (e) return e;
+	let n = t ?? "button";
+	if (typeof n == "string" && n.toLowerCase() === "button") return "button";
+}
+function ue(e, t) {
+	let n = f(N(e.value.type, e.value.as));
+	return l(() => {
+		n.value = N(e.value.type, e.value.as);
+	}), h(() => {
+		var e;
+		n.value || x(t) && x(t) instanceof HTMLButtonElement && !((e = x(t)) != null && e.hasAttribute("type")) && (n.value = "button");
+	}), n;
+}
+function P(e) {
+	return [e.screenX, e.screenY];
+}
+function de() {
+	let e = f([-1, -1]);
+	return {
+		wasMoved(t) {
+			let n = P(t);
+			return e.value[0] === n[0] && e.value[1] === n[1] ? !1 : (e.value = n, !0);
+		},
+		update(t) {
+			e.value = P(t);
+		}
+	};
+}
+var F = ((e) => (e[e.None = 0] = "None", e[e.RenderStrategy = 1] = "RenderStrategy", e[e.Static = 2] = "Static", e))(F || {}), fe = ((e) => (e[e.Unmount = 0] = "Unmount", e[e.Hidden = 1] = "Hidden", e))(fe || {});
+function I({ visible: e = !0, features: t = 0, ourProps: n, theirProps: r,...i }) {
+	var a;
+	let o = z(r, n), s = Object.assign(i, { props: o });
+	if (e || t & 2 && o.static) return L(s);
+	if (t & 1) {
+		let e = (a = o.unmount) == null || a ? 0 : 1;
+		return S(e, {
+			0() {
+				return null;
+			},
+			1() {
+				return L({
+					...i,
+					props: {
+						...o,
+						hidden: !0,
+						style: { display: "none" }
+					}
+				});
+			}
+		});
+	}
+	return L(s);
+}
+function L({ props: e, attrs: t, slots: n, slot: i, name: a }) {
+	var s, c;
+	let { as: l,...u } = B(e, ["unmount", "static"]), d = (s = n.default)?.call(n, i), f = {};
+	if (i) {
+		let e = !1, t = [];
+		for (let [n, r] of Object.entries(i)) typeof r == "boolean" && (e = !0), r === !0 && t.push(n);
+		e && (f["data-headlessui-state"] = t.join(" "));
+	}
+	if (l === "template") {
+		if (d = R(d ?? []), Object.keys(u).length > 0 || Object.keys(t).length > 0) {
+			let [e, ...n] = d ?? [];
+			if (!me(e) || n.length > 0) throw Error([
+				"Passing props on \"template\"!",
+				"",
+				`The current component <${a} /> is rendering a "template".`,
+				"However we need to passthrough the following props:",
+				Object.keys(u).concat(Object.keys(t)).map((e) => e.trim()).filter((e, t, n) => n.indexOf(e) === t).sort((e, t) => e.localeCompare(t)).map((e) => `  - ${e}`).join("\n"),
+				"",
+				"You can apply a few solutions:",
+				["Add an `as=\"...\"` prop, to ensure that we render an actual element instead of a \"template\".", "Render a single element as the child so that we can forward the props onto that element."].map((e) => `  - ${e}`).join("\n")
+			].join("\n"));
+			let i = z((c = e.props) ?? {}, u, f), o = r(e, i, !0);
+			for (let e in i) e.startsWith("on") && (o.props ||= {}, o.props[e] = i[e]);
+			return o;
+		}
+		return Array.isArray(d) && d.length === 1 ? d[0] : d;
+	}
+	return o(l, Object.assign({}, u, f), { default: () => d });
+}
+function R(e) {
+	return e.flatMap((e) => e.type === n ? R(e.children) : [e]);
+}
+function z(...e) {
+	var t;
+	if (e.length === 0) return {};
+	if (e.length === 1) return e[0];
+	let n = {}, r = {};
+	for (let i of e) for (let e in i) e.startsWith("on") && typeof i[e] == "function" ? ((t = r[e]) ?? (r[e] = []), r[e].push(i[e])) : n[e] = i[e];
+	if (n.disabled || n["aria-disabled"]) return Object.assign(n, Object.fromEntries(Object.keys(r).map((e) => [e, void 0])));
+	for (let e in r) Object.assign(n, { [e](t, ...n) {
+		let i = r[e];
+		for (let e of i) {
+			if (t instanceof Event && t.defaultPrevented) return;
+			e(t, ...n);
+		}
+	} });
+	return n;
+}
+function pe(e) {
+	let t = Object.assign({}, e);
+	for (let e in t) t[e] === void 0 && delete t[e];
+	return t;
+}
+function B(e, t = []) {
+	let n = Object.assign({}, e);
+	for (let e of t) e in n && delete n[e];
+	return n;
+}
+function me(e) {
+	return e == null ? !1 : typeof e.type == "string" || typeof e.type == "object" || typeof e.type == "function";
+}
+var V = ((e) => (e[e.None = 1] = "None", e[e.Focusable = 2] = "Focusable", e[e.Hidden = 4] = "Hidden", e))(V || {});
+let he = a({
+	name: "Hidden",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "div"
+		},
+		features: {
+			type: Number,
+			default: 1
+		}
+	},
+	setup(e, { slots: t, attrs: n }) {
+		return () => {
+			var r;
+			let { features: i,...a } = e, o = {
+				"aria-hidden": (i & 2) == 2 ? !0 : (r = a["aria-hidden"]) ?? void 0,
+				hidden: (i & 4) == 4 ? !0 : void 0,
+				style: {
+					position: "fixed",
+					top: 1,
+					left: 1,
+					width: 1,
+					height: 0,
+					padding: 0,
+					margin: -1,
+					overflow: "hidden",
+					clip: "rect(0, 0, 0, 0)",
+					whiteSpace: "nowrap",
+					borderWidth: "0",
+					...(i & 4) == 4 && (i & 2) != 2 && { display: "none" }
+				}
+			};
+			return I({
+				ourProps: o,
+				theirProps: a,
+				slot: {},
+				attrs: n,
+				slots: t,
+				name: "Hidden"
+			});
+		};
+	}
+}), H = Symbol("Context");
+var U = ((e) => (e[e.Open = 1] = "Open", e[e.Closed = 2] = "Closed", e[e.Closing = 4] = "Closing", e[e.Opening = 8] = "Opening", e))(U || {});
+function ge() {
+	return s(H, null);
+}
+function _e(e) {
+	d(H, e);
+}
+var W = ((e) => (e.Space = " ", e.Enter = "Enter", e.Escape = "Escape", e.Backspace = "Backspace", e.Delete = "Delete", e.ArrowLeft = "ArrowLeft", e.ArrowUp = "ArrowUp", e.ArrowRight = "ArrowRight", e.ArrowDown = "ArrowDown", e.Home = "Home", e.End = "End", e.PageUp = "PageUp", e.PageDown = "PageDown", e.Tab = "Tab", e))(W || {});
+function ve(e) {
+	throw Error("Unexpected object: " + e);
+}
+var G = ((e) => (e[e.First = 0] = "First", e[e.Previous = 1] = "Previous", e[e.Next = 2] = "Next", e[e.Last = 3] = "Last", e[e.Specific = 4] = "Specific", e[e.Nothing = 5] = "Nothing", e))(G || {});
+function ye(e, t) {
+	let n = t.resolveItems();
+	if (n.length <= 0) return null;
+	let r = t.resolveActiveIndex(), i = r ?? -1;
+	switch (e.focus) {
+		case 0:
+			for (let e = 0; e < n.length; ++e) if (!t.resolveDisabled(n[e], e, n)) return e;
+			return r;
+		case 1:
+			i === -1 && (i = n.length);
+			for (let e = i - 1; e >= 0; --e) if (!t.resolveDisabled(n[e], e, n)) return e;
+			return r;
+		case 2:
+			for (let e = i + 1; e < n.length; ++e) if (!t.resolveDisabled(n[e], e, n)) return e;
+			return r;
+		case 3:
+			for (let e = n.length - 1; e >= 0; --e) if (!t.resolveDisabled(n[e], e, n)) return e;
+			return r;
+		case 4:
+			for (let r = 0; r < n.length; ++r) if (t.resolveId(n[r], r, n) === e.id) return r;
+			return r;
+		case 5: return null;
+		default: ve(e);
+	}
+}
+function K(e = {}, t = null, n = []) {
+	for (let [r, i] of Object.entries(e)) J(n, q(t, r), i);
+	return n;
+}
+function q(e, t) {
+	return e ? e + "[" + t + "]" : t;
+}
+function J(e, t, n) {
+	if (Array.isArray(n)) for (let [r, i] of n.entries()) J(e, q(t, r.toString()), i);
+	else n instanceof Date ? e.push([t, n.toISOString()]) : typeof n == "boolean" ? e.push([t, n ? "1" : "0"]) : typeof n == "string" ? e.push([t, n]) : typeof n == "number" ? e.push([t, `${n}`]) : n == null ? e.push([t, ""]) : K(n, t, e);
+}
+let Y = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
+function X(e) {
+	var t, n;
+	let r = (t = e.innerText) ?? "", i = e.cloneNode(!0);
+	if (!(i instanceof HTMLElement)) return r;
+	let a = !1;
+	for (let e of i.querySelectorAll("[hidden],[aria-hidden],[role=\"img\"]")) e.remove(), a = !0;
+	let o = a ? (n = i.innerText) ?? "" : r;
+	return Y.test(o) && (o = o.replace(Y, "")), o;
+}
+function be(e) {
+	let t = e.getAttribute("aria-label");
+	if (typeof t == "string") return t.trim();
+	let n = e.getAttribute("aria-labelledby");
+	if (n) {
+		let e = n.split(" ").map((e) => {
+			let t = document.getElementById(e);
+			if (t) {
+				let e = t.getAttribute("aria-label");
+				return typeof e == "string" ? e.trim() : X(t).trim();
+			}
+			return null;
+		}).filter(Boolean);
+		if (e.length > 0) return e.join(", ");
+	}
+	return X(e).trim();
+}
+function xe(e) {
+	let t = f(""), n = f("");
+	return () => {
+		let r = x(e);
+		if (!r) return "";
+		let i = r.innerText;
+		if (t.value === i) return n.value;
+		let a = be(r).trim().toLowerCase();
+		return t.value = i, n.value = a, a;
+	};
+}
+function Se(e, t) {
+	return e === t;
+}
+var Ce = ((e) => (e[e.Open = 0] = "Open", e[e.Closed = 1] = "Closed", e))(Ce || {}), we = ((e) => (e[e.Single = 0] = "Single", e[e.Multi = 1] = "Multi", e))(we || {}), Te = ((e) => (e[e.Pointer = 0] = "Pointer", e[e.Other = 1] = "Other", e))(Te || {});
+function Ee(e) {
+	requestAnimationFrame(() => requestAnimationFrame(e));
+}
+let Z = Symbol("ListboxContext");
+function Q(e) {
+	let t = s(Z, null);
+	if (t === null) {
+		let t = /* @__PURE__ */ Error(`<${e} /> is missing a parent <Listbox /> component.`);
+		throw Error.captureStackTrace && Error.captureStackTrace(t, Q), t;
+	}
+	return t;
+}
+let De = a({
+	name: "Listbox",
+	emits: { "update:modelValue": (e) => !0 },
+	props: {
+		as: {
+			type: [Object, String],
+			default: "template"
+		},
+		disabled: {
+			type: [Boolean],
+			default: !1
+		},
+		by: {
+			type: [String, Function],
+			default: () => Se
+		},
+		horizontal: {
+			type: [Boolean],
+			default: !1
+		},
+		modelValue: {
+			type: [
+				Object,
+				String,
+				Number,
+				Boolean
+			],
+			default: void 0
+		},
+		defaultValue: {
+			type: [
+				Object,
+				String,
+				Number,
+				Boolean
+			],
+			default: void 0
+		},
+		form: {
+			type: String,
+			optional: !0
+		},
+		name: {
+			type: String,
+			optional: !0
+		},
+		multiple: {
+			type: [Boolean],
+			default: !1
+		}
+	},
+	inheritAttrs: !1,
+	setup(e, { slots: t, attrs: r, emit: a }) {
+		let s = f(1), c = f(null), u = f(null), h = f(null), _ = f([]), v = f(""), y = f(null), b = f(1);
+		function C(e = (e) => e) {
+			let t = y.value === null ? null : _.value[y.value], n = ie(e(_.value.slice()), (e) => x(e.dataRef.domRef)), r = t ? n.indexOf(t) : null;
+			return r === -1 && (r = null), {
+				options: n,
+				activeOptionIndex: r
+			};
+		}
+		let w = i(() => e.multiple ? 1 : 0), [T, E] = g(i(() => e.modelValue), (e) => a("update:modelValue", e), i(() => e.defaultValue)), D = i(() => T.value === void 0 ? S(w.value, {
+			1: [],
+			0: void 0
+		}) : T.value), O = {
+			listboxState: s,
+			value: D,
+			mode: w,
+			compare(t, n) {
+				if (typeof e.by == "string") {
+					let r = e.by;
+					return t?.[r] === n?.[r];
+				}
+				return e.by(t, n);
+			},
+			orientation: i(() => e.horizontal ? "horizontal" : "vertical"),
+			labelRef: c,
+			buttonRef: u,
+			optionsRef: h,
+			disabled: i(() => e.disabled),
+			options: _,
+			searchQuery: v,
+			activeOptionIndex: y,
+			activationTrigger: b,
+			closeListbox() {
+				e.disabled || s.value !== 1 && (s.value = 1, y.value = null);
+			},
+			openListbox() {
+				e.disabled || s.value !== 0 && (s.value = 0);
+			},
+			goToOption(t, n, r) {
+				if (e.disabled || s.value === 1) return;
+				let i = C(), a = ye(t === G.Specific ? {
+					focus: G.Specific,
+					id: n
+				} : { focus: t }, {
+					resolveItems: () => i.options,
+					resolveActiveIndex: () => i.activeOptionIndex,
+					resolveId: (e) => e.id,
+					resolveDisabled: (e) => e.dataRef.disabled
+				});
+				v.value = "", y.value = a, b.value = r ?? 1, _.value = i.options;
+			},
+			search(t) {
+				if (e.disabled || s.value === 1) return;
+				let n = v.value === "" ? 1 : 0;
+				v.value += t.toLowerCase();
+				let r = (y.value === null ? _.value : _.value.slice(y.value + n).concat(_.value.slice(0, y.value + n))).find((e) => e.dataRef.textValue.startsWith(v.value) && !e.dataRef.disabled), i = r ? _.value.indexOf(r) : -1;
+				i === -1 || i === y.value || (y.value = i, b.value = 1);
+			},
+			clearSearch() {
+				e.disabled || s.value !== 1 && v.value !== "" && (v.value = "");
+			},
+			registerOption(e, t) {
+				let n = C((n) => [...n, {
+					id: e,
+					dataRef: t
+				}]);
+				_.value = n.options, y.value = n.activeOptionIndex;
+			},
+			unregisterOption(e) {
+				let t = C((t) => {
+					let n = t.findIndex((t) => t.id === e);
+					return n !== -1 && t.splice(n, 1), t;
+				});
+				_.value = t.options, y.value = t.activeOptionIndex, b.value = 1;
+			},
+			theirOnChange(t) {
+				e.disabled || E(t);
+			},
+			select(t) {
+				e.disabled || E(S(w.value, {
+					0: () => t,
+					1: () => {
+						let e = p(O.value.value).slice(), n = p(t), r = e.findIndex((e) => O.compare(n, p(e)));
+						return r === -1 ? e.push(n) : e.splice(r, 1), e;
+					}
+				}));
+			}
+		};
+		le([u, h], (e, t) => {
+			var n;
+			O.closeListbox(), j(t, A.Loose) || (e.preventDefault(), (n = x(u)) == null || n.focus());
+		}, i(() => s.value === 0)), d(Z, O), _e(i(() => S(s.value, {
+			0: U.Open,
+			1: U.Closed
+		})));
+		let k = i(() => {
+			var e;
+			return (e = x(u))?.closest("form");
+		});
+		return l(() => {
+			m([k], () => {
+				if (!k.value || e.defaultValue === void 0) return;
+				function t() {
+					O.theirOnChange(e.defaultValue);
+				}
+				return k.value.addEventListener("reset", t), () => {
+					var e;
+					(e = k.value) == null || e.removeEventListener("reset", t);
+				};
+			}, { immediate: !0 });
+		}), () => {
+			let { name: i, modelValue: a, disabled: c, form: l,...u } = e, d = {
+				open: s.value === 0,
+				disabled: c,
+				value: D.value
+			};
+			return o(n, [...i != null && D.value != null ? K({ [i]: D.value }).map(([e, t]) => o(he, pe({
+				features: V.Hidden,
+				key: e,
+				as: "input",
+				type: "hidden",
+				hidden: !0,
+				readOnly: !0,
+				form: l,
+				disabled: c,
+				name: e,
+				value: t
+			}))) : [], I({
+				ourProps: {},
+				theirProps: {
+					...r,
+					...B(u, [
+						"defaultValue",
+						"onUpdate:modelValue",
+						"horizontal",
+						"multiple",
+						"by"
+					])
+				},
+				slot: d,
+				slots: t,
+				attrs: r,
+				name: "Listbox"
+			})]);
+		};
+	}
+});
+a({
+	name: "ListboxLabel",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "label"
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { attrs: t, slots: n }) {
+		var r;
+		let i = (r = e.id) ?? `headlessui-listbox-label-${b()}`, a = Q("ListboxLabel");
+		function o() {
+			var e;
+			(e = x(a.buttonRef)) == null || e.focus({ preventScroll: !0 });
+		}
+		return () => {
+			let r = {
+				open: a.listboxState.value === 0,
+				disabled: a.disabled.value
+			}, { ...s } = e, c = {
+				id: i,
+				ref: a.labelRef,
+				onClick: o
+			};
+			return I({
+				ourProps: c,
+				theirProps: s,
+				slot: r,
+				attrs: t,
+				slots: n,
+				name: "ListboxLabel"
+			});
+		};
+	}
+});
+let Oe = a({
+	name: "ListboxButton",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "button"
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { attrs: t, slots: n, expose: r }) {
+		var a;
+		let o = (a = e.id) ?? `headlessui-listbox-button-${b()}`, s = Q("ListboxButton");
+		r({
+			el: s.buttonRef,
+			$el: s.buttonRef
+		});
+		function l(e) {
+			switch (e.key) {
+				case W.Space:
+				case W.Enter:
+				case W.ArrowDown:
+					e.preventDefault(), s.openListbox(), c(() => {
+						var e;
+						(e = x(s.optionsRef)) == null || e.focus({ preventScroll: !0 }), s.value.value || s.goToOption(G.First);
+					});
+					break;
+				case W.ArrowUp:
+					e.preventDefault(), s.openListbox(), c(() => {
+						var e;
+						(e = x(s.optionsRef)) == null || e.focus({ preventScroll: !0 }), s.value.value || s.goToOption(G.Last);
+					});
+					break;
+			}
+		}
+		function u(e) {
+			switch (e.key) {
+				case W.Space:
+					e.preventDefault();
+					break;
+			}
+		}
+		function d(e) {
+			s.disabled.value || (s.listboxState.value === 0 ? (s.closeListbox(), c(() => {
+				var e;
+				return (e = x(s.buttonRef))?.focus({ preventScroll: !0 });
+			})) : (e.preventDefault(), s.openListbox(), Ee(() => {
+				var e;
+				return (e = x(s.optionsRef))?.focus({ preventScroll: !0 });
+			})));
+		}
+		let f = ue(i(() => ({
+			as: e.as,
+			type: t.type
+		})), s.buttonRef);
+		return () => {
+			var r, i;
+			let a = {
+				open: s.listboxState.value === 0,
+				disabled: s.disabled.value,
+				value: s.value.value
+			}, { ...c } = e, p = {
+				ref: s.buttonRef,
+				id: o,
+				type: f.value,
+				"aria-haspopup": "listbox",
+				"aria-controls": (r = x(s.optionsRef))?.id,
+				"aria-expanded": s.listboxState.value === 0,
+				"aria-labelledby": s.labelRef.value ? [(i = x(s.labelRef))?.id, o].join(" ") : void 0,
+				disabled: s.disabled.value === !0 ? !0 : void 0,
+				onKeydown: l,
+				onKeyup: u,
+				onClick: d
+			};
+			return I({
+				ourProps: p,
+				theirProps: c,
+				slot: a,
+				attrs: t,
+				slots: n,
+				name: "ListboxButton"
+			});
+		};
+	}
+}), ke = a({
+	name: "ListboxOptions",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "ul"
+		},
+		static: {
+			type: Boolean,
+			default: !1
+		},
+		unmount: {
+			type: Boolean,
+			default: !0
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { attrs: t, slots: n, expose: r }) {
+		var a;
+		let o = (a = e.id) ?? `headlessui-listbox-options-${b()}`, s = Q("ListboxOptions"), l = f(null);
+		r({
+			el: s.optionsRef,
+			$el: s.optionsRef
+		});
+		function u(e) {
+			switch (l.value && clearTimeout(l.value), e.key) {
+				case W.Space: if (s.searchQuery.value !== "") return e.preventDefault(), e.stopPropagation(), s.search(e.key);
+				case W.Enter:
+					if (e.preventDefault(), e.stopPropagation(), s.activeOptionIndex.value !== null) {
+						let e = s.options.value[s.activeOptionIndex.value];
+						s.select(e.dataRef.value);
+					}
+					s.mode.value === 0 && (s.closeListbox(), c(() => {
+						var e;
+						return (e = x(s.buttonRef))?.focus({ preventScroll: !0 });
+					}));
+					break;
+				case S(s.orientation.value, {
+					vertical: W.ArrowDown,
+					horizontal: W.ArrowRight
+				}): return e.preventDefault(), e.stopPropagation(), s.goToOption(G.Next);
+				case S(s.orientation.value, {
+					vertical: W.ArrowUp,
+					horizontal: W.ArrowLeft
+				}): return e.preventDefault(), e.stopPropagation(), s.goToOption(G.Previous);
+				case W.Home:
+				case W.PageUp: return e.preventDefault(), e.stopPropagation(), s.goToOption(G.First);
+				case W.End:
+				case W.PageDown: return e.preventDefault(), e.stopPropagation(), s.goToOption(G.Last);
+				case W.Escape:
+					e.preventDefault(), e.stopPropagation(), s.closeListbox(), c(() => {
+						var e;
+						return (e = x(s.buttonRef))?.focus({ preventScroll: !0 });
+					});
+					break;
+				case W.Tab:
+					e.preventDefault(), e.stopPropagation();
+					break;
+				default:
+					e.key.length === 1 && (s.search(e.key), l.value = setTimeout(() => s.clearSearch(), 350));
+					break;
+			}
+		}
+		let d = ge(), p = i(() => d === null ? s.listboxState.value === 0 : (d.value & U.Open) === U.Open);
+		return () => {
+			var r, i;
+			let a = { open: s.listboxState.value === 0 }, { ...c } = e, l = {
+				"aria-activedescendant": s.activeOptionIndex.value === null || (r = s.options.value[s.activeOptionIndex.value]) == null ? void 0 : r.id,
+				"aria-multiselectable": s.mode.value === 1 ? !0 : void 0,
+				"aria-labelledby": (i = x(s.buttonRef))?.id,
+				"aria-orientation": s.orientation.value,
+				id: o,
+				onKeydown: u,
+				role: "listbox",
+				tabIndex: 0,
+				ref: s.optionsRef
+			};
+			return I({
+				ourProps: l,
+				theirProps: c,
+				slot: a,
+				attrs: t,
+				slots: n,
+				features: F.RenderStrategy | F.Static,
+				visible: p.value,
+				name: "ListboxOptions"
+			});
+		};
+	}
+}), $ = a({
+	name: "ListboxOption",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "li"
+		},
+		value: { type: [
+			Object,
+			String,
+			Number,
+			Boolean
+		] },
+		disabled: {
+			type: Boolean,
+			default: !1
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { slots: t, attrs: n, expose: r }) {
+		var a;
+		let o = (a = e.id) ?? `headlessui-listbox-option-${b()}`, s = Q("ListboxOption"), d = f(null);
+		r({
+			el: d,
+			$el: d
+		});
+		let g = i(() => s.activeOptionIndex.value === null ? !1 : s.options.value[s.activeOptionIndex.value].id === o), _ = i(() => S(s.mode.value, {
+			0: () => s.compare(p(s.value.value), p(e.value)),
+			1: () => p(s.value.value).some((t) => s.compare(p(t), p(e.value)))
+		})), v = i(() => S(s.mode.value, {
+			1: () => {
+				var e;
+				let t = p(s.value.value);
+				return (e = s.options.value.find((e) => t.some((t) => s.compare(p(t), p(e.dataRef.value)))))?.id === o;
+			},
+			0: () => _.value
+		})), y = xe(d), C = i(() => ({
+			disabled: e.disabled,
+			value: e.value,
+			get textValue() {
+				return y();
+			},
+			domRef: d
+		}));
+		l(() => s.registerOption(o, C)), u(() => s.unregisterOption(o)), l(() => {
+			m([s.listboxState, _], () => {
+				s.listboxState.value === 0 && _.value && S(s.mode.value, {
+					1: () => {
+						v.value && s.goToOption(G.Specific, o);
+					},
+					0: () => {
+						s.goToOption(G.Specific, o);
+					}
+				});
+			}, { immediate: !0 });
+		}), h(() => {
+			s.listboxState.value === 0 && g.value && s.activationTrigger.value !== 0 && c(() => {
+				var e, t;
+				return (t = (e = x(d))?.scrollIntoView)?.call(e, { block: "nearest" });
+			});
+		});
+		function w(t) {
+			if (e.disabled) return t.preventDefault();
+			s.select(e.value), s.mode.value === 0 && (s.closeListbox(), c(() => {
+				var e;
+				return (e = x(s.buttonRef))?.focus({ preventScroll: !0 });
+			}));
+		}
+		function T() {
+			if (e.disabled) return s.goToOption(G.Nothing);
+			s.goToOption(G.Specific, o);
+		}
+		let E = de();
+		function D(e) {
+			E.update(e);
+		}
+		function O(t) {
+			E.wasMoved(t) && (e.disabled || g.value || s.goToOption(G.Specific, o, 0));
+		}
+		function k(t) {
+			E.wasMoved(t) && (e.disabled || g.value && s.goToOption(G.Nothing));
+		}
+		return () => {
+			let { disabled: r } = e, i = {
+				active: g.value,
+				selected: _.value,
+				disabled: r
+			}, { value: a, disabled: s,...c } = e, l = {
+				id: o,
+				ref: d,
+				role: "option",
+				tabIndex: r === !0 ? void 0 : -1,
+				"aria-disabled": r === !0 ? !0 : void 0,
+				"aria-selected": _.value,
+				disabled: void 0,
+				onClick: w,
+				onFocus: T,
+				onPointerenter: D,
+				onMouseenter: D,
+				onPointermove: O,
+				onMousemove: O,
+				onPointerleave: k,
+				onMouseleave: k
+			};
+			return I({
+				ourProps: l,
+				theirProps: c,
+				slot: i,
+				attrs: n,
+				slots: t,
+				name: "ListboxOption"
+			});
+		};
+	}
+});
+const Ae = { install(e) {
+	Object.entries({
+		Listbox: De,
+		ListboxButton: Oe,
+		ListboxOptions: ke,
+		ListboxOption: $
+	}).forEach(([t, n]) => {
+		e.component(t, n);
+	});
+} };
+var je = Ae;
+export { De as Listbox, Oe as ListboxButton, $ as ListboxOption, ke as ListboxOptions, je as default };
+
 //# sourceMappingURL=index.js.map

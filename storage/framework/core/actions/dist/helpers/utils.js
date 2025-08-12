@@ -1,5 +1,5 @@
 // @bun
-import"../chunk-1j66gxht.js";
+import"../chunk-tsfemdz5.js";
 
 // src/helpers/utils.ts
 import { buddyOptions, runCommand, runCommands } from "@stacksjs/cli";

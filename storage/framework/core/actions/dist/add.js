@@ -1,5 +1,5 @@
 // @bun
-import"./chunk-1j66gxht.js";
+import"./chunk-tsfemdz5.js";
 
 // src/add.ts
 import { installPackage } from "@stacksjs/cli";

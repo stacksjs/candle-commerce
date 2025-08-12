@@ -2,7 +2,7 @@
 import {
   library_default
 } from "../chunk-494jp8d5.js";
-import"../chunk-1j66gxht.js";
+import"../chunk-tsfemdz5.js";
 
 // src/helpers/vscode-custom-data.ts
 import { err, ok } from "@stacksjs/error-handling";

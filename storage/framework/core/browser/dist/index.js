@@ -2790,7 +2790,7 @@ function provide(key, value) {
   }
 }
 function inject(key, defaultValue, treatDefaultAsFactory = false) {
-  const instance = currentInstance || currentRenderingInstance;
+  const instance = getCurrentInstance();
   if (instance || currentApp) {
     let provides = currentApp ? currentApp._context.provides : instance ? instance.parent == null || instance.ce ? instance.vnode.appContext && instance.vnode.appContext.provides : instance.parent.provides : undefined;
     if (provides && key in provides) {
@@ -2805,7 +2805,7 @@ function inject(key, defaultValue, treatDefaultAsFactory = false) {
   }
 }
 function hasInjectionContext() {
-  return !!(currentInstance || currentRenderingInstance || currentApp);
+  return !!(getCurrentInstance() || currentApp);
 }
 var internalObjectProto = {};
 var isInternalObject = (obj) => Object.getPrototypeOf(obj) === internalObjectProto;
@@ -3100,6 +3100,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false, cloneTransition = false
     suspense: vnode.suspense,
     ssContent: vnode.ssContent && cloneVNode(vnode.ssContent),
     ssFallback: vnode.ssFallback && cloneVNode(vnode.ssFallback),
+    placeholder: vnode.placeholder,
     el: vnode.el,
     anchor: vnode.anchor,
     ctx: vnode.ctx,
@@ -3479,7 +3480,7 @@ function initCustomFormatter() {
     window.devtoolsFormatters = [formatter];
   }
 }
-var version = "3.5.17";
+var version = "3.5.18";
 var warn2 = warn$1;
 // ../../../../node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
 var policy = undefined;
@@ -8816,43 +8817,56 @@ function useFileDialog(options = {}) {
   const files = ref(prepareInitialFiles(options.initialFiles));
   const { on: onChange, trigger: changeTrigger } = createEventHook();
   const { on: onCancel, trigger: cancelTrigger } = createEventHook();
-  let input;
-  if (document2) {
-    input = unrefElement(options.input) || document2.createElement("input");
-    input.type = "file";
-    input.onchange = (event) => {
-      const result = event.target;
-      files.value = result.files;
-      changeTrigger(files.value);
-    };
-    input.oncancel = () => {
-      cancelTrigger();
-    };
-  }
+  const inputRef = computed2(() => {
+    var _a;
+    const input = (_a = unrefElement(options.input)) != null ? _a : document2 ? document2.createElement("input") : undefined;
+    if (input) {
+      input.type = "file";
+      input.onchange = (event) => {
+        const result = event.target;
+        files.value = result.files;
+        changeTrigger(files.value);
+      };
+      input.oncancel = () => {
+        cancelTrigger();
+      };
+    }
+    return input;
+  });
   const reset = () => {
     files.value = null;
-    if (input && input.value) {
-      input.value = "";
+    if (inputRef.value && inputRef.value.value) {
+      inputRef.value.value = "";
       changeTrigger(null);
     }
   };
-  const open = (localOptions) => {
-    if (!input)
+  const applyOptions = (options2) => {
+    const el = inputRef.value;
+    if (!el)
       return;
-    const _options = {
+    el.multiple = toValue(options2.multiple);
+    el.accept = toValue(options2.accept);
+    el.webkitdirectory = toValue(options2.directory);
+    if (hasOwn2(options2, "capture"))
+      el.capture = toValue(options2.capture);
+  };
+  const open = (localOptions) => {
+    const el = inputRef.value;
+    if (!el)
+      return;
+    const mergedOptions = {
       ...DEFAULT_OPTIONS,
       ...options,
       ...localOptions
     };
-    input.multiple = _options.multiple;
-    input.accept = _options.accept;
-    input.webkitdirectory = _options.directory;
-    if (hasOwn2(_options, "capture"))
-      input.capture = _options.capture;
-    if (_options.reset)
+    applyOptions(mergedOptions);
+    if (toValue(mergedOptions.reset))
       reset();
-    input.click();
+    el.click();
   };
+  watchEffect(() => {
+    applyOptions(options);
+  });
   return {
     files: readonly(files),
     open,
@@ -9692,9 +9706,13 @@ function useMagicKeys(options = {}) {
       setRefs(key2, value);
     }
     if (key === "shift" && !value) {
-      shiftDeps.forEach((key2) => {
-        current.delete(key2);
-        setRefs(key2, false);
+      const shiftDepsArray = Array.from(shiftDeps);
+      const shiftIndex = shiftDepsArray.indexOf("shift");
+      shiftDepsArray.forEach((key2, index) => {
+        if (index >= shiftIndex) {
+          current.delete(key2);
+          setRefs(key2, false);
+        }
       });
       shiftDeps.clear();
     } else if (typeof e.getModifierState === "function" && e.getModifierState("Shift") && value) {
@@ -10125,7 +10143,7 @@ function useMouseInElement(target, options = {}) {
     const elX = x.value - elementPositionX.value;
     const elY = y.value - elementPositionY.value;
     isOutside.value = width === 0 || height === 0 || elX < 0 || elY < 0 || elX > width || elY > height;
-    if (handleOutside) {
+    if (handleOutside || !isOutside.value) {
       elementX.value = elX;
       elementY.value = elY;
     }
@@ -11301,7 +11319,8 @@ function useStorageAsync(key, initialValue, storage, options = {}) {
     eventFilter,
     onError = (e) => {
       console.error(e);
-    }
+    },
+    onReady
   } = options;
   const rawInit = toValue(initialValue);
   const type = guessSerializerType(rawInit);
@@ -11341,7 +11360,12 @@ function useStorageAsync(key, initialValue, storage, options = {}) {
       onError(e);
     }
   }
-  read();
+  const promise = new Promise((resolve) => {
+    read().then(() => {
+      onReady == null || onReady(data.value);
+      resolve(data);
+    });
+  });
   if (window2 && listenToStorageChanges)
     useEventListener(window2, "storage", (e) => Promise.resolve().then(() => read(e)), { passive: true });
   if (storage) {
@@ -11360,6 +11384,10 @@ function useStorageAsync(key, initialValue, storage, options = {}) {
       eventFilter
     });
   }
+  Object.assign(data, {
+    then: promise.then.bind(promise),
+    catch: promise.catch.bind(promise)
+  });
   return data;
 }
 var _id = 0;
@@ -11821,6 +11849,9 @@ function toVec(t) {
 }
 function executeTransition(source, from, to, options = {}) {
   var _a, _b;
+  const {
+    window: window2 = defaultWindow
+  } = options;
   const fromVal = toValue(from);
   const toVal = toValue(to);
   const v1 = toVec(fromVal);
@@ -11849,7 +11880,7 @@ function executeTransition(source, from, to, options = {}) {
       else if (typeof source.value === "number")
         source.value = arr[0];
       if (now < endAt) {
-        requestAnimationFrame(tick);
+        window2 == null || window2.requestAnimationFrame(tick);
       } else {
         source.value = toVal;
         resolve();
@@ -12243,7 +12274,7 @@ function createGetDistance(itemSize, source) {
   };
 }
 function useWatchForSizes(size, list, containerRef, calculateRange) {
-  watch2([size.width, size.height, list, containerRef], () => {
+  watch2([size.width, size.height, () => toValue(list), containerRef], () => {
     calculateRange();
   });
 }
@@ -13363,7 +13394,7 @@ var registerWrapper = function registerWrapper2(stripe, startTime) {
   }
   stripe._registerWrapper({
     name: "stripe-js",
-    version: "7.4.0",
+    version: "7.8.0",
     startTime
   });
 };
@@ -13438,7 +13469,7 @@ var initStripe = function initStripe2(maybeStripe, args, startTime) {
   var version2 = runtimeVersionToUrlVersion(maybeStripe.version);
   var expectedVersion = RELEASE_TRAIN;
   if (isTestKey && version2 !== expectedVersion) {
-    console.warn("Stripe.js@".concat(version2, " was loaded on the page, but @stripe/stripe-js@").concat("7.4.0", " expected Stripe.js@").concat(expectedVersion, ". This may result in unexpected behavior. For more information, see https://docs.stripe.com/sdks/stripejs-versioning"));
+    console.warn("Stripe.js@".concat(version2, " was loaded on the page, but @stripe/stripe-js@").concat("7.8.0", " expected Stripe.js@").concat(expectedVersion, ". This may result in unexpected behavior. For more information, see https://docs.stripe.com/sdks/stripejs-versioning"));
   }
   var stripe = maybeStripe.apply(undefined, args);
   registerWrapper(stripe, startTime);
@@ -17233,7 +17264,8 @@ function prettyBytes(number, options) {
   const exponent = Math.min(Math.floor(options.binary ? log(number) / Math.log(1024) : log10(number) / 3), UNITS.length - 1);
   number = divide(number, (options.binary ? 1024 : 1000) ** exponent);
   if (!localeOptions) {
-    number = number.toPrecision(3);
+    const minPrecision = Math.max(3, Number.parseInt(number, 10).toString().length);
+    number = number.toPrecision(minPrecision);
   }
   const numberString = toLocaleString(Number(number), options.locale, localeOptions);
   const unit = UNITS[exponent];

@@ -1,5 +1,463 @@
-function e(e){if(!e||typeof document>`u`)return;let t=document.head||document.getElementsByTagName(`head`)[0],n=document.createElement(`style`);n.type=`text/css`,t.appendChild(n),n.styleSheet?n.styleSheet.cssText=e:n.appendChild(document.createTextNode(e))}e(``);import*as t from"vue";import{Fragment as n,cloneVNode as r,computed as i,defineComponent as a,h as o,inject as s,onMounted as c,onUnmounted as l,provide as u,ref as d,unref as f,watch as p,watchEffect as m}from"vue";function h(e,t,n){let r=d(n?.value),a=i(()=>e.value!==void 0);return[i(()=>a.value?e.value:r.value),function(e){return a.value||(r.value=e),t?.(e)}]}var g;let _=Symbol(`headlessui.useid`),v=0;const y=(g=t.useId)??function(){return t.inject(_,()=>`${++v}`)()};function b(e){var t;if(e==null||e.value==null)return null;let n=(t=e.value.$el)??e.value;return n instanceof Node?n:null}function x(e,t,...n){if(e in t){let r=t[e];return typeof r==`function`?r(...n):r}let r=Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map(e=>`"${e}"`).join(`, `)}.`);throw Error.captureStackTrace&&Error.captureStackTrace(r,x),r}function S(e,t){if(e)return e;let n=t??`button`;if(typeof n==`string`&&n.toLowerCase()===`button`)return`button`}function C(e,t){let n=d(S(e.value.type,e.value.as));return c(()=>{n.value=S(e.value.type,e.value.as)}),m(()=>{var e;n.value||b(t)&&b(t)instanceof HTMLButtonElement&&!((e=b(t))!=null&&e.hasAttribute(`type`))&&(n.value=`button`)}),n}var w=(e=>(e[e.None=0]=`None`,e[e.RenderStrategy=1]=`RenderStrategy`,e[e.Static=2]=`Static`,e))(w||{}),T=(e=>(e[e.Unmount=0]=`Unmount`,e[e.Hidden=1]=`Hidden`,e))(T||{});function E({visible:e=!0,features:t=0,ourProps:n,theirProps:r,...i}){var a;let o=k(r,n),s=Object.assign(i,{props:o});if(e||t&2&&o.static)return D(s);if(t&1){let e=(a=o.unmount)==null||a?0:1;return x(e,{0(){return null},1(){return D({...i,props:{...o,hidden:!0,style:{display:`none`}}})}})}return D(s)}function D({props:e,attrs:t,slots:n,slot:i,name:a}){var s,c;let{as:l,...u}=j(e,[`unmount`,`static`]),d=(s=n.default)?.call(n,i),f={};if(i){let e=!1,t=[];for(let[n,r]of Object.entries(i))typeof r==`boolean`&&(e=!0),r===!0&&t.push(n);e&&(f[`data-headlessui-state`]=t.join(` `))}if(l===`template`){if(d=O(d??[]),Object.keys(u).length>0||Object.keys(t).length>0){let[e,...n]=d??[];if(!M(e)||n.length>0)throw Error([`Passing props on "template"!`,``,`The current component <${a} /> is rendering a "template".`,`However we need to passthrough the following props:`,Object.keys(u).concat(Object.keys(t)).map(e=>e.trim()).filter((e,t,n)=>n.indexOf(e)===t).sort((e,t)=>e.localeCompare(t)).map(e=>`  - ${e}`).join(`
-`),``,`You can apply a few solutions:`,['Add an `as="..."` prop, to ensure that we render an actual element instead of a "template".',`Render a single element as the child so that we can forward the props onto that element.`].map(e=>`  - ${e}`).join(`
-`)].join(`
-`));let i=k((c=e.props)??{},u,f),o=r(e,i,!0);for(let e in i)e.startsWith(`on`)&&(o.props||={},o.props[e]=i[e]);return o}return Array.isArray(d)&&d.length===1?d[0]:d}return o(l,Object.assign({},u,f),{default:()=>d})}function O(e){return e.flatMap(e=>e.type===n?O(e.children):[e])}function k(...e){var t;if(e.length===0)return{};if(e.length===1)return e[0];let n={},r={};for(let i of e)for(let e in i)e.startsWith(`on`)&&typeof i[e]==`function`?((t=r[e])??(r[e]=[]),r[e].push(i[e])):n[e]=i[e];if(n.disabled||n[`aria-disabled`])return Object.assign(n,Object.fromEntries(Object.keys(r).map(e=>[e,void 0])));for(let e in r)Object.assign(n,{[e](t,...n){let i=r[e];for(let e of i){if(t instanceof Event&&t.defaultPrevented)return;e(t,...n)}}});return n}function A(e){let t=Object.assign({},e);for(let e in t)t[e]===void 0&&delete t[e];return t}function j(e,t=[]){let n=Object.assign({},e);for(let e of t)e in n&&delete n[e];return n}function M(e){return e==null?!1:typeof e.type==`string`||typeof e.type==`object`||typeof e.type==`function`}var N=(e=>(e[e.None=1]=`None`,e[e.Focusable=2]=`Focusable`,e[e.Hidden=4]=`Hidden`,e))(N||{});let P=a({name:`Hidden`,props:{as:{type:[Object,String],default:`div`},features:{type:Number,default:1}},setup(e,{slots:t,attrs:n}){return()=>{var r;let{features:i,...a}=e,o={"aria-hidden":(i&2)==2?!0:(r=a[`aria-hidden`])??void 0,hidden:(i&4)==4?!0:void 0,style:{position:`fixed`,top:1,left:1,width:1,height:0,padding:0,margin:-1,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,borderWidth:`0`,...(i&4)==4&&(i&2)!=2&&{display:`none`}}};return E({ourProps:o,theirProps:a,slot:{},attrs:n,slots:t,name:`Hidden`})}}});var F=(e=>(e.Space=` `,e.Enter=`Enter`,e.Escape=`Escape`,e.Backspace=`Backspace`,e.Delete=`Delete`,e.ArrowLeft=`ArrowLeft`,e.ArrowUp=`ArrowUp`,e.ArrowRight=`ArrowRight`,e.ArrowDown=`ArrowDown`,e.Home=`Home`,e.End=`End`,e.PageUp=`PageUp`,e.PageDown=`PageDown`,e.Tab=`Tab`,e))(F||{});function I(e){var t,n;let r=(t=e?.form)??e.closest(`form`);if(r){for(let t of r.elements)if(t!==e&&(t.tagName===`INPUT`&&t.type===`submit`||t.tagName===`BUTTON`&&t.type===`submit`||t.nodeName===`INPUT`&&t.type===`image`)){t.click();return}(n=r.requestSubmit)==null||n.call(r)}}let L=Symbol(`DescriptionContext`);function R(){let e=s(L,null);if(e===null)throw Error(`Missing parent`);return e}function z({slot:e=d({}),name:t=`Description`,props:n={}}={}){let r=d([]);function a(e){return r.value.push(e),()=>{let t=r.value.indexOf(e);t!==-1&&r.value.splice(t,1)}}return u(L,{register:a,slot:e,name:t,props:n}),i(()=>r.value.length>0?r.value.join(` `):void 0)}let B=a({name:`Description`,props:{as:{type:[Object,String],default:`p`},id:{type:String,default:null}},setup(e,{attrs:t,slots:n}){var r;let i=(r=e.id)??`headlessui-description-${y()}`,a=R();return c(()=>l(a.register(i))),()=>{let{name:r=`Description`,slot:o=d({}),props:s={}}=a,{...c}=e,l={...Object.entries(s).reduce((e,[t,n])=>Object.assign(e,{[t]:f(n)}),{}),id:i};return E({ourProps:l,theirProps:c,slot:o.value,attrs:t,slots:n,name:r})}}}),V=Symbol(`LabelContext`);function H(){let e=s(V,null);if(e===null){let e=Error(`You used a <Label /> component, but it is not inside a parent.`);throw Error.captureStackTrace&&Error.captureStackTrace(e,H),e}return e}function U({slot:e={},name:t=`Label`,props:n={}}={}){let r=d([]);function a(e){return r.value.push(e),()=>{let t=r.value.indexOf(e);t!==-1&&r.value.splice(t,1)}}return u(V,{register:a,slot:e,name:t,props:n}),i(()=>r.value.length>0?r.value.join(` `):void 0)}let W=a({name:`Label`,props:{as:{type:[Object,String],default:`label`},passive:{type:[Boolean],default:!1},id:{type:String,default:null}},setup(e,{slots:t,attrs:n}){var r;let i=(r=e.id)??`headlessui-label-${y()}`,a=H();return c(()=>l(a.register(i))),()=>{let{name:r=`Label`,slot:o={},props:s={}}=a,{passive:c,...l}=e,u={...Object.entries(s).reduce((e,[t,n])=>Object.assign(e,{[t]:f(n)}),{}),id:i};return c&&(delete u.onClick,delete u.htmlFor,delete l.onClick),E({ourProps:u,theirProps:l,slot:o,attrs:n,slots:t,name:r})}}}),G=Symbol(`GroupContext`),K=a({name:`SwitchGroup`,props:{as:{type:[Object,String],default:`template`}},setup(e,{slots:t,attrs:n}){let r=d(null),a=U({name:`SwitchLabel`,props:{htmlFor:i(()=>{var e;return(e=r.value)?.id}),onClick(e){r.value&&(e.currentTarget.tagName===`LABEL`&&e.preventDefault(),r.value.click(),r.value.focus({preventScroll:!0}))}}}),o=z({name:`SwitchDescription`});return u(G,{switchRef:r,labelledby:a,describedby:o}),()=>E({theirProps:e,ourProps:{},slot:{},slots:t,attrs:n,name:`SwitchGroup`})}}),q=a({name:`Switch`,emits:{"update:modelValue":e=>!0},props:{as:{type:[Object,String],default:`button`},modelValue:{type:Boolean,default:void 0},defaultChecked:{type:Boolean,optional:!0},form:{type:String,optional:!0},name:{type:String,optional:!0},value:{type:String,optional:!0},id:{type:String,default:null},disabled:{type:Boolean,default:!1},tabIndex:{type:Number,default:0}},inheritAttrs:!1,setup(e,{emit:t,attrs:r,slots:a,expose:l}){var u;let f=(u=e.id)??`headlessui-switch-${y()}`,m=s(G,null),[g,_]=h(i(()=>e.modelValue),e=>t(`update:modelValue`,e),i(()=>e.defaultChecked));function v(){_(!g.value)}let x=d(null),S=m===null?x:m.switchRef,w=C(i(()=>({as:e.as,type:r.type})),S);l({el:S,$el:S});function T(e){e.preventDefault(),v()}function D(e){e.key===F.Space?(e.preventDefault(),v()):e.key===F.Enter&&I(e.currentTarget)}function O(e){e.preventDefault()}let k=i(()=>{var e,t;return(t=(e=b(S))?.closest)?.call(e,`form`)});return c(()=>{p([k],()=>{if(!k.value||e.defaultChecked===void 0)return;function t(){_(e.defaultChecked)}return k.value.addEventListener(`reset`,t),()=>{var e;(e=k.value)==null||e.removeEventListener(`reset`,t)}},{immediate:!0})}),()=>{let{name:t,value:i,form:s,tabIndex:c,...l}=e,u={checked:g.value},d={id:f,ref:S,role:`switch`,type:w.value,tabIndex:c===-1?0:c,"aria-checked":g.value,"aria-labelledby":m?.labelledby.value,"aria-describedby":m?.describedby.value,onClick:T,onKeyup:D,onKeypress:O};return o(n,[t!=null&&g.value!=null?o(P,A({features:N.Hidden,as:`input`,type:`checkbox`,hidden:!0,readOnly:!0,checked:g.value,form:s,disabled:l.disabled,name:t,value:i})):null,E({ourProps:d,theirProps:{...r,...j(l,[`modelValue`,`defaultChecked`])},slot:u,attrs:r,slots:a,name:`Switch`})])}}}),J=W,Y=B;const X={install(e){Object.entries({Switch:q}).forEach(([t,n])=>{e.component(t,n)})}};var Z=X;export{q as Switch,Z as default};
+function e(e) {
+	if (!e || typeof document > "u") return;
+	let t = document.head || document.getElementsByTagName("head")[0], n = document.createElement("style");
+	n.type = "text/css", t.appendChild(n), n.styleSheet ? n.styleSheet.cssText = e : n.appendChild(document.createTextNode(e));
+}
+e("");
+import * as t from "vue";
+import { Fragment as n, cloneVNode as r, computed as i, defineComponent as a, h as o, inject as s, onMounted as c, onUnmounted as l, provide as u, ref as d, unref as f, watch as p, watchEffect as m } from "vue";
+function h(e, t, n) {
+	let r = d(n?.value), a = i(() => e.value !== void 0);
+	return [i(() => a.value ? e.value : r.value), function(e) {
+		return a.value || (r.value = e), t?.(e);
+	}];
+}
+var g;
+let _ = Symbol("headlessui.useid"), v = 0;
+const y = (g = t.useId) ?? function() {
+	return t.inject(_, () => `${++v}`)();
+};
+function b(e) {
+	var t;
+	if (e == null || e.value == null) return null;
+	let n = (t = e.value.$el) ?? e.value;
+	return n instanceof Node ? n : null;
+}
+function x(e, t, ...n) {
+	if (e in t) {
+		let r = t[e];
+		return typeof r == "function" ? r(...n) : r;
+	}
+	let r = /* @__PURE__ */ Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map((e) => `"${e}"`).join(", ")}.`);
+	throw Error.captureStackTrace && Error.captureStackTrace(r, x), r;
+}
+function S(e, t) {
+	if (e) return e;
+	let n = t ?? "button";
+	if (typeof n == "string" && n.toLowerCase() === "button") return "button";
+}
+function C(e, t) {
+	let n = d(S(e.value.type, e.value.as));
+	return c(() => {
+		n.value = S(e.value.type, e.value.as);
+	}), m(() => {
+		var e;
+		n.value || b(t) && b(t) instanceof HTMLButtonElement && !((e = b(t)) != null && e.hasAttribute("type")) && (n.value = "button");
+	}), n;
+}
+var w = ((e) => (e[e.None = 0] = "None", e[e.RenderStrategy = 1] = "RenderStrategy", e[e.Static = 2] = "Static", e))(w || {}), T = ((e) => (e[e.Unmount = 0] = "Unmount", e[e.Hidden = 1] = "Hidden", e))(T || {});
+function E({ visible: e = !0, features: t = 0, ourProps: n, theirProps: r,...i }) {
+	var a;
+	let o = k(r, n), s = Object.assign(i, { props: o });
+	if (e || t & 2 && o.static) return D(s);
+	if (t & 1) {
+		let e = (a = o.unmount) == null || a ? 0 : 1;
+		return x(e, {
+			0() {
+				return null;
+			},
+			1() {
+				return D({
+					...i,
+					props: {
+						...o,
+						hidden: !0,
+						style: { display: "none" }
+					}
+				});
+			}
+		});
+	}
+	return D(s);
+}
+function D({ props: e, attrs: t, slots: n, slot: i, name: a }) {
+	var s, c;
+	let { as: l,...u } = j(e, ["unmount", "static"]), d = (s = n.default)?.call(n, i), f = {};
+	if (i) {
+		let e = !1, t = [];
+		for (let [n, r] of Object.entries(i)) typeof r == "boolean" && (e = !0), r === !0 && t.push(n);
+		e && (f["data-headlessui-state"] = t.join(" "));
+	}
+	if (l === "template") {
+		if (d = O(d ?? []), Object.keys(u).length > 0 || Object.keys(t).length > 0) {
+			let [e, ...n] = d ?? [];
+			if (!M(e) || n.length > 0) throw Error([
+				"Passing props on \"template\"!",
+				"",
+				`The current component <${a} /> is rendering a "template".`,
+				"However we need to passthrough the following props:",
+				Object.keys(u).concat(Object.keys(t)).map((e) => e.trim()).filter((e, t, n) => n.indexOf(e) === t).sort((e, t) => e.localeCompare(t)).map((e) => `  - ${e}`).join("\n"),
+				"",
+				"You can apply a few solutions:",
+				["Add an `as=\"...\"` prop, to ensure that we render an actual element instead of a \"template\".", "Render a single element as the child so that we can forward the props onto that element."].map((e) => `  - ${e}`).join("\n")
+			].join("\n"));
+			let i = k((c = e.props) ?? {}, u, f), o = r(e, i, !0);
+			for (let e in i) e.startsWith("on") && (o.props ||= {}, o.props[e] = i[e]);
+			return o;
+		}
+		return Array.isArray(d) && d.length === 1 ? d[0] : d;
+	}
+	return o(l, Object.assign({}, u, f), { default: () => d });
+}
+function O(e) {
+	return e.flatMap((e) => e.type === n ? O(e.children) : [e]);
+}
+function k(...e) {
+	var t;
+	if (e.length === 0) return {};
+	if (e.length === 1) return e[0];
+	let n = {}, r = {};
+	for (let i of e) for (let e in i) e.startsWith("on") && typeof i[e] == "function" ? ((t = r[e]) ?? (r[e] = []), r[e].push(i[e])) : n[e] = i[e];
+	if (n.disabled || n["aria-disabled"]) return Object.assign(n, Object.fromEntries(Object.keys(r).map((e) => [e, void 0])));
+	for (let e in r) Object.assign(n, { [e](t, ...n) {
+		let i = r[e];
+		for (let e of i) {
+			if (t instanceof Event && t.defaultPrevented) return;
+			e(t, ...n);
+		}
+	} });
+	return n;
+}
+function A(e) {
+	let t = Object.assign({}, e);
+	for (let e in t) t[e] === void 0 && delete t[e];
+	return t;
+}
+function j(e, t = []) {
+	let n = Object.assign({}, e);
+	for (let e of t) e in n && delete n[e];
+	return n;
+}
+function M(e) {
+	return e == null ? !1 : typeof e.type == "string" || typeof e.type == "object" || typeof e.type == "function";
+}
+var N = ((e) => (e[e.None = 1] = "None", e[e.Focusable = 2] = "Focusable", e[e.Hidden = 4] = "Hidden", e))(N || {});
+let P = a({
+	name: "Hidden",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "div"
+		},
+		features: {
+			type: Number,
+			default: 1
+		}
+	},
+	setup(e, { slots: t, attrs: n }) {
+		return () => {
+			var r;
+			let { features: i,...a } = e, o = {
+				"aria-hidden": (i & 2) == 2 ? !0 : (r = a["aria-hidden"]) ?? void 0,
+				hidden: (i & 4) == 4 ? !0 : void 0,
+				style: {
+					position: "fixed",
+					top: 1,
+					left: 1,
+					width: 1,
+					height: 0,
+					padding: 0,
+					margin: -1,
+					overflow: "hidden",
+					clip: "rect(0, 0, 0, 0)",
+					whiteSpace: "nowrap",
+					borderWidth: "0",
+					...(i & 4) == 4 && (i & 2) != 2 && { display: "none" }
+				}
+			};
+			return E({
+				ourProps: o,
+				theirProps: a,
+				slot: {},
+				attrs: n,
+				slots: t,
+				name: "Hidden"
+			});
+		};
+	}
+});
+var F = ((e) => (e.Space = " ", e.Enter = "Enter", e.Escape = "Escape", e.Backspace = "Backspace", e.Delete = "Delete", e.ArrowLeft = "ArrowLeft", e.ArrowUp = "ArrowUp", e.ArrowRight = "ArrowRight", e.ArrowDown = "ArrowDown", e.Home = "Home", e.End = "End", e.PageUp = "PageUp", e.PageDown = "PageDown", e.Tab = "Tab", e))(F || {});
+function I(e) {
+	var t, n;
+	let r = (t = e?.form) ?? e.closest("form");
+	if (r) {
+		for (let t of r.elements) if (t !== e && (t.tagName === "INPUT" && t.type === "submit" || t.tagName === "BUTTON" && t.type === "submit" || t.nodeName === "INPUT" && t.type === "image")) {
+			t.click();
+			return;
+		}
+		(n = r.requestSubmit) == null || n.call(r);
+	}
+}
+let L = Symbol("DescriptionContext");
+function R() {
+	let e = s(L, null);
+	if (e === null) throw Error("Missing parent");
+	return e;
+}
+function z({ slot: e = d({}), name: t = "Description", props: n = {} } = {}) {
+	let r = d([]);
+	function a(e) {
+		return r.value.push(e), () => {
+			let t = r.value.indexOf(e);
+			t !== -1 && r.value.splice(t, 1);
+		};
+	}
+	return u(L, {
+		register: a,
+		slot: e,
+		name: t,
+		props: n
+	}), i(() => r.value.length > 0 ? r.value.join(" ") : void 0);
+}
+a({
+	name: "Description",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "p"
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { attrs: t, slots: n }) {
+		var r;
+		let i = (r = e.id) ?? `headlessui-description-${y()}`, a = R();
+		return c(() => l(a.register(i))), () => {
+			let { name: r = "Description", slot: o = d({}), props: s = {} } = a, { ...c } = e, l = {
+				...Object.entries(s).reduce((e, [t, n]) => Object.assign(e, { [t]: f(n) }), {}),
+				id: i
+			};
+			return E({
+				ourProps: l,
+				theirProps: c,
+				slot: o.value,
+				attrs: t,
+				slots: n,
+				name: r
+			});
+		};
+	}
+});
+let B = Symbol("LabelContext");
+function V() {
+	let e = s(B, null);
+	if (e === null) {
+		let e = /* @__PURE__ */ Error("You used a <Label /> component, but it is not inside a parent.");
+		throw Error.captureStackTrace && Error.captureStackTrace(e, V), e;
+	}
+	return e;
+}
+function H({ slot: e = {}, name: t = "Label", props: n = {} } = {}) {
+	let r = d([]);
+	function a(e) {
+		return r.value.push(e), () => {
+			let t = r.value.indexOf(e);
+			t !== -1 && r.value.splice(t, 1);
+		};
+	}
+	return u(B, {
+		register: a,
+		slot: e,
+		name: t,
+		props: n
+	}), i(() => r.value.length > 0 ? r.value.join(" ") : void 0);
+}
+a({
+	name: "Label",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "label"
+		},
+		passive: {
+			type: [Boolean],
+			default: !1
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	setup(e, { slots: t, attrs: n }) {
+		var r;
+		let i = (r = e.id) ?? `headlessui-label-${y()}`, a = V();
+		return c(() => l(a.register(i))), () => {
+			let { name: r = "Label", slot: o = {}, props: s = {} } = a, { passive: c,...l } = e, u = {
+				...Object.entries(s).reduce((e, [t, n]) => Object.assign(e, { [t]: f(n) }), {}),
+				id: i
+			};
+			return c && (delete u.onClick, delete u.htmlFor, delete l.onClick), E({
+				ourProps: u,
+				theirProps: l,
+				slot: o,
+				attrs: n,
+				slots: t,
+				name: r
+			});
+		};
+	}
+});
+let U = Symbol("GroupContext");
+a({
+	name: "SwitchGroup",
+	props: { as: {
+		type: [Object, String],
+		default: "template"
+	} },
+	setup(e, { slots: t, attrs: n }) {
+		let r = d(null), a = H({
+			name: "SwitchLabel",
+			props: {
+				htmlFor: i(() => {
+					var e;
+					return (e = r.value)?.id;
+				}),
+				onClick(e) {
+					r.value && (e.currentTarget.tagName === "LABEL" && e.preventDefault(), r.value.click(), r.value.focus({ preventScroll: !0 }));
+				}
+			}
+		}), o = z({ name: "SwitchDescription" });
+		return u(U, {
+			switchRef: r,
+			labelledby: a,
+			describedby: o
+		}), () => E({
+			theirProps: e,
+			ourProps: {},
+			slot: {},
+			slots: t,
+			attrs: n,
+			name: "SwitchGroup"
+		});
+	}
+});
+let W = a({
+	name: "Switch",
+	emits: { "update:modelValue": (e) => !0 },
+	props: {
+		as: {
+			type: [Object, String],
+			default: "button"
+		},
+		modelValue: {
+			type: Boolean,
+			default: void 0
+		},
+		defaultChecked: {
+			type: Boolean,
+			optional: !0
+		},
+		form: {
+			type: String,
+			optional: !0
+		},
+		name: {
+			type: String,
+			optional: !0
+		},
+		value: {
+			type: String,
+			optional: !0
+		},
+		id: {
+			type: String,
+			default: null
+		},
+		disabled: {
+			type: Boolean,
+			default: !1
+		},
+		tabIndex: {
+			type: Number,
+			default: 0
+		}
+	},
+	inheritAttrs: !1,
+	setup(e, { emit: t, attrs: r, slots: a, expose: l }) {
+		var u;
+		let f = (u = e.id) ?? `headlessui-switch-${y()}`, m = s(U, null), [g, _] = h(i(() => e.modelValue), (e) => t("update:modelValue", e), i(() => e.defaultChecked));
+		function v() {
+			_(!g.value);
+		}
+		let x = d(null), S = m === null ? x : m.switchRef, w = C(i(() => ({
+			as: e.as,
+			type: r.type
+		})), S);
+		l({
+			el: S,
+			$el: S
+		});
+		function T(e) {
+			e.preventDefault(), v();
+		}
+		function D(e) {
+			e.key === F.Space ? (e.preventDefault(), v()) : e.key === F.Enter && I(e.currentTarget);
+		}
+		function O(e) {
+			e.preventDefault();
+		}
+		let k = i(() => {
+			var e, t;
+			return (t = (e = b(S))?.closest)?.call(e, "form");
+		});
+		return c(() => {
+			p([k], () => {
+				if (!k.value || e.defaultChecked === void 0) return;
+				function t() {
+					_(e.defaultChecked);
+				}
+				return k.value.addEventListener("reset", t), () => {
+					var e;
+					(e = k.value) == null || e.removeEventListener("reset", t);
+				};
+			}, { immediate: !0 });
+		}), () => {
+			let { name: t, value: i, form: s, tabIndex: c,...l } = e, u = { checked: g.value }, d = {
+				id: f,
+				ref: S,
+				role: "switch",
+				type: w.value,
+				tabIndex: c === -1 ? 0 : c,
+				"aria-checked": g.value,
+				"aria-labelledby": m?.labelledby.value,
+				"aria-describedby": m?.describedby.value,
+				onClick: T,
+				onKeyup: D,
+				onKeypress: O
+			};
+			return o(n, [t != null && g.value != null ? o(P, A({
+				features: N.Hidden,
+				as: "input",
+				type: "checkbox",
+				hidden: !0,
+				readOnly: !0,
+				checked: g.value,
+				form: s,
+				disabled: l.disabled,
+				name: t,
+				value: i
+			})) : null, E({
+				ourProps: d,
+				theirProps: {
+					...r,
+					...j(l, ["modelValue", "defaultChecked"])
+				},
+				slot: u,
+				attrs: r,
+				slots: a,
+				name: "Switch"
+			})]);
+		};
+	}
+});
+const G = { install(e) {
+	Object.entries({ Switch: W }).forEach(([t, n]) => {
+		e.component(t, n);
+	});
+} };
+var K = G;
+export { W as Switch, K as default };
+
 //# sourceMappingURL=index.js.map

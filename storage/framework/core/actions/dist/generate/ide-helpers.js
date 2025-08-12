@@ -5,7 +5,7 @@ import {
   generateWebTypes
 } from "../helpers/vscode-custom-data.js";
 import"../chunk-494jp8d5.js";
-import"../chunk-1j66gxht.js";
+import"../chunk-tsfemdz5.js";
 
 // src/generate/ide-helpers.ts
 import { log } from "@stacksjs/logging";

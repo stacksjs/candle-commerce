@@ -1,9 +1,12 @@
 // @bun
+import {
+  template
+} from "./chunk-5y2n067z.js";
 import"./chunk-ze46550n.js";
 import {
   runAction
 } from "./helpers/utils.js";
-import"./chunk-1j66gxht.js";
+import"./chunk-tsfemdz5.js";
 
 // src/make.ts
 import process from "process";
@@ -14,6 +17,155 @@ import { handleError } from "@stacksjs/error-handling";
 import { log } from "@stacksjs/logging";
 import { frameworkPath, path as p, resolve } from "@stacksjs/path";
 import { createFolder, doesFolderExist, writeTextFile } from "@stacksjs/storage";
+
+// src/templates.ts
+var CODE_TEMPLATES = {
+  action: `import { Action } from '@stacksjs/actions'
+
+export default new Action({
+  name: '{0}',
+  description: '{0} action',
+
+  handle() {
+    return 'Hello World action'
+  },
+})`,
+  component: `<script setup lang="ts">
+console.log('Hello World component created')
+</script>
+
+<template>
+  <div>
+    Some HTML block
+  </div>
+</template>`,
+  page: `<script setup lang="ts">
+console.log('Hello World page created')
+</script>
+
+<template>
+  <div>
+    Visit http://127.0.0.1/{0}
+  </div>
+</template>`,
+  function: `// reactive state
+const {0} = ref(0)
+
+// functions that mutate state and trigger updates
+function increment() {
+  {0}.value++
+}
+
+export {
+  {0},
+  increment,
+}`,
+  language: `button:
+  text: Copy`,
+  notification: `import type { {0} } from '@stacksjs/types'
+
+function content(): string {
+  return 'example'
+}
+
+function send(): {0} {
+  return {
+    content: content(),
+  }
+}`,
+  middleware: `import type { Request } from '@stacksjs/router'
+import { Middleware } from '@stacksjs/router'
+
+export default new Middleware({
+  name: '{0}',
+  priority: 1,
+  async handle(request: Request) {
+    // Your middleware logic here
+  },
+})`,
+  model: `import { faker } from '@stacksjs/faker'
+import { schema } from '@stacksjs/validation'
+import type { Model } from '@stacksjs/types'
+
+export default {
+  name: '{0}',
+
+  traits: {
+    useTimestamps: true,
+
+    useSeeder: {
+      count: 10,
+    },
+  },
+
+  attributes: {
+    // your attributes here
+  },
+} satisfies Model`,
+  migration: `import { Kysely } from 'kysely'
+
+export async function up(db: Kysely<any>): Promise<void> {
+  await db.schema
+    .createTable('{0}')
+    .addColumn('id', 'integer', col => col.autoIncrement().primaryKey())
+    .execute()
+}`,
+  job: `import { Job } from '@stacksjs/jobs'
+
+export default new Job({
+  name: '{0}',
+  description: '{0} job',
+
+  async handle() {
+    // Your job logic here
+    console.log('Job executed')
+  },
+})`,
+  event: `import { Event } from '@stacksjs/events'
+
+export default new Event({
+  name: '{0}',
+  description: '{0} event',
+
+  async handle(data: any) {
+    // Your event handler logic here
+    console.log('Event handled:', data)
+  },
+})`,
+  listener: `import { Listener } from '@stacksjs/events'
+
+export default new Listener({
+  name: '{0}',
+  description: '{0} listener',
+
+  async handle(data: any) {
+    // Your listener logic here
+    console.log('Listener triggered:', data)
+  },
+})`,
+  command: `import { Command } from '@stacksjs/cli'
+
+export default new Command({
+  name: '{0}',
+  description: '{0} command',
+
+  async handle() {
+    // Your command logic here
+    console.log('Command executed')
+  },
+})`
+};
+
+// src/make.ts
+function generateCode(templateKey, ...args) {
+  return template(CODE_TEMPLATES[templateKey], ...args);
+}
+async function createFileWithTemplate(path, templateKey, ...args) {
+  await writeTextFile({
+    path,
+    data: generateCode(templateKey, ...args)
+  });
+}
 async function invoke(options) {
   if (options.component)
     await makeComponent(options);
@@ -23,6 +175,8 @@ async function invoke(options) {
     await makeFunction(options);
   if (options.language)
     await makeLanguage(options);
+  if (options.middleware)
+    await createMiddleware(options);
   if (options.notification)
     await makeNotification(options);
   if (options.page)
@@ -57,36 +211,11 @@ async function makeComponent(options) {
 }
 async function createAction(options) {
   const name = options.name;
-  await writeTextFile({
-    path: p.userActionsPath(name),
-    data: `import { Action } from '@stacksjs/actions'
-
-export default new Action({
-  name: '${name}',
-  description: '${name} action',
-
-  handle() {
-    return 'Hello World action'
-  },
-})
-`
-  });
+  await createFileWithTemplate(p.userActionsPath(name), "action", name);
 }
 async function createComponent(options) {
   const name = options.name;
-  await writeTextFile({
-    path: p.userComponentsPath(`${name}.vue`),
-    data: `<script setup lang="ts">
-console.log('Hello World component created')
-</script>
-
-<template>
-  <div>
-    Some HTML block
-  </div>
-</template>
-`
-  });
+  await createFileWithTemplate(p.userComponentsPath(`${name}.vue`), "component", name);
 }
 function makeDatabase(options) {
   try {
@@ -140,19 +269,7 @@ async function makePage(options) {
 }
 async function createPage(options) {
   const name = options.name;
-  await writeTextFile({
-    path: p.userViewsPath(`${name}.vue`),
-    data: `<script setup lang="ts">
-console.log('Hello World page created')
-</script>
-
-<template>
-  <div>
-    Visit http://127.0.0.1/${name}
-  </div>
-</template>
-`
-  });
+  await createFileWithTemplate(p.userViewsPath(`${name}.vue`), "page", name);
 }
 async function makeFunction(options) {
   try {
@@ -167,22 +284,7 @@ async function makeFunction(options) {
 }
 async function createFunction(options) {
   const name = options.name;
-  await writeTextFile({
-    path: p.userFunctionsPath(`${name}.ts`),
-    data: `// reactive state
-const ${name} = ref(0)
-
-// functions that mutate state and trigger updates
-function increment() {
-  ${name}.value++
-}
-
-export {
-  ${name},
-  increment,
-}
-`
-  });
+  await createFileWithTemplate(p.userFunctionsPath(`${name}.ts`), "function", name);
 }
 async function makeLanguage(options) {
   try {
@@ -197,12 +299,7 @@ async function makeLanguage(options) {
 }
 async function createLanguage(options) {
   const name = options.name;
-  await writeTextFile({
-    path: p.resourcesPath(`lang/${name}.yml`),
-    data: `button:
-  text: Copy
-`
-  });
+  await createFileWithTemplate(p.resourcesPath(`lang/${name}.yml`), "language", name);
 }
 function makeStack(options) {
   try {
@@ -226,20 +323,7 @@ async function createNotification(options) {
       importOption = "ChatOptions";
     if (options.sms)
       importOption = "SMSOptions";
-    await writeTextFile({
-      path: p.userNotificationsPath(`${name}.ts`),
-      data: `import type { ${importOption} } from '@stacksjs/types'
-
-function content(): string {
-  return 'example'
-}
-
-function send(): ${importOption} {
-  return {
-    content: content(),
-  }
-}`
-    });
+    await createFileWithTemplate(p.userNotificationsPath(`${name}.ts`), "notification", importOption);
     return true;
   } catch (error) {
     handleError("Error creating notification", error);
@@ -254,17 +338,7 @@ async function createMigration(options) {
   const name = optionName[0].toUpperCase() + optionName.slice(1);
   const path = frameworkPath(`database/migrations/${name}.ts`);
   try {
-    await writeTextFile({
-      path: `${path}`,
-      data: `import { Kysely } from 'kysely'
-
-export async function up(db: Kysely<any>): Promise<void> {
-  await db.schema
-    .createTable('${table}')
-    .addColumn('id', 'integer', col => col.autoIncrement().primaryKey())
-    .execute()
-}`
-    });
+    await createFileWithTemplate(path, "migration", table);
     log.success(`Successfully created your migration file at stacks/database/migrations/${name}.ts`);
   } catch (error) {
     log.error(error);
@@ -293,32 +367,15 @@ async function createModel(options) {
   const name = optionName[0].toUpperCase() + optionName.slice(1);
   const path = p.userModelsPath(`${name}.ts`);
   try {
-    await writeTextFile({
-      path: `${path}`,
-      data: `import { faker } from '@stacksjs/faker'
-import { schema } from '@stacksjs/validation'
-import type { Model } from '@stacksjs/types'
-
-export default {
-  name: '${name}',
-
-  traits: {
-    useTimestamps: true,
-
-    useSeeder: {
-      count: 10,
-    },
-  },
-
-  attributes: {
-    // your attributes here
-  },
-} satisfies Model`
-    });
+    await createFileWithTemplate(path, "model", name);
     log.success(`Model created: ${italic(`app/Models/${name}.ts`)}`);
   } catch (error) {
     log.error(error);
   }
+}
+async function createMiddleware(options) {
+  const name = options.name;
+  await createFileWithTemplate(p.userMiddlewarePath(`${name}.ts`), "middleware", name);
 }
 export {
   makeStack,
@@ -338,6 +395,7 @@ export {
   createNotification,
   createModel,
   createMigration,
+  createMiddleware,
   createLanguage,
   createFunction,
   createFactory,
@@ -346,4 +404,4 @@ export {
   createAction
 };
 
-export { make, makeAction, makeComponent, createComponent, makeDatabase, createDatabase, createFactory, makeNotification, makePage, createPage, makeFunction, createFunction, makeLanguage, createLanguage, makeStack, createNotification, createMigration, makeQueueTable, makeCertificate, createModel };
+export { make, makeAction, makeComponent, createComponent, makeDatabase, createDatabase, createFactory, makeNotification, makePage, createPage, makeFunction, createFunction, makeLanguage, createLanguage, makeStack, createNotification, createMigration, makeQueueTable, makeCertificate, createModel, createMiddleware };

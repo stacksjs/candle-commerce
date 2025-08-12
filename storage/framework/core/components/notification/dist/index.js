@@ -1,14 +1,655 @@
-function e(e){if(!e||typeof document>`u`)return;let t=document.head||document.getElementsByTagName(`head`)[0],n=document.createElement(`style`);n.type=`text/css`,t.appendChild(n),n.styleSheet?n.styleSheet.cssText=e:n.appendChild(document.createTextNode(e))}e(`:where([data-sonner-toaster][dir=ltr]),:where(html[dir=ltr]){--toast-icon-margin-start:-3px;--toast-icon-margin-end:4px;--toast-svg-margin-start:-1px;--toast-svg-margin-end:0px;--toast-button-margin-start:auto;--toast-button-margin-end:0;--toast-close-button-start:0;--toast-close-button-end:unset;--toast-close-button-transform:translate(-35%, -35%)}:where([data-sonner-toaster][dir=rtl]),:where(html[dir=rtl]){--toast-icon-margin-start:4px;--toast-icon-margin-end:-3px;--toast-svg-margin-start:0px;--toast-svg-margin-end:-1px;--toast-button-margin-start:0;--toast-button-margin-end:auto;--toast-close-button-start:unset;--toast-close-button-end:0;--toast-close-button-transform:translate(35%, -35%)}:where([data-sonner-toaster]){position:fixed;width:var(--width);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;--gray1:hsl(0, 0%, 99%);--gray2:hsl(0, 0%, 97.3%);--gray3:hsl(0, 0%, 95.1%);--gray4:hsl(0, 0%, 93%);--gray5:hsl(0, 0%, 90.9%);--gray6:hsl(0, 0%, 88.7%);--gray7:hsl(0, 0%, 85.8%);--gray8:hsl(0, 0%, 78%);--gray9:hsl(0, 0%, 56.1%);--gray10:hsl(0, 0%, 52.3%);--gray11:hsl(0, 0%, 43.5%);--gray12:hsl(0, 0%, 9%);--border-radius:8px;box-sizing:border-box;padding:0;margin:0;list-style:none;outline:0;z-index:999999999}:where([data-sonner-toaster][data-x-position=right]){right:max(var(--offset),env(safe-area-inset-right))}:where([data-sonner-toaster][data-x-position=left]){left:max(var(--offset),env(safe-area-inset-left))}:where([data-sonner-toaster][data-x-position=center]){left:50%;transform:translateX(-50%)}:where([data-sonner-toaster][data-y-position=top]){top:max(var(--offset),env(safe-area-inset-top))}:where([data-sonner-toaster][data-y-position=bottom]){bottom:max(var(--offset),env(safe-area-inset-bottom))}:where([data-sonner-toast]){--y:translateY(100%);--lift-amount:calc(var(--lift) * var(--gap));z-index:var(--z-index);position:absolute;opacity:0;transform:var(--y);filter:blur(0);touch-action:none;transition:transform .4s,opacity .4s,height .4s,box-shadow .2s;box-sizing:border-box;outline:0;overflow-wrap:anywhere}:where([data-sonner-toast][data-styled=true]){padding:16px;background:var(--normal-bg);border:1px solid var(--normal-border);color:var(--normal-text);border-radius:var(--border-radius);box-shadow:0 4px 12px rgba(0,0,0,.1);width:var(--width);font-size:13px;display:flex;align-items:center;gap:6px}:where([data-sonner-toast]:focus-visible){box-shadow:0 4px 12px rgba(0,0,0,.1),0 0 0 2px rgba(0,0,0,.2)}:where([data-sonner-toast][data-y-position=top]){top:0;--y:translateY(-100%);--lift:1;--lift-amount:calc(1 * var(--gap))}:where([data-sonner-toast][data-y-position=bottom]){bottom:0;--y:translateY(100%);--lift:-1;--lift-amount:calc(var(--lift) * var(--gap))}:where([data-sonner-toast]) :where([data-description]){font-weight:400;line-height:1.4;color:inherit}:where([data-sonner-toast]) :where([data-title]){font-weight:500;line-height:1.5;color:inherit}:where([data-sonner-toast]) :where([data-icon]){display:flex;height:16px;width:16px;position:relative;justify-content:flex-start;align-items:center;flex-shrink:0;margin-left:var(--toast-icon-margin-start);margin-right:var(--toast-icon-margin-end)}:where([data-sonner-toast][data-promise=true]) :where([data-icon])>svg{opacity:0;transform:scale(.8);transform-origin:center;animation:sonner-fade-in .3s ease forwards}:where([data-sonner-toast]) :where([data-icon])>*{flex-shrink:0}:where([data-sonner-toast]) :where([data-icon]) svg{margin-left:var(--toast-svg-margin-start);margin-right:var(--toast-svg-margin-end)}:where([data-sonner-toast]) :where([data-content]){display:flex;flex-direction:column;gap:2px}[data-sonner-toast][data-styled=true] [data-button]{border-radius:4px;padding-left:8px;padding-right:8px;height:24px;font-size:12px;color:var(--normal-bg);background:var(--normal-text);margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end);border:none;cursor:pointer;outline:0;display:flex;align-items:center;flex-shrink:0;transition:opacity .4s,box-shadow .2s}:where([data-sonner-toast]) :where([data-button]):focus-visible{box-shadow:0 0 0 2px rgba(0,0,0,.4)}:where([data-sonner-toast]) :where([data-button]):first-of-type{margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end)}:where([data-sonner-toast]) :where([data-cancel]){color:var(--normal-text);background:rgba(0,0,0,.08)}:where([data-sonner-toast][data-theme=dark]) :where([data-cancel]){background:rgba(255,255,255,.3)}[data-sonner-toast] [data-close-button]{position:absolute;left:var(--toast-close-button-start);right:var(--toast-close-button-end);top:0;height:20px;width:20px;display:flex;justify-content:center;align-items:center;padding:0;background:var(--normal-bg);color:var(--normal-text);border:1px solid var(--normal-border);transform:var(--toast-close-button-transform);border-radius:50%;cursor:pointer;z-index:1;transition:opacity .1s,background .2s,border-color .2s}[data-sonner-toast] [data-close-button]:focus-visible{box-shadow:0 4px 12px rgba(0,0,0,.1),0 0 0 2px rgba(0,0,0,.2)}:where([data-sonner-toast]) :where([data-disabled=true]){cursor:not-allowed}[data-sonner-toast]:hover [data-close-button]:hover{background:var(--gray2);border-color:var(--gray5)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast]:hover [data-close-button]:hover{background:#000;border-color:#4c4c4c}:where([data-sonner-toast][data-swiping=true])::before{content:'';position:absolute;left:0;right:0;height:100%;z-index:-1}:where(
-[data-sonner-toast][data-y-position=top][data-swiping=true]
-)::before{bottom:50%;transform:scaleY(3) translateY(50%)}:where(
-[data-sonner-toast][data-y-position=bottom][data-swiping=true]
-)::before{top:50%;transform:scaleY(3) translateY(-50%)}:where([data-sonner-toast][data-swiping=false][data-removed=true])::before{content:'';position:absolute;inset:0;transform:scaleY(2)}:where([data-sonner-toast])::after{content:'';position:absolute;left:0;height:calc(var(--gap) + 1px);bottom:100%;width:100%}:where([data-sonner-toast][data-mounted=true]){--y:translateY(0);opacity:1}:where([data-sonner-toast][data-expanded=false][data-front=false]){--scale:var(--toasts-before) * 0.05 + 1;--y:translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));height:var(--front-toast-height)}:where([data-sonner-toast])>*{transition:opacity .4s}:where(
-[data-sonner-toast][data-expanded=false][data-front=false][data-styled=true]
-)>*{opacity:0}:where([data-sonner-toast][data-visible=false]){opacity:0;pointer-events:none}:where([data-sonner-toast][data-mounted=true][data-expanded=true]){--y:translateY(calc(var(--lift) * var(--offset)));height:var(--initial-height)}:where(
-[data-sonner-toast][data-removed=true][data-front=true][data-swipe-out=false]
-){--y:translateY(calc(var(--lift) * -100%));opacity:0}:where(
-[data-sonner-toast][data-removed=true][data-front=false][data-swipe-out=false][data-expanded=true]
-){--y:translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));opacity:0}:where(
-[data-sonner-toast][data-removed=true][data-front=false][data-swipe-out=false][data-expanded=false]
-){--y:translateY(40%);opacity:0;transition:transform .5s,opacity .2s}:where([data-sonner-toast][data-removed=true][data-front=false])::before{height:calc(var(--initial-height) + 20%)}[data-sonner-toast][data-swiping=true]{transform:var(--y) translateY(var(--swipe-amount,0));transition:none}[data-sonner-toast][data-swipe-out=true][data-y-position=bottom],[data-sonner-toast][data-swipe-out=true][data-y-position=top]{animation:swipe-out .2s ease-out forwards}@keyframes swipe-out{from{transform:translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount)));opacity:1}to{transform:translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount) + var(--lift) * -100%));opacity:0}}@media (max-width:600px){[data-sonner-toaster]{position:fixed;--mobile-offset:16px;right:var(--mobile-offset);left:var(--mobile-offset);width:100%}[data-sonner-toaster][dir=rtl]{left:calc(var(--mobile-offset) * -1)}[data-sonner-toaster] [data-sonner-toast]{left:0;right:0;width:calc(100% - var(--mobile-offset) * 2)}[data-sonner-toaster][data-x-position=left]{left:var(--mobile-offset)}[data-sonner-toaster][data-y-position=bottom]{bottom:20px}[data-sonner-toaster][data-y-position=top]{top:20px}[data-sonner-toaster][data-x-position=center]{left:var(--mobile-offset);right:var(--mobile-offset);transform:none}}[data-sonner-toaster][data-theme=light]{--normal-bg:#fff;--normal-border:var(--gray4);--normal-text:var(--gray12);--success-bg:hsl(143, 85%, 96%);--success-border:hsl(145, 92%, 91%);--success-text:hsl(140, 100%, 27%);--info-bg:hsl(208, 100%, 97%);--info-border:hsl(221, 91%, 91%);--info-text:hsl(210, 92%, 45%);--warning-bg:hsl(49, 100%, 97%);--warning-border:hsl(49, 91%, 91%);--warning-text:hsl(31, 92%, 45%);--error-bg:hsl(359, 100%, 97%);--error-border:hsl(359, 100%, 94%);--error-text:hsl(360, 100%, 45%)}[data-sonner-toaster][data-theme=light] [data-sonner-toast][data-invert=true]{--normal-bg:#000;--normal-border:hsl(0, 0%, 20%);--normal-text:var(--gray1)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast][data-invert=true]{--normal-bg:#fff;--normal-border:var(--gray3);--normal-text:var(--gray12)}[data-sonner-toaster][data-theme=dark]{--normal-bg:#000;--normal-border:hsl(0, 0%, 20%);--normal-text:var(--gray1);--success-bg:hsl(150, 100%, 6%);--success-border:hsl(147, 100%, 12%);--success-text:hsl(150, 86%, 65%);--info-bg:hsl(215, 100%, 6%);--info-border:hsl(223, 100%, 12%);--info-text:hsl(216, 87%, 65%);--warning-bg:hsl(64, 100%, 6%);--warning-border:hsl(60, 100%, 12%);--warning-text:hsl(46, 87%, 65%);--error-bg:hsl(358, 76%, 10%);--error-border:hsl(357, 89%, 16%);--error-text:hsl(358, 100%, 81%)}[data-rich-colors=true][data-sonner-toast][data-type=success]{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text)}[data-rich-colors=true][data-sonner-toast][data-type=success] [data-close-button]{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text)}[data-rich-colors=true][data-sonner-toast][data-type=info]{background:var(--info-bg);border-color:var(--info-border);color:var(--info-text)}[data-rich-colors=true][data-sonner-toast][data-type=info] [data-close-button]{background:var(--info-bg);border-color:var(--info-border);color:var(--info-text)}[data-rich-colors=true][data-sonner-toast][data-type=warning]{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-text)}[data-rich-colors=true][data-sonner-toast][data-type=warning] [data-close-button]{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-text)}[data-rich-colors=true][data-sonner-toast][data-type=error]{background:var(--error-bg);border-color:var(--error-border);color:var(--error-text)}[data-rich-colors=true][data-sonner-toast][data-type=error] [data-close-button]{background:var(--error-bg);border-color:var(--error-border);color:var(--error-text)}.sonner-loading-wrapper{--size:16px;height:var(--size);width:var(--size);position:absolute;inset:0;z-index:10}.sonner-loading-wrapper[data-visible=false]{transform-origin:center;animation:sonner-fade-out .2s ease forwards}.sonner-spinner{position:relative;top:50%;left:50%;height:var(--size);width:var(--size)}.sonner-loading-bar{animation:sonner-spin 1.2s linear infinite;background:var(--gray11);border-radius:6px;height:8%;left:-10%;position:absolute;top:-3.9%;width:24%}.sonner-loading-bar:first-child{animation-delay:-1.2s;transform:rotate(.0001deg) translate(146%)}.sonner-loading-bar:nth-child(2){animation-delay:-1.1s;transform:rotate(30deg) translate(146%)}.sonner-loading-bar:nth-child(3){animation-delay:-1s;transform:rotate(60deg) translate(146%)}.sonner-loading-bar:nth-child(4){animation-delay:-.9s;transform:rotate(90deg) translate(146%)}.sonner-loading-bar:nth-child(5){animation-delay:-.8s;transform:rotate(120deg) translate(146%)}.sonner-loading-bar:nth-child(6){animation-delay:-.7s;transform:rotate(150deg) translate(146%)}.sonner-loading-bar:nth-child(7){animation-delay:-.6s;transform:rotate(180deg) translate(146%)}.sonner-loading-bar:nth-child(8){animation-delay:-.5s;transform:rotate(210deg) translate(146%)}.sonner-loading-bar:nth-child(9){animation-delay:-.4s;transform:rotate(240deg) translate(146%)}.sonner-loading-bar:nth-child(10){animation-delay:-.3s;transform:rotate(270deg) translate(146%)}.sonner-loading-bar:nth-child(11){animation-delay:-.2s;transform:rotate(300deg) translate(146%)}.sonner-loading-bar:nth-child(12){animation-delay:-.1s;transform:rotate(330deg) translate(146%)}@keyframes sonner-fade-in{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}@keyframes sonner-fade-out{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.8)}}@keyframes sonner-spin{0%{opacity:1}100%{opacity:.15}}@media (prefers-reduced-motion){.sonner-loading-bar,[data-sonner-toast],[data-sonner-toast]>*{transition:none!important;animation:none!important}}.sonner-loader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transform-origin:center;transition:opacity .2s,transform .2s}.sonner-loader[data-visible=false]{opacity:0;transform:scale(.8) translate(-50%,-50%)}`);import{Fragment as t,computed as n,createBlock as r,createCommentVNode as i,createElementBlock as a,createElementVNode as o,createTextVNode as s,createVNode as c,defineComponent as l,mergeProps as u,nextTick as d,normalizeClass as f,normalizeProps as p,normalizeStyle as m,onMounted as h,onUnmounted as g,openBlock as _,ref as v,renderList as y,renderSlot as b,resolveDynamicComponent as x,toDisplayString as S,unref as C,useAttrs as w,watch as T,watchEffect as E,withCtx as D}from"vue";let O=0;var k=class{subscribers;toasts;constructor(){this.subscribers=[],this.toasts=[]}subscribe=e=>(this.subscribers.push(e),()=>{let t=this.subscribers.indexOf(e);this.subscribers.splice(t,1)});publish=e=>{this.subscribers.forEach(t=>t(e))};addToast=e=>{this.publish(e),this.toasts=[...this.toasts,e]};create=e=>{let{message:t,...n}=e,r=typeof e.id==`number`||e.id&&e.id?.length>0?e.id:O++,i=this.toasts.find(e=>e.id===r),a=e.dismissible===void 0?!0:e.dismissible;return i?this.toasts=this.toasts.map(n=>n.id===r?(this.publish({...n,...e,id:r,title:t}),{...n,...e,id:r,dismissible:a,title:t}):n):this.addToast({title:t,...n,dismissible:a,id:r}),r};dismiss=e=>(e||this.toasts.forEach(e=>{this.subscribers.forEach(t=>t({id:e.id,dismiss:!0}))}),this.subscribers.forEach(t=>t({id:e,dismiss:!0})),e);message=(e,t)=>this.create({...t,message:e,type:`default`});error=(e,t)=>this.create({...t,type:`error`,message:e});success=(e,t)=>this.create({...t,type:`success`,message:e});info=(e,t)=>this.create({...t,type:`info`,message:e});warning=(e,t)=>this.create({...t,type:`warning`,message:e});loading=(e,t)=>this.create({...t,type:`loading`,message:e});promise=(e,t)=>{if(!t)return;let n;t.loading!==void 0&&(n=this.create({...t,promise:e,type:`loading`,message:t.loading,description:typeof t.description==`function`?void 0:t.description}));let r=e instanceof Promise?e:e(),i=n!==void 0,a,o=r.then(async e=>{if(a=[`resolve`,e],M(e)&&!e.ok){i=!1;let r=typeof t.error==`function`?await t.error(`HTTP error! status: ${e.status}`):t.error,a=typeof t.description==`function`?await t.description(`HTTP error! status: ${e.status}`):t.description;this.create({id:n,type:`error`,message:r,description:a})}else if(t.success!==void 0){i=!1;let r=typeof t.success==`function`?await t.success(e):t.success,a=typeof t.description==`function`?await t.description(e):t.description;this.create({id:n,type:`success`,message:r,description:a})}}).catch(async e=>{if(a=[`reject`,e],t.error!==void 0){i=!1;let r=typeof t.error==`function`?await t.error(e):t.error,a=typeof t.description==`function`?await t.description(e):t.description;this.create({id:n,type:`error`,message:r,description:a})}}).finally(()=>{i&&(this.dismiss(n),n=void 0),t.finally?.()}),s=()=>new Promise((e,t)=>o.then(()=>a[0]===`reject`?t(a[1]):e(a[1])).catch(t));return typeof n!=`string`&&typeof n!=`number`?{unwrap:s}:Object.assign(n,{unwrap:s})};custom=(e,t)=>{let n=t?.id||O++;return this.publish({component:e,id:n,...t}),n}};const A=new k;function j(e,t){let n=t?.id||O++;return A.create({message:e,id:n,type:`default`,...t}),n}function M(e){return e&&typeof e==`object`&&`ok`in e&&typeof e.ok==`boolean`&&`status`in e&&typeof e.status==`number`}const N=j,P=()=>A.toasts,F=Object.assign(N,{success:A.success,info:A.info,warning:A.warning,error:A.error,custom:A.custom,message:A.message,promise:A.promise,dismiss:A.dismiss,loading:A.loading},{getHistory:P}),I=F,L=[`data-visible`],R={class:`sonner-spinner`};var z=l({__name:`Loader`,props:{visible:{type:Boolean}},setup(e){let n=Array.from({length:12}).fill(0);return(e,r)=>(_(),a(`div`,{class:`sonner-loading-wrapper`,"data-visible":e.visible},[o(`div`,R,[(_(!0),a(t,null,y(C(n),e=>(_(),a(`div`,{key:`spinner-bar-${e}`,class:`sonner-loading-bar`}))),128))])],8,L))}}),ee=z;function te(){let e=v(!1);return E(()=>{let t=()=>{e.value=document.hidden};return document.addEventListener(`visibilitychange`,t),()=>window.removeEventListener(`visibilitychange`,t)}),{isDocumentHidden:e}}function B(e){return e.label!==void 0}const ne=[`aria-live`,`data-rich-colors`,`data-styled`,`data-mounted`,`data-promise`,`data-removed`,`data-visible`,`data-y-position`,`data-x-position`,`data-index`,`data-front`,`data-swiping`,`data-dismissible`,`data-type`,`data-invert`,`data-swipe-out`,`data-expanded`],re=[`aria-label`,`data-disabled`],ie={key:0,"data-icon":``},ae={"data-content":``},oe=4e3,se=20,ce=200;var V=l({__name:`Toast`,props:{toast:{},toasts:{},index:{},expanded:{type:Boolean},invert:{type:Boolean},heights:{},gap:{},position:{},visibleToasts:{},expandByDefault:{type:Boolean},closeButton:{type:Boolean},interacting:{type:Boolean},style:{},cancelButtonStyle:{},actionButtonStyle:{},duration:{},class:{},unstyled:{type:Boolean},descriptionClass:{},loadingIcon:{},classes:{},icons:{},closeButtonAriaLabel:{},pauseWhenPageIsHidden:{type:Boolean},cn:{type:Function},defaultRichColors:{type:Boolean}},emits:[`update:heights`,`removeToast`],setup(e,{emit:c}){let l=e,d=c,y=v(!1),w=v(!1),T=v(!1),D=v(!1),O=v(0),k=v(0),A=v(null),j=v(null),M=n(()=>l.index===0),N=n(()=>l.index+1<=l.visibleToasts),P=n(()=>l.toast.type),F=n(()=>l.toast.dismissible!==!1),I=n(()=>l.toast.class||``),L=n(()=>l.descriptionClass||``),R=l.toast.style||{},z=n(()=>l.heights.findIndex(e=>e.toastId===l.toast.id)||0),ee=n(()=>l.toast.closeButton??l.closeButton),V=n(()=>l.toast.duration||l.duration||oe),H=v(0),U=v(0),W=v(0),G=v(null),K=n(()=>l.position.split(`-`)),q=n(()=>K.value[0]),J=n(()=>K.value[1]),Y=n(()=>typeof l.toast.title!=`string`),X=n(()=>typeof l.toast.description!=`string`),Z=n(()=>l.heights.reduce((e,t,n)=>n>=z.value?e:e+t.height,0)),le=te(),ue=n(()=>l.toast.invert||l.invert),Q=n(()=>P.value===`loading`);h(()=>{if(!y.value)return;let e=j.value,t=e?.style.height,n=0;e&&(e.style.height=`auto`,n=e.getBoundingClientRect().height,e.style.height=t||``),k.value=n;let r,i=l.heights.find(e=>e.toastId===l.toast.id);r=i?l.heights.map(e=>e.toastId===l.toast.id?{...e,height:n}:e):[{toastId:l.toast.id,height:n,position:l.toast.position},...l.heights],d(`update:heights`,r)});function $(){w.value=!0,O.value=U.value;let e=l.heights.filter(e=>e.toastId!==l.toast.id);d(`update:heights`,e),setTimeout(()=>{d(`removeToast`,l.toast)},ce)}function de(){Q.value||!F.value||($(),l.toast.onDismiss?.(l.toast))}function fe(e){Q.value||!F.value||(A.value=new Date,O.value=U.value,e.target.setPointerCapture(e.pointerId),e.target.tagName!==`BUTTON`&&(T.value=!0,G.value={x:e.clientX,y:e.clientY}))}function pe(){if(D.value)return;G.value=null;let e=Number(j.value?.style.getPropertyValue(`--swipe-amount`).replace(`px`,``)||0),t=new Date().getTime()-(A.value?.getTime()||0),n=Math.abs(e)/t;if(Math.abs(e)>=se||n>.11){O.value=U.value,l.toast.onDismiss?.(l.toast),$(),D.value=!0;return}j.value?.style.setProperty(`--swipe-amount`,`0px`),T.value=!1}function me(e){if(!G.value||!F.value)return;let t=e.clientY-G.value.y,n=e.clientX-G.value.x,r=K.value[0]===`top`?Math.min:Math.max,i=r(0,t),a=e.pointerType===`touch`?10:2,o=Math.abs(i)>a;o?j.value?.style.setProperty(`--swipe-amount`,`${t}px`):Math.abs(n)>a&&(G.value=null)}return E(()=>{U.value=z.value*(l?.gap||0)+Z.value}),E(e=>{if(l.toast.promise&&P.value===`loading`||l.toast.duration===1/0||l.toast.type===`loading`)return;let t,n=V.value,r=()=>{if(W.value<H.value){let e=new Date().getTime()-H.value;n-=e}W.value=new Date().getTime()},i=()=>{n!==1/0&&(H.value=new Date().getTime(),t=setTimeout(()=>{l.toast.onAutoClose?.(l.toast),$()},n))};l.expanded||l.interacting||l.pauseWhenPageIsHidden&&le?r():i(),e(()=>{clearTimeout(t)})}),h(()=>{if(j.value){let e=j.value.getBoundingClientRect().height;k.value=e;let t=[{toastId:l.toast.id,height:e,position:l.toast.position||`top-right`},...l.heights];d(`update:heights`,t)}y.value=!0}),g(()=>{if(j.value){let e=l.heights.filter(e=>e.toastId!==l.toast.id);d(`update:heights`,e)}}),(e,n)=>(_(),a(`li`,{ref_key:`toastRef`,ref:j,"aria-live":e.toast.important?`assertive`:`polite`,"aria-atomic":`true`,role:`status`,tabindex:`0`,"data-sonner-toast":`true`,class:f(I.value),"data-rich-colors":e.toast.richColors??e.defaultRichColors,"data-styled":!(e.toast.component||e.toast?.unstyled||e.unstyled),"data-mounted":y.value,"data-promise":!!e.toast.promise,"data-removed":w.value,"data-visible":N.value,"data-y-position":q.value,"data-x-position":J.value,"data-index":e.index,"data-front":M.value,"data-swiping":T.value,"data-dismissible":F.value,"data-type":P.value,"data-invert":ue.value,"data-swipe-out":D.value,"data-expanded":!!(e.expanded||e.expandByDefault&&y.value),style:m({"--index":e.index,"--toasts-before":e.index,"--z-index":e.toasts.length-e.index,"--offset":`${w.value?O.value:U.value}px`,"--initial-height":e.expandByDefault?`auto`:`${k.value}px`,...e.style,...C(R)}),onPointerdown:fe,onPointerup:pe,onPointermove:me},[ee.value&&!e.toast.component?(_(),a(`button`,{key:0,"aria-label":e.closeButtonAriaLabel||`Close toast`,"data-disabled":Q.value,"data-close-button":`true`,class:f(e.cn(e.classes?.closeButton,e.toast?.classes?.closeButton)),onClick:de},[e.icons?.close?(_(),r(x(e.icons?.close),{key:0})):b(e.$slots,`close-icon`,{key:1})],10,re)):i(``,!0),e.toast.component?(_(),r(x(e.toast.component),u({key:1},e.toast.componentProps,{"on-close-toast":$}),null,16)):(_(),a(t,{key:2},[P.value!==`default`||e.toast.icon||e.toast.promise?(_(),a(`div`,ie,[(e.toast.promise||P.value===`loading`)&&!e.toast.icon?b(e.$slots,`loading-icon`,{key:0}):i(``,!0),e.toast.icon?(_(),r(x(e.toast.icon),{key:1})):(_(),a(t,{key:2},[P.value===`success`?b(e.$slots,`success-icon`,{key:0}):P.value===`error`?b(e.$slots,`error-icon`,{key:1}):P.value===`warning`?b(e.$slots,`warning-icon`,{key:2}):P.value===`info`?b(e.$slots,`info-icon`,{key:3}):i(``,!0)],64))])):i(``,!0),o(`div`,ae,[o(`div`,{"data-title":``,class:f(e.cn(e.classes?.title,e.toast.classes?.title))},[Y.value?(_(),r(x(e.toast.title),p(u({key:0},e.toast.componentProps)),null,16)):(_(),a(t,{key:1},[s(S(e.toast.title),1)],64))],2),e.toast.description?(_(),a(`div`,{key:0,"data-description":``,class:f(e.cn(e.descriptionClass,L.value,e.classes?.description,e.toast.classes?.description))},[X.value?(_(),r(x(e.toast.description),p(u({key:0},e.toast.componentProps)),null,16)):(_(),a(t,{key:1},[s(S(e.toast.description),1)],64))],2)):i(``,!0)]),e.toast.cancel?(_(),a(`button`,{key:1,style:m(e.toast.cancelButtonStyle||e.cancelButtonStyle),class:f(e.cn(e.classes?.cancelButton,e.toast.classes?.cancelButton)),"data-button":``,"data-cancel":``,onClick:n[0]||=t=>{C(B)(e.toast.cancel)&&F.value&&(e.toast.cancel?.onClick?.(t),$())}},S(C(B)(e.toast.cancel)?e.toast.cancel?.label:e.toast.cancel),7)):i(``,!0),e.toast.action?(_(),a(`button`,{key:2,style:m(e.toast.actionButtonStyle||e.actionButtonStyle),class:f(e.cn(e.classes?.actionButton,e.toast.classes?.actionButton)),"data-button":``,"data-action":``,onClick:n[1]||=t=>{C(B)(e.toast.action)&&(t.defaultPrevented||(e.toast.action?.onClick?.(t),$()))}},S(C(B)(e.toast.action)?e.toast.action?.label:e.toast.action),7)):i(``,!0)],64))],46,ne))}}),H=V;const U=[`aria-label`],W=[`dir`,`data-theme`,`data-rich-colors`,`data-y-position`,`data-x-position`],G=3,K=`32px`,q=356,J=14;function Y(...e){return e.filter(Boolean).join(` `)}var X=l({name:`Toaster`,inheritAttrs:!1,__name:`Toaster`,props:{invert:{type:Boolean,default:!1},theme:{default:`light`},position:{default:`bottom-right`},hotkey:{default:()=>[`altKey`,`KeyT`]},richColors:{type:Boolean,default:!1},expand:{type:Boolean,default:!1},duration:{},gap:{default:J},visibleToasts:{default:G},closeButton:{type:Boolean,default:!1},toastOptions:{default:()=>({})},class:{default:``},style:{default:()=>({})},offset:{default:K},dir:{default:`auto`},icons:{},containerAriaLabel:{default:`Notifications`},pauseWhenPageIsHidden:{type:Boolean,default:!1},cn:{type:Function,default:Y}},setup(e){let i=e,s=typeof window<`u`&&typeof document<`u`;function l(){if(typeof window>`u`||typeof document>`u`)return`ltr`;let e=document.documentElement.getAttribute(`dir`);return e===`auto`||!e?window.getComputedStyle(document.documentElement).direction:e}let p=w(),h=v([]),g=n(()=>{let e=h.value.filter(e=>e.position).map(e=>e.position);return e.length>0?Array.from(new Set([i.position].concat(e))):[i.position]}),x=v([]),S=v(!1),O=v(!1),k=v(i.theme===`system`?typeof window<`u`&&window.matchMedia&&window.matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`:i.theme),j=v(null),M=v(null),N=v(!1),P=i.hotkey.join(`+`).replace(/Key/g,``).replace(/Digit/g,``);function F(e){h.value.find(t=>t.id===e.id)?.delete||A.dismiss(e.id),h.value=h.value.filter(({id:t})=>t!==e.id)}function I(e){N.value&&!e.currentTarget?.contains?.(e.relatedTarget)&&(N.value=!1,M.value&&(M.value.focus({preventScroll:!0}),M.value=null))}function L(e){let t=e.target instanceof HTMLElement&&e.target.dataset.dismissible===`false`;t||N.value||(N.value=!0,M.value=e.relatedTarget)}function R(e){if(e.target){let t=e.target instanceof HTMLElement&&e.target.dataset.dismissible===`false`;if(t)return}O.value=!1}return E(e=>{let t=A.subscribe(e=>{if(e.dismiss){h.value=h.value.map(t=>t.id===e.id?{...t,delete:!0}:t);return}d(()=>{let t=h.value.findIndex(t=>t.id===e.id);t===-1?h.value=[e,...h.value]:h.value=[...h.value.slice(0,t),{...h.value[t],...e},...h.value.slice(t+1)]})});e(()=>{t()})}),T(()=>i.theme,e=>{if(e!==`system`){k.value=e;return}e===`system`&&(window.matchMedia&&window.matchMedia(`(prefers-color-scheme: dark)`).matches?k.value=`dark`:k.value=`light`),!(typeof window>`u`)&&window.matchMedia(`(prefers-color-scheme: dark)`).addEventListener(`change`,({matches:e})=>{e?k.value=`dark`:k.value=`light`})}),T(()=>j.value,()=>{if(j.value)return()=>{M.value&&(M.value.focus({preventScroll:!0}),M.value=null,N.value=!1)}}),E(()=>{h.value.length<=1&&(S.value=!1)}),E(e=>{function t(e){let t=i.hotkey.every(t=>e[t]||e.code===t),n=Array.isArray(j.value)?j.value[0]:j.value;t&&(S.value=!0,n?.focus());let r=document.activeElement===j.value||n?.contains(document.activeElement);e.code===`Escape`&&r&&(S.value=!1)}s&&(document.addEventListener(`keydown`,t),e(()=>{document.removeEventListener(`keydown`,t)}))}),(e,n)=>(_(),a(`section`,{"aria-label":`${e.containerAriaLabel} ${C(P)}`,tabIndex:-1},[(_(!0),a(t,null,y(g.value,(s,d)=>(_(),a(`ol`,u({key:s,ref_for:!0,ref_key:`listRef`,ref:j,"data-sonner-toaster":``,class:i.class,dir:e.dir===`auto`?l():e.dir,tabIndex:-1,"data-theme":e.theme,"data-rich-colors":e.richColors,"data-y-position":s.split(`-`)[0],"data-x-position":s.split(`-`)[1],style:{"--front-toast-height":`${x.value[0]?.height}px`,"--offset":typeof e.offset==`number`?`${e.offset}px`:e.offset||K,"--width":`${q}px`,"--gap":`${e.gap}px`,...e.style,...C(p).style}},{ref_for:!0},e.$attrs,{onBlur:I,onFocus:L,onMouseenter:n[1]||=()=>S.value=!0,onMousemove:n[2]||=()=>S.value=!0,onMouseleave:n[3]||=()=>{O.value||(S.value=!1)},onPointerdown:R,onPointerup:n[4]||=()=>O.value=!1}),[(_(!0),a(t,null,y(h.value.filter(e=>!e.position&&d===0||e.position===s),(t,i)=>(_(),r(H,{key:t.id,heights:x.value.filter(e=>e.position===t.position),icons:e.icons,index:i,toast:t,"default-rich-colors":e.richColors,duration:e.toastOptions?.duration??e.duration,class:f(e.toastOptions?.class??``),"description-class":e.toastOptions?.descriptionClass,invert:e.invert,"visible-toasts":e.visibleToasts,"close-button":e.toastOptions?.closeButton??e.closeButton,interacting:O.value,position:s,style:m(e.toastOptions?.style),unstyled:e.toastOptions?.unstyled,classes:e.toastOptions?.classes,"cancel-button-style":e.toastOptions?.cancelButtonStyle,"action-button-style":e.toastOptions?.actionButtonStyle,toasts:h.value.filter(e=>e.position===t.position),"expand-by-default":e.expand,gap:e.gap,expanded:S.value,"pause-when-page-is-hidden":e.pauseWhenPageIsHidden,cn:e.cn,"onUpdate:heights":n[0]||=e=>{x.value=e},onRemoveToast:F},{"close-icon":D(()=>[b(e.$slots,`close-icon`,{},()=>[n[5]||=o(`div`,{class:`i-ic:outline-close h-5 w-5`},null,-1)])]),"loading-icon":D(()=>[b(e.$slots,`loading-icon`,{},()=>[c(ee,{visible:t.type===`loading`},null,8,[`visible`])])]),"success-icon":D(()=>[b(e.$slots,`success-icon`,{},()=>[n[6]||=o(`div`,{class:`i-ic:baseline-check-circle h-5 w-5`},null,-1)])]),"error-icon":D(()=>[b(e.$slots,`error-icon`,{},()=>[n[7]||=o(`div`,{class:`i-ic:baseline-error h-5 w-5`},null,-1)])]),"warning-icon":D(()=>[b(e.$slots,`warning-icon`,{},()=>[n[8]||=o(`div`,{class:`i-ic:baseline-warning h-5 w-5`},null,-1)])]),"info-icon":D(()=>[b(e.$slots,`info-icon`,{},()=>[n[9]||=o(`div`,{class:`i-ic:baseline-info h-5 w-5`},null,-1)])]),_:2},1032,[`heights`,`icons`,`index`,`toast`,`default-rich-colors`,`duration`,`class`,`description-class`,`invert`,`visible-toasts`,`close-button`,`interacting`,`position`,`style`,`unstyled`,`classes`,`cancel-button-style`,`action-button-style`,`toasts`,`expand-by-default`,`gap`,`expanded`,`pause-when-page-is-hidden`,`cn`]))),128))],16,W))),128))],8,U))}}),Z=X;function le(){let e=v([]);return E(t=>{let n=A.subscribe(t=>{if(`dismiss`in t&&t.dismiss)return e.value.filter(e=>e.id!==t.id);let n=e.value.findIndex(e=>e.id===t.id);if(n!==-1){let r=[...e.value];r[n]={...r[n],...t},e.value=r}else e.value=[t,...e.value]});t(()=>{n()})}),{activeToasts:e}}const ue={install(e){e.component(`Notification`,Z)}};var Q=ue;export{Z as Notification,Z as Toaster,Q as default,F as notification,I as toast,le as useNotification};
+function e(e) {
+	if (!e || typeof document > "u") return;
+	let t = document.head || document.getElementsByTagName("head")[0], n = document.createElement("style");
+	n.type = "text/css", t.appendChild(n), n.styleSheet ? n.styleSheet.cssText = e : n.appendChild(document.createTextNode(e));
+}
+e(":where([data-sonner-toaster][dir=ltr]),:where(html[dir=ltr]){--toast-icon-margin-start:-3px;--toast-icon-margin-end:4px;--toast-svg-margin-start:-1px;--toast-svg-margin-end:0px;--toast-button-margin-start:auto;--toast-button-margin-end:0;--toast-close-button-start:0;--toast-close-button-end:unset;--toast-close-button-transform:translate(-35%, -35%)}:where([data-sonner-toaster][dir=rtl]),:where(html[dir=rtl]){--toast-icon-margin-start:4px;--toast-icon-margin-end:-3px;--toast-svg-margin-start:0px;--toast-svg-margin-end:-1px;--toast-button-margin-start:0;--toast-button-margin-end:auto;--toast-close-button-start:unset;--toast-close-button-end:0;--toast-close-button-transform:translate(35%, -35%)}:where([data-sonner-toaster]){position:fixed;width:var(--width);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;--gray1:hsl(0, 0%, 99%);--gray2:hsl(0, 0%, 97.3%);--gray3:hsl(0, 0%, 95.1%);--gray4:hsl(0, 0%, 93%);--gray5:hsl(0, 0%, 90.9%);--gray6:hsl(0, 0%, 88.7%);--gray7:hsl(0, 0%, 85.8%);--gray8:hsl(0, 0%, 78%);--gray9:hsl(0, 0%, 56.1%);--gray10:hsl(0, 0%, 52.3%);--gray11:hsl(0, 0%, 43.5%);--gray12:hsl(0, 0%, 9%);--border-radius:8px;box-sizing:border-box;padding:0;margin:0;list-style:none;outline:0;z-index:999999999}:where([data-sonner-toaster][data-x-position=right]){right:max(var(--offset),env(safe-area-inset-right))}:where([data-sonner-toaster][data-x-position=left]){left:max(var(--offset),env(safe-area-inset-left))}:where([data-sonner-toaster][data-x-position=center]){left:50%;transform:translateX(-50%)}:where([data-sonner-toaster][data-y-position=top]){top:max(var(--offset),env(safe-area-inset-top))}:where([data-sonner-toaster][data-y-position=bottom]){bottom:max(var(--offset),env(safe-area-inset-bottom))}:where([data-sonner-toast]){--y:translateY(100%);--lift-amount:calc(var(--lift) * var(--gap));z-index:var(--z-index);position:absolute;opacity:0;transform:var(--y);filter:blur(0);touch-action:none;transition:transform .4s,opacity .4s,height .4s,box-shadow .2s;box-sizing:border-box;outline:0;overflow-wrap:anywhere}:where([data-sonner-toast][data-styled=true]){padding:16px;background:var(--normal-bg);border:1px solid var(--normal-border);color:var(--normal-text);border-radius:var(--border-radius);box-shadow:0 4px 12px rgba(0,0,0,.1);width:var(--width);font-size:13px;display:flex;align-items:center;gap:6px}:where([data-sonner-toast]:focus-visible){box-shadow:0 4px 12px rgba(0,0,0,.1),0 0 0 2px rgba(0,0,0,.2)}:where([data-sonner-toast][data-y-position=top]){top:0;--y:translateY(-100%);--lift:1;--lift-amount:calc(1 * var(--gap))}:where([data-sonner-toast][data-y-position=bottom]){bottom:0;--y:translateY(100%);--lift:-1;--lift-amount:calc(var(--lift) * var(--gap))}:where([data-sonner-toast]) :where([data-description]){font-weight:400;line-height:1.4;color:inherit}:where([data-sonner-toast]) :where([data-title]){font-weight:500;line-height:1.5;color:inherit}:where([data-sonner-toast]) :where([data-icon]){display:flex;height:16px;width:16px;position:relative;justify-content:flex-start;align-items:center;flex-shrink:0;margin-left:var(--toast-icon-margin-start);margin-right:var(--toast-icon-margin-end)}:where([data-sonner-toast][data-promise=true]) :where([data-icon])>svg{opacity:0;transform:scale(.8);transform-origin:center;animation:sonner-fade-in .3s ease forwards}:where([data-sonner-toast]) :where([data-icon])>*{flex-shrink:0}:where([data-sonner-toast]) :where([data-icon]) svg{margin-left:var(--toast-svg-margin-start);margin-right:var(--toast-svg-margin-end)}:where([data-sonner-toast]) :where([data-content]){display:flex;flex-direction:column;gap:2px}[data-sonner-toast][data-styled=true] [data-button]{border-radius:4px;padding-left:8px;padding-right:8px;height:24px;font-size:12px;color:var(--normal-bg);background:var(--normal-text);margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end);border:none;cursor:pointer;outline:0;display:flex;align-items:center;flex-shrink:0;transition:opacity .4s,box-shadow .2s}:where([data-sonner-toast]) :where([data-button]):focus-visible{box-shadow:0 0 0 2px rgba(0,0,0,.4)}:where([data-sonner-toast]) :where([data-button]):first-of-type{margin-left:var(--toast-button-margin-start);margin-right:var(--toast-button-margin-end)}:where([data-sonner-toast]) :where([data-cancel]){color:var(--normal-text);background:rgba(0,0,0,.08)}:where([data-sonner-toast][data-theme=dark]) :where([data-cancel]){background:rgba(255,255,255,.3)}[data-sonner-toast] [data-close-button]{position:absolute;left:var(--toast-close-button-start);right:var(--toast-close-button-end);top:0;height:20px;width:20px;display:flex;justify-content:center;align-items:center;padding:0;background:var(--normal-bg);color:var(--normal-text);border:1px solid var(--normal-border);transform:var(--toast-close-button-transform);border-radius:50%;cursor:pointer;z-index:1;transition:opacity .1s,background .2s,border-color .2s}[data-sonner-toast] [data-close-button]:focus-visible{box-shadow:0 4px 12px rgba(0,0,0,.1),0 0 0 2px rgba(0,0,0,.2)}:where([data-sonner-toast]) :where([data-disabled=true]){cursor:not-allowed}[data-sonner-toast]:hover [data-close-button]:hover{background:var(--gray2);border-color:var(--gray5)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast]:hover [data-close-button]:hover{background:#000;border-color:#4c4c4c}:where([data-sonner-toast][data-swiping=true])::before{content:'';position:absolute;left:0;right:0;height:100%;z-index:-1}:where(\n[data-sonner-toast][data-y-position=top][data-swiping=true]\n)::before{bottom:50%;transform:scaleY(3) translateY(50%)}:where(\n[data-sonner-toast][data-y-position=bottom][data-swiping=true]\n)::before{top:50%;transform:scaleY(3) translateY(-50%)}:where([data-sonner-toast][data-swiping=false][data-removed=true])::before{content:'';position:absolute;inset:0;transform:scaleY(2)}:where([data-sonner-toast])::after{content:'';position:absolute;left:0;height:calc(var(--gap) + 1px);bottom:100%;width:100%}:where([data-sonner-toast][data-mounted=true]){--y:translateY(0);opacity:1}:where([data-sonner-toast][data-expanded=false][data-front=false]){--scale:var(--toasts-before) * 0.05 + 1;--y:translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));height:var(--front-toast-height)}:where([data-sonner-toast])>*{transition:opacity .4s}:where(\n[data-sonner-toast][data-expanded=false][data-front=false][data-styled=true]\n)>*{opacity:0}:where([data-sonner-toast][data-visible=false]){opacity:0;pointer-events:none}:where([data-sonner-toast][data-mounted=true][data-expanded=true]){--y:translateY(calc(var(--lift) * var(--offset)));height:var(--initial-height)}:where(\n[data-sonner-toast][data-removed=true][data-front=true][data-swipe-out=false]\n){--y:translateY(calc(var(--lift) * -100%));opacity:0}:where(\n[data-sonner-toast][data-removed=true][data-front=false][data-swipe-out=false][data-expanded=true]\n){--y:translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));opacity:0}:where(\n[data-sonner-toast][data-removed=true][data-front=false][data-swipe-out=false][data-expanded=false]\n){--y:translateY(40%);opacity:0;transition:transform .5s,opacity .2s}:where([data-sonner-toast][data-removed=true][data-front=false])::before{height:calc(var(--initial-height) + 20%)}[data-sonner-toast][data-swiping=true]{transform:var(--y) translateY(var(--swipe-amount,0));transition:none}[data-sonner-toast][data-swipe-out=true][data-y-position=bottom],[data-sonner-toast][data-swipe-out=true][data-y-position=top]{animation:swipe-out .2s ease-out forwards}@keyframes swipe-out{from{transform:translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount)));opacity:1}to{transform:translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount) + var(--lift) * -100%));opacity:0}}@media (max-width:600px){[data-sonner-toaster]{position:fixed;--mobile-offset:16px;right:var(--mobile-offset);left:var(--mobile-offset);width:100%}[data-sonner-toaster][dir=rtl]{left:calc(var(--mobile-offset) * -1)}[data-sonner-toaster] [data-sonner-toast]{left:0;right:0;width:calc(100% - var(--mobile-offset) * 2)}[data-sonner-toaster][data-x-position=left]{left:var(--mobile-offset)}[data-sonner-toaster][data-y-position=bottom]{bottom:20px}[data-sonner-toaster][data-y-position=top]{top:20px}[data-sonner-toaster][data-x-position=center]{left:var(--mobile-offset);right:var(--mobile-offset);transform:none}}[data-sonner-toaster][data-theme=light]{--normal-bg:#fff;--normal-border:var(--gray4);--normal-text:var(--gray12);--success-bg:hsl(143, 85%, 96%);--success-border:hsl(145, 92%, 91%);--success-text:hsl(140, 100%, 27%);--info-bg:hsl(208, 100%, 97%);--info-border:hsl(221, 91%, 91%);--info-text:hsl(210, 92%, 45%);--warning-bg:hsl(49, 100%, 97%);--warning-border:hsl(49, 91%, 91%);--warning-text:hsl(31, 92%, 45%);--error-bg:hsl(359, 100%, 97%);--error-border:hsl(359, 100%, 94%);--error-text:hsl(360, 100%, 45%)}[data-sonner-toaster][data-theme=light] [data-sonner-toast][data-invert=true]{--normal-bg:#000;--normal-border:hsl(0, 0%, 20%);--normal-text:var(--gray1)}[data-sonner-toaster][data-theme=dark] [data-sonner-toast][data-invert=true]{--normal-bg:#fff;--normal-border:var(--gray3);--normal-text:var(--gray12)}[data-sonner-toaster][data-theme=dark]{--normal-bg:#000;--normal-border:hsl(0, 0%, 20%);--normal-text:var(--gray1);--success-bg:hsl(150, 100%, 6%);--success-border:hsl(147, 100%, 12%);--success-text:hsl(150, 86%, 65%);--info-bg:hsl(215, 100%, 6%);--info-border:hsl(223, 100%, 12%);--info-text:hsl(216, 87%, 65%);--warning-bg:hsl(64, 100%, 6%);--warning-border:hsl(60, 100%, 12%);--warning-text:hsl(46, 87%, 65%);--error-bg:hsl(358, 76%, 10%);--error-border:hsl(357, 89%, 16%);--error-text:hsl(358, 100%, 81%)}[data-rich-colors=true][data-sonner-toast][data-type=success]{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text)}[data-rich-colors=true][data-sonner-toast][data-type=success] [data-close-button]{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text)}[data-rich-colors=true][data-sonner-toast][data-type=info]{background:var(--info-bg);border-color:var(--info-border);color:var(--info-text)}[data-rich-colors=true][data-sonner-toast][data-type=info] [data-close-button]{background:var(--info-bg);border-color:var(--info-border);color:var(--info-text)}[data-rich-colors=true][data-sonner-toast][data-type=warning]{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-text)}[data-rich-colors=true][data-sonner-toast][data-type=warning] [data-close-button]{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-text)}[data-rich-colors=true][data-sonner-toast][data-type=error]{background:var(--error-bg);border-color:var(--error-border);color:var(--error-text)}[data-rich-colors=true][data-sonner-toast][data-type=error] [data-close-button]{background:var(--error-bg);border-color:var(--error-border);color:var(--error-text)}.sonner-loading-wrapper{--size:16px;height:var(--size);width:var(--size);position:absolute;inset:0;z-index:10}.sonner-loading-wrapper[data-visible=false]{transform-origin:center;animation:sonner-fade-out .2s ease forwards}.sonner-spinner{position:relative;top:50%;left:50%;height:var(--size);width:var(--size)}.sonner-loading-bar{animation:sonner-spin 1.2s linear infinite;background:var(--gray11);border-radius:6px;height:8%;left:-10%;position:absolute;top:-3.9%;width:24%}.sonner-loading-bar:first-child{animation-delay:-1.2s;transform:rotate(.0001deg) translate(146%)}.sonner-loading-bar:nth-child(2){animation-delay:-1.1s;transform:rotate(30deg) translate(146%)}.sonner-loading-bar:nth-child(3){animation-delay:-1s;transform:rotate(60deg) translate(146%)}.sonner-loading-bar:nth-child(4){animation-delay:-.9s;transform:rotate(90deg) translate(146%)}.sonner-loading-bar:nth-child(5){animation-delay:-.8s;transform:rotate(120deg) translate(146%)}.sonner-loading-bar:nth-child(6){animation-delay:-.7s;transform:rotate(150deg) translate(146%)}.sonner-loading-bar:nth-child(7){animation-delay:-.6s;transform:rotate(180deg) translate(146%)}.sonner-loading-bar:nth-child(8){animation-delay:-.5s;transform:rotate(210deg) translate(146%)}.sonner-loading-bar:nth-child(9){animation-delay:-.4s;transform:rotate(240deg) translate(146%)}.sonner-loading-bar:nth-child(10){animation-delay:-.3s;transform:rotate(270deg) translate(146%)}.sonner-loading-bar:nth-child(11){animation-delay:-.2s;transform:rotate(300deg) translate(146%)}.sonner-loading-bar:nth-child(12){animation-delay:-.1s;transform:rotate(330deg) translate(146%)}@keyframes sonner-fade-in{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}@keyframes sonner-fade-out{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.8)}}@keyframes sonner-spin{0%{opacity:1}100%{opacity:.15}}@media (prefers-reduced-motion){.sonner-loading-bar,[data-sonner-toast],[data-sonner-toast]>*{transition:none!important;animation:none!important}}.sonner-loader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transform-origin:center;transition:opacity .2s,transform .2s}.sonner-loader[data-visible=false]{opacity:0;transform:scale(.8) translate(-50%,-50%)}");
+import { Fragment as t, computed as n, createBlock as r, createCommentVNode as i, createElementBlock as a, createElementVNode as o, createTextVNode as s, createVNode as c, defineComponent as l, mergeProps as u, nextTick as d, normalizeClass as f, normalizeProps as p, normalizeStyle as m, onMounted as h, onUnmounted as g, openBlock as _, ref as v, renderList as y, renderSlot as b, resolveDynamicComponent as x, toDisplayString as S, unref as C, useAttrs as w, watch as T, watchEffect as E, withCtx as D } from "vue";
+let O = 0;
+var k = class {
+	subscribers;
+	toasts;
+	constructor() {
+		this.subscribers = [], this.toasts = [];
+	}
+	subscribe = (e) => (this.subscribers.push(e), () => {
+		let t = this.subscribers.indexOf(e);
+		this.subscribers.splice(t, 1);
+	});
+	publish = (e) => {
+		this.subscribers.forEach((t) => t(e));
+	};
+	addToast = (e) => {
+		this.publish(e), this.toasts = [...this.toasts, e];
+	};
+	create = (e) => {
+		let { message: t,...n } = e, r = typeof e.id == "number" || e.id && e.id?.length > 0 ? e.id : O++, i = this.toasts.find((e) => e.id === r), a = e.dismissible === void 0 ? !0 : e.dismissible;
+		return i ? this.toasts = this.toasts.map((n) => n.id === r ? (this.publish({
+			...n,
+			...e,
+			id: r,
+			title: t
+		}), {
+			...n,
+			...e,
+			id: r,
+			dismissible: a,
+			title: t
+		}) : n) : this.addToast({
+			title: t,
+			...n,
+			dismissible: a,
+			id: r
+		}), r;
+	};
+	dismiss = (e) => (e || this.toasts.forEach((e) => {
+		this.subscribers.forEach((t) => t({
+			id: e.id,
+			dismiss: !0
+		}));
+	}), this.subscribers.forEach((t) => t({
+		id: e,
+		dismiss: !0
+	})), e);
+	message = (e, t) => this.create({
+		...t,
+		message: e,
+		type: "default"
+	});
+	error = (e, t) => this.create({
+		...t,
+		type: "error",
+		message: e
+	});
+	success = (e, t) => this.create({
+		...t,
+		type: "success",
+		message: e
+	});
+	info = (e, t) => this.create({
+		...t,
+		type: "info",
+		message: e
+	});
+	warning = (e, t) => this.create({
+		...t,
+		type: "warning",
+		message: e
+	});
+	loading = (e, t) => this.create({
+		...t,
+		type: "loading",
+		message: e
+	});
+	promise = (e, t) => {
+		if (!t) return;
+		let n;
+		t.loading !== void 0 && (n = this.create({
+			...t,
+			promise: e,
+			type: "loading",
+			message: t.loading,
+			description: typeof t.description == "function" ? void 0 : t.description
+		}));
+		let r = e instanceof Promise ? e : e(), i = n !== void 0, a, o = r.then(async (e) => {
+			if (a = ["resolve", e], M(e) && !e.ok) {
+				i = !1;
+				let r = typeof t.error == "function" ? await t.error(`HTTP error! status: ${e.status}`) : t.error, a = typeof t.description == "function" ? await t.description(`HTTP error! status: ${e.status}`) : t.description;
+				this.create({
+					id: n,
+					type: "error",
+					message: r,
+					description: a
+				});
+			} else if (t.success !== void 0) {
+				i = !1;
+				let r = typeof t.success == "function" ? await t.success(e) : t.success, a = typeof t.description == "function" ? await t.description(e) : t.description;
+				this.create({
+					id: n,
+					type: "success",
+					message: r,
+					description: a
+				});
+			}
+		}).catch(async (e) => {
+			if (a = ["reject", e], t.error !== void 0) {
+				i = !1;
+				let r = typeof t.error == "function" ? await t.error(e) : t.error, a = typeof t.description == "function" ? await t.description(e) : t.description;
+				this.create({
+					id: n,
+					type: "error",
+					message: r,
+					description: a
+				});
+			}
+		}).finally(() => {
+			i && (this.dismiss(n), n = void 0), t.finally?.();
+		}), s = () => new Promise((e, t) => o.then(() => a[0] === "reject" ? t(a[1]) : e(a[1])).catch(t));
+		return typeof n != "string" && typeof n != "number" ? { unwrap: s } : Object.assign(n, { unwrap: s });
+	};
+	custom = (e, t) => {
+		let n = t?.id || O++;
+		return this.publish({
+			component: e,
+			id: n,
+			...t
+		}), n;
+	};
+};
+const A = new k();
+function j(e, t) {
+	let n = t?.id || O++;
+	return A.create({
+		message: e,
+		id: n,
+		type: "default",
+		...t
+	}), n;
+}
+function M(e) {
+	return e && typeof e == "object" && "ok" in e && typeof e.ok == "boolean" && "status" in e && typeof e.status == "number";
+}
+const N = j, P = () => A.toasts, F = Object.assign(N, {
+	success: A.success,
+	info: A.info,
+	warning: A.warning,
+	error: A.error,
+	custom: A.custom,
+	message: A.message,
+	promise: A.promise,
+	dismiss: A.dismiss,
+	loading: A.loading
+}, { getHistory: P }), I = F, L = ["data-visible"], R = { class: "sonner-spinner" };
+var z = /* @__PURE__ */ l({
+	__name: "Loader",
+	props: { visible: { type: Boolean } },
+	setup(e) {
+		let n = Array.from({ length: 12 }).fill(0);
+		return (e, r) => (_(), a("div", {
+			class: "sonner-loading-wrapper",
+			"data-visible": e.visible
+		}, [o("div", R, [(_(!0), a(t, null, y(C(n), (e) => (_(), a("div", {
+			key: `spinner-bar-${e}`,
+			class: "sonner-loading-bar"
+		}))), 128))])], 8, L));
+	}
+}), ee = z;
+function te() {
+	let e = v(!1);
+	return E(() => {
+		let t = () => {
+			e.value = document.hidden;
+		};
+		return document.addEventListener("visibilitychange", t), () => window.removeEventListener("visibilitychange", t);
+	}), { isDocumentHidden: e };
+}
+function B(e) {
+	return e.label !== void 0;
+}
+const ne = [
+	"aria-live",
+	"data-rich-colors",
+	"data-styled",
+	"data-mounted",
+	"data-promise",
+	"data-removed",
+	"data-visible",
+	"data-y-position",
+	"data-x-position",
+	"data-index",
+	"data-front",
+	"data-swiping",
+	"data-dismissible",
+	"data-type",
+	"data-invert",
+	"data-swipe-out",
+	"data-expanded"
+], re = ["aria-label", "data-disabled"], ie = {
+	key: 0,
+	"data-icon": ""
+}, ae = { "data-content": "" };
+var V = /* @__PURE__ */ l({
+	__name: "Toast",
+	props: {
+		toast: {},
+		toasts: {},
+		index: {},
+		expanded: { type: Boolean },
+		invert: { type: Boolean },
+		heights: {},
+		gap: {},
+		position: {},
+		visibleToasts: {},
+		expandByDefault: { type: Boolean },
+		closeButton: { type: Boolean },
+		interacting: { type: Boolean },
+		style: {},
+		cancelButtonStyle: {},
+		actionButtonStyle: {},
+		duration: {},
+		class: {},
+		unstyled: { type: Boolean },
+		descriptionClass: {},
+		loadingIcon: {},
+		classes: {},
+		icons: {},
+		closeButtonAriaLabel: {},
+		pauseWhenPageIsHidden: { type: Boolean },
+		cn: { type: Function },
+		defaultRichColors: { type: Boolean }
+	},
+	emits: ["update:heights", "removeToast"],
+	setup(e, { emit: c }) {
+		let l = e, d = c, y = v(!1), w = v(!1), T = v(!1), D = v(!1), O = v(0), k = v(0), A = v(null), j = v(null), M = n(() => l.index === 0), N = n(() => l.index + 1 <= l.visibleToasts), P = n(() => l.toast.type), F = n(() => l.toast.dismissible !== !1), I = n(() => l.toast.class || ""), L = n(() => l.descriptionClass || ""), R = l.toast.style || {}, z = n(() => l.heights.findIndex((e) => e.toastId === l.toast.id) || 0), ee = n(() => l.toast.closeButton ?? l.closeButton), V = n(() => l.toast.duration || l.duration || 4e3), H = v(0), U = v(0), W = v(0), G = v(null), K = n(() => l.position.split("-")), q = n(() => K.value[0]), J = n(() => K.value[1]), Y = n(() => typeof l.toast.title != "string"), X = n(() => typeof l.toast.description != "string"), Z = n(() => l.heights.reduce((e, t, n) => n >= z.value ? e : e + t.height, 0)), oe = te(), se = n(() => l.toast.invert || l.invert), Q = n(() => P.value === "loading");
+		h(() => {
+			if (!y.value) return;
+			let e = j.value, t = e?.style.height, n = 0;
+			e && (e.style.height = "auto", n = e.getBoundingClientRect().height, e.style.height = t || ""), k.value = n;
+			let r, i = l.heights.find((e) => e.toastId === l.toast.id);
+			r = i ? l.heights.map((e) => e.toastId === l.toast.id ? {
+				...e,
+				height: n
+			} : e) : [{
+				toastId: l.toast.id,
+				height: n,
+				position: l.toast.position
+			}, ...l.heights], d("update:heights", r);
+		});
+		function $() {
+			w.value = !0, O.value = U.value;
+			let e = l.heights.filter((e) => e.toastId !== l.toast.id);
+			d("update:heights", e), setTimeout(() => {
+				d("removeToast", l.toast);
+			}, 200);
+		}
+		function ce() {
+			Q.value || !F.value || ($(), l.toast.onDismiss?.(l.toast));
+		}
+		function le(e) {
+			Q.value || !F.value || (A.value = /* @__PURE__ */ new Date(), O.value = U.value, e.target.setPointerCapture(e.pointerId), e.target.tagName !== "BUTTON" && (T.value = !0, G.value = {
+				x: e.clientX,
+				y: e.clientY
+			}));
+		}
+		function ue() {
+			if (D.value) return;
+			G.value = null;
+			let e = Number(j.value?.style.getPropertyValue("--swipe-amount").replace("px", "") || 0), t = (/* @__PURE__ */ new Date()).getTime() - (A.value?.getTime() || 0), n = Math.abs(e) / t;
+			if (Math.abs(e) >= 20 || n > .11) {
+				O.value = U.value, l.toast.onDismiss?.(l.toast), $(), D.value = !0;
+				return;
+			}
+			j.value?.style.setProperty("--swipe-amount", "0px"), T.value = !1;
+		}
+		function de(e) {
+			if (!G.value || !F.value) return;
+			let t = e.clientY - G.value.y, n = e.clientX - G.value.x, r = K.value[0] === "top" ? Math.min : Math.max, i = r(0, t), a = e.pointerType === "touch" ? 10 : 2, o = Math.abs(i) > a;
+			o ? j.value?.style.setProperty("--swipe-amount", `${t}px`) : Math.abs(n) > a && (G.value = null);
+		}
+		return E(() => {
+			U.value = z.value * (l?.gap || 0) + Z.value;
+		}), E((e) => {
+			if (l.toast.promise && P.value === "loading" || l.toast.duration === Infinity || l.toast.type === "loading") return;
+			let t, n = V.value, r = () => {
+				if (W.value < H.value) {
+					let e = (/* @__PURE__ */ new Date()).getTime() - H.value;
+					n -= e;
+				}
+				W.value = (/* @__PURE__ */ new Date()).getTime();
+			}, i = () => {
+				n !== Infinity && (H.value = (/* @__PURE__ */ new Date()).getTime(), t = setTimeout(() => {
+					l.toast.onAutoClose?.(l.toast), $();
+				}, n));
+			};
+			l.expanded || l.interacting || l.pauseWhenPageIsHidden && oe ? r() : i(), e(() => {
+				clearTimeout(t);
+			});
+		}), h(() => {
+			if (j.value) {
+				let e = j.value.getBoundingClientRect().height;
+				k.value = e;
+				let t = [{
+					toastId: l.toast.id,
+					height: e,
+					position: l.toast.position || "top-right"
+				}, ...l.heights];
+				d("update:heights", t);
+			}
+			y.value = !0;
+		}), g(() => {
+			if (j.value) {
+				let e = l.heights.filter((e) => e.toastId !== l.toast.id);
+				d("update:heights", e);
+			}
+		}), (e, n) => (_(), a("li", {
+			ref_key: "toastRef",
+			ref: j,
+			"aria-live": e.toast.important ? "assertive" : "polite",
+			"aria-atomic": "true",
+			role: "status",
+			tabindex: "0",
+			"data-sonner-toast": "true",
+			class: f(I.value),
+			"data-rich-colors": e.toast.richColors ?? e.defaultRichColors,
+			"data-styled": !(e.toast.component || e.toast?.unstyled || e.unstyled),
+			"data-mounted": y.value,
+			"data-promise": !!e.toast.promise,
+			"data-removed": w.value,
+			"data-visible": N.value,
+			"data-y-position": q.value,
+			"data-x-position": J.value,
+			"data-index": e.index,
+			"data-front": M.value,
+			"data-swiping": T.value,
+			"data-dismissible": F.value,
+			"data-type": P.value,
+			"data-invert": se.value,
+			"data-swipe-out": D.value,
+			"data-expanded": !!(e.expanded || e.expandByDefault && y.value),
+			style: m({
+				"--index": e.index,
+				"--toasts-before": e.index,
+				"--z-index": e.toasts.length - e.index,
+				"--offset": `${w.value ? O.value : U.value}px`,
+				"--initial-height": e.expandByDefault ? "auto" : `${k.value}px`,
+				...e.style,
+				...C(R)
+			}),
+			onPointerdown: le,
+			onPointerup: ue,
+			onPointermove: de
+		}, [ee.value && !e.toast.component ? (_(), a("button", {
+			key: 0,
+			"aria-label": e.closeButtonAriaLabel || "Close toast",
+			"data-disabled": Q.value,
+			"data-close-button": "true",
+			class: f(e.cn(e.classes?.closeButton, e.toast?.classes?.closeButton)),
+			onClick: ce
+		}, [e.icons?.close ? (_(), r(x(e.icons?.close), { key: 0 })) : b(e.$slots, "close-icon", { key: 1 })], 10, re)) : i("", !0), e.toast.component ? (_(), r(x(e.toast.component), u({ key: 1 }, e.toast.componentProps, { "on-close-toast": $ }), null, 16)) : (_(), a(t, { key: 2 }, [
+			P.value !== "default" || e.toast.icon || e.toast.promise ? (_(), a("div", ie, [(e.toast.promise || P.value === "loading") && !e.toast.icon ? b(e.$slots, "loading-icon", { key: 0 }) : i("", !0), e.toast.icon ? (_(), r(x(e.toast.icon), { key: 1 })) : (_(), a(t, { key: 2 }, [P.value === "success" ? b(e.$slots, "success-icon", { key: 0 }) : P.value === "error" ? b(e.$slots, "error-icon", { key: 1 }) : P.value === "warning" ? b(e.$slots, "warning-icon", { key: 2 }) : P.value === "info" ? b(e.$slots, "info-icon", { key: 3 }) : i("", !0)], 64))])) : i("", !0),
+			o("div", ae, [o("div", {
+				"data-title": "",
+				class: f(e.cn(e.classes?.title, e.toast.classes?.title))
+			}, [Y.value ? (_(), r(x(e.toast.title), p(u({ key: 0 }, e.toast.componentProps)), null, 16)) : (_(), a(t, { key: 1 }, [s(S(e.toast.title), 1)], 64))], 2), e.toast.description ? (_(), a("div", {
+				key: 0,
+				"data-description": "",
+				class: f(e.cn(e.descriptionClass, L.value, e.classes?.description, e.toast.classes?.description))
+			}, [X.value ? (_(), r(x(e.toast.description), p(u({ key: 0 }, e.toast.componentProps)), null, 16)) : (_(), a(t, { key: 1 }, [s(S(e.toast.description), 1)], 64))], 2)) : i("", !0)]),
+			e.toast.cancel ? (_(), a("button", {
+				key: 1,
+				style: m(e.toast.cancelButtonStyle || e.cancelButtonStyle),
+				class: f(e.cn(e.classes?.cancelButton, e.toast.classes?.cancelButton)),
+				"data-button": "",
+				"data-cancel": "",
+				onClick: n[0] ||= (t) => {
+					C(B)(e.toast.cancel) && F.value && (e.toast.cancel?.onClick?.(t), $());
+				}
+			}, S(C(B)(e.toast.cancel) ? e.toast.cancel?.label : e.toast.cancel), 7)) : i("", !0),
+			e.toast.action ? (_(), a("button", {
+				key: 2,
+				style: m(e.toast.actionButtonStyle || e.actionButtonStyle),
+				class: f(e.cn(e.classes?.actionButton, e.toast.classes?.actionButton)),
+				"data-button": "",
+				"data-action": "",
+				onClick: n[1] ||= (t) => {
+					C(B)(e.toast.action) && (t.defaultPrevented || (e.toast.action?.onClick?.(t), $()));
+				}
+			}, S(C(B)(e.toast.action) ? e.toast.action?.label : e.toast.action), 7)) : i("", !0)
+		], 64))], 46, ne));
+	}
+}), H = V;
+const U = ["aria-label"], W = [
+	"dir",
+	"data-theme",
+	"data-rich-colors",
+	"data-y-position",
+	"data-x-position"
+], G = "32px";
+function K(...e) {
+	return e.filter(Boolean).join(" ");
+}
+var q = /* @__PURE__ */ l({
+	name: "Toaster",
+	inheritAttrs: !1,
+	__name: "Toaster",
+	props: {
+		invert: {
+			type: Boolean,
+			default: !1
+		},
+		theme: { default: "light" },
+		position: { default: "bottom-right" },
+		hotkey: { default: () => ["altKey", "KeyT"] },
+		richColors: {
+			type: Boolean,
+			default: !1
+		},
+		expand: {
+			type: Boolean,
+			default: !1
+		},
+		duration: {},
+		gap: { default: 14 },
+		visibleToasts: { default: 3 },
+		closeButton: {
+			type: Boolean,
+			default: !1
+		},
+		toastOptions: { default: () => ({}) },
+		class: { default: "" },
+		style: { default: () => ({}) },
+		offset: { default: G },
+		dir: { default: "auto" },
+		icons: {},
+		containerAriaLabel: { default: "Notifications" },
+		pauseWhenPageIsHidden: {
+			type: Boolean,
+			default: !1
+		},
+		cn: {
+			type: Function,
+			default: K
+		}
+	},
+	setup(e) {
+		let i = e, s = typeof window < "u" && typeof document < "u";
+		function l() {
+			if (typeof window > "u" || typeof document > "u") return "ltr";
+			let e = document.documentElement.getAttribute("dir");
+			return e === "auto" || !e ? window.getComputedStyle(document.documentElement).direction : e;
+		}
+		let p = w(), h = v([]), g = n(() => {
+			let e = h.value.filter((e) => e.position).map((e) => e.position);
+			return e.length > 0 ? Array.from(new Set([i.position].concat(e))) : [i.position];
+		}), x = v([]), S = v(!1), O = v(!1), k = v(i.theme === "system" ? typeof window < "u" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light" : i.theme), j = v(null), M = v(null), N = v(!1), P = i.hotkey.join("+").replace(/Key/g, "").replace(/Digit/g, "");
+		function F(e) {
+			h.value.find((t) => t.id === e.id)?.delete || A.dismiss(e.id), h.value = h.value.filter(({ id: t }) => t !== e.id);
+		}
+		function I(e) {
+			N.value && !e.currentTarget?.contains?.(e.relatedTarget) && (N.value = !1, M.value && (M.value.focus({ preventScroll: !0 }), M.value = null));
+		}
+		function L(e) {
+			let t = e.target instanceof HTMLElement && e.target.dataset.dismissible === "false";
+			t || N.value || (N.value = !0, M.value = e.relatedTarget);
+		}
+		function R(e) {
+			if (e.target) {
+				let t = e.target instanceof HTMLElement && e.target.dataset.dismissible === "false";
+				if (t) return;
+			}
+			O.value = !1;
+		}
+		return E((e) => {
+			let t = A.subscribe((e) => {
+				if (e.dismiss) {
+					h.value = h.value.map((t) => t.id === e.id ? {
+						...t,
+						delete: !0
+					} : t);
+					return;
+				}
+				d(() => {
+					let t = h.value.findIndex((t) => t.id === e.id);
+					t === -1 ? h.value = [e, ...h.value] : h.value = [
+						...h.value.slice(0, t),
+						{
+							...h.value[t],
+							...e
+						},
+						...h.value.slice(t + 1)
+					];
+				});
+			});
+			e(() => {
+				t();
+			});
+		}), T(() => i.theme, (e) => {
+			if (e !== "system") {
+				k.value = e;
+				return;
+			}
+			e === "system" && (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? k.value = "dark" : k.value = "light"), !(typeof window > "u") && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches: e }) => {
+				e ? k.value = "dark" : k.value = "light";
+			});
+		}), T(() => j.value, () => {
+			if (j.value) return () => {
+				M.value && (M.value.focus({ preventScroll: !0 }), M.value = null, N.value = !1);
+			};
+		}), E(() => {
+			h.value.length <= 1 && (S.value = !1);
+		}), E((e) => {
+			function t(e) {
+				let t = i.hotkey.every((t) => e[t] || e.code === t), n = Array.isArray(j.value) ? j.value[0] : j.value;
+				t && (S.value = !0, n?.focus());
+				let r = document.activeElement === j.value || n?.contains(document.activeElement);
+				e.code === "Escape" && r && (S.value = !1);
+			}
+			s && (document.addEventListener("keydown", t), e(() => {
+				document.removeEventListener("keydown", t);
+			}));
+		}), (e, n) => (_(), a("section", {
+			"aria-label": `${e.containerAriaLabel} ${C(P)}`,
+			tabIndex: -1
+		}, [(_(!0), a(t, null, y(g.value, (s, d) => (_(), a("ol", u({
+			key: s,
+			ref_for: !0,
+			ref_key: "listRef",
+			ref: j,
+			"data-sonner-toaster": "",
+			class: i.class,
+			dir: e.dir === "auto" ? l() : e.dir,
+			tabIndex: -1,
+			"data-theme": e.theme,
+			"data-rich-colors": e.richColors,
+			"data-y-position": s.split("-")[0],
+			"data-x-position": s.split("-")[1],
+			style: {
+				"--front-toast-height": `${x.value[0]?.height}px`,
+				"--offset": typeof e.offset == "number" ? `${e.offset}px` : e.offset || G,
+				"--width": "356px",
+				"--gap": `${e.gap}px`,
+				...e.style,
+				...C(p).style
+			}
+		}, { ref_for: !0 }, e.$attrs, {
+			onBlur: I,
+			onFocus: L,
+			onMouseenter: n[1] ||= () => S.value = !0,
+			onMousemove: n[2] ||= () => S.value = !0,
+			onMouseleave: n[3] ||= () => {
+				O.value || (S.value = !1);
+			},
+			onPointerdown: R,
+			onPointerup: n[4] ||= () => O.value = !1
+		}), [(_(!0), a(t, null, y(h.value.filter((e) => !e.position && d === 0 || e.position === s), (t, i) => (_(), r(H, {
+			key: t.id,
+			heights: x.value.filter((e) => e.position === t.position),
+			icons: e.icons,
+			index: i,
+			toast: t,
+			"default-rich-colors": e.richColors,
+			duration: e.toastOptions?.duration ?? e.duration,
+			class: f(e.toastOptions?.class ?? ""),
+			"description-class": e.toastOptions?.descriptionClass,
+			invert: e.invert,
+			"visible-toasts": e.visibleToasts,
+			"close-button": e.toastOptions?.closeButton ?? e.closeButton,
+			interacting: O.value,
+			position: s,
+			style: m(e.toastOptions?.style),
+			unstyled: e.toastOptions?.unstyled,
+			classes: e.toastOptions?.classes,
+			"cancel-button-style": e.toastOptions?.cancelButtonStyle,
+			"action-button-style": e.toastOptions?.actionButtonStyle,
+			toasts: h.value.filter((e) => e.position === t.position),
+			"expand-by-default": e.expand,
+			gap: e.gap,
+			expanded: S.value,
+			"pause-when-page-is-hidden": e.pauseWhenPageIsHidden,
+			cn: e.cn,
+			"onUpdate:heights": n[0] ||= (e) => {
+				x.value = e;
+			},
+			onRemoveToast: F
+		}, {
+			"close-icon": D(() => [b(e.$slots, "close-icon", {}, () => [n[5] ||= o("div", { class: "i-ic:outline-close h-5 w-5" }, null, -1)])]),
+			"loading-icon": D(() => [b(e.$slots, "loading-icon", {}, () => [c(ee, { visible: t.type === "loading" }, null, 8, ["visible"])])]),
+			"success-icon": D(() => [b(e.$slots, "success-icon", {}, () => [n[6] ||= o("div", { class: "i-ic:baseline-check-circle h-5 w-5" }, null, -1)])]),
+			"error-icon": D(() => [b(e.$slots, "error-icon", {}, () => [n[7] ||= o("div", { class: "i-ic:baseline-error h-5 w-5" }, null, -1)])]),
+			"warning-icon": D(() => [b(e.$slots, "warning-icon", {}, () => [n[8] ||= o("div", { class: "i-ic:baseline-warning h-5 w-5" }, null, -1)])]),
+			"info-icon": D(() => [b(e.$slots, "info-icon", {}, () => [n[9] ||= o("div", { class: "i-ic:baseline-info h-5 w-5" }, null, -1)])]),
+			_: 2
+		}, 1032, [
+			"heights",
+			"icons",
+			"index",
+			"toast",
+			"default-rich-colors",
+			"duration",
+			"class",
+			"description-class",
+			"invert",
+			"visible-toasts",
+			"close-button",
+			"interacting",
+			"position",
+			"style",
+			"unstyled",
+			"classes",
+			"cancel-button-style",
+			"action-button-style",
+			"toasts",
+			"expand-by-default",
+			"gap",
+			"expanded",
+			"pause-when-page-is-hidden",
+			"cn"
+		]))), 128))], 16, W))), 128))], 8, U));
+	}
+}), J = q;
+function Y() {
+	let e = v([]);
+	return E((t) => {
+		let n = A.subscribe((t) => {
+			if ("dismiss" in t && t.dismiss) return e.value.filter((e) => e.id !== t.id);
+			let n = e.value.findIndex((e) => e.id === t.id);
+			if (n !== -1) {
+				let r = [...e.value];
+				r[n] = {
+					...r[n],
+					...t
+				}, e.value = r;
+			} else e.value = [t, ...e.value];
+		});
+		t(() => {
+			n();
+		});
+	}), { activeToasts: e };
+}
+const X = { install(e) {
+	e.component("Notification", J);
+} };
+var Z = X;
+export { J as Notification, J as Toaster, Z as default, F as notification, I as toast, Y as useNotification };
+
 //# sourceMappingURL=index.js.map

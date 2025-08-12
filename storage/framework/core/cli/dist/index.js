@@ -1157,7 +1157,7 @@ var require_stat = __commonJS((exports, module) => {
     return checkParentPathsSync(src, srcStat, destParent, funcName);
   }
   function areIdentical(srcStat, destStat) {
-    return destStat.ino && destStat.dev && destStat.ino === srcStat.ino && destStat.dev === srcStat.dev;
+    return destStat.ino !== undefined && destStat.dev !== undefined && destStat.ino === srcStat.ino && destStat.dev === srcStat.dev;
   }
   function isSrcSubdir(src, dest) {
     const srcArr = path2.resolve(src).split(path2.sep).filter((i) => i);
@@ -13204,6 +13204,9 @@ function _supportsColor(haveStream, { streamIsTTY, sniffFlags = true } = {}) {
     return 3;
   }
   if (env2.TERM === "xterm-kitty") {
+    return 3;
+  }
+  if (env2.TERM === "xterm-ghostty") {
     return 3;
   }
   if ("TERM_PROGRAM" in env2) {

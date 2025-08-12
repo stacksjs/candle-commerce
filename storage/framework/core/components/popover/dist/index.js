@@ -1,5 +1,1014 @@
-function e(e){if(!e||typeof document>`u`)return;let t=document.head||document.getElementsByTagName(`head`)[0],n=document.createElement(`style`);n.type=`text/css`,t.appendChild(n),n.styleSheet?n.styleSheet.cssText=e:n.appendChild(document.createTextNode(e))}e(``);import*as t from"vue";import{Fragment as n,Teleport as r,cloneVNode as i,computed as a,defineComponent as o,getCurrentInstance as s,h as c,inject as l,onMounted as u,onUnmounted as d,provide as f,reactive as p,ref as m,shallowRef as h,watch as g,watchEffect as _}from"vue";var v;let y=Symbol(`headlessui.useid`),b=0;const x=(v=t.useId)??function(){return t.inject(y,()=>`${++b}`)()};function S(e){var t;if(e==null||e.value==null)return null;let n=(t=e.value.$el)??e.value;return n instanceof Node?n:null}function C(e,t,...n){if(e in t){let r=t[e];return typeof r==`function`?r(...n):r}let r=Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map(e=>`"${e}"`).join(`, `)}.`);throw Error.captureStackTrace&&Error.captureStackTrace(r,C),r}var w=Object.defineProperty,T=(e,t,n)=>t in e?w(e,t,{enumerable:!0,configurable:!0,writable:!0,value:n}):e[t]=n,E=(e,t,n)=>(T(e,typeof t==`symbol`?t:t+``,n),n),D=class{constructor(){E(this,`current`,this.detect()),E(this,`currentId`,0)}set(e){this.current!==e&&(this.currentId=0,this.current=e)}reset(){this.set(this.detect())}nextId(){return++this.currentId}get isServer(){return this.current===`server`}get isClient(){return this.current===`client`}detect(){return typeof window>`u`||typeof document>`u`?`server`:`client`}};let O=new D;function k(e){if(O.isServer)return null;if(e instanceof Node)return e.ownerDocument;if(e!=null&&e.hasOwnProperty(`value`)){let t=S(e);if(t)return t.ownerDocument}return document}let A=[`[contentEditable=true]`,`[tabindex]`,`a[href]`,`area[href]`,`button:not([disabled])`,`iframe`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`].map(e=>`${e}:not([tabindex='-1'])`).join(`,`);var j=(e=>(e[e.First=1]=`First`,e[e.Previous=2]=`Previous`,e[e.Next=4]=`Next`,e[e.Last=8]=`Last`,e[e.WrapAround=16]=`WrapAround`,e[e.NoScroll=32]=`NoScroll`,e))(j||{}),M=(e=>(e[e.Error=0]=`Error`,e[e.Overflow=1]=`Overflow`,e[e.Success=2]=`Success`,e[e.Underflow=3]=`Underflow`,e))(M||{}),N=(e=>(e[e.Previous=-1]=`Previous`,e[e.Next=1]=`Next`,e))(N||{});function P(e=document.body){return e==null?[]:Array.from(e.querySelectorAll(A)).sort((e,t)=>Math.sign((e.tabIndex||2**53-1)-(t.tabIndex||2**53-1)))}var F=(e=>(e[e.Strict=0]=`Strict`,e[e.Loose=1]=`Loose`,e))(F||{});function ee(e,t=0){var n;return e===(n=k(e))?.body?!1:C(t,{0(){return e.matches(A)},1(){let t=e;for(;t!==null;){if(t.matches(A))return!0;t=t.parentElement}return!1}})}var te=(e=>(e[e.Keyboard=0]=`Keyboard`,e[e.Mouse=1]=`Mouse`,e))(te||{});typeof window<`u`&&typeof document<`u`&&(document.addEventListener(`keydown`,e=>{e.metaKey||e.altKey||e.ctrlKey||(document.documentElement.dataset.headlessuiFocusVisible=``)},!0),document.addEventListener(`click`,e=>{e.detail===1?delete document.documentElement.dataset.headlessuiFocusVisible:e.detail===0&&(document.documentElement.dataset.headlessuiFocusVisible=``)},!0));let ne=[`textarea`,`input`].join(`,`);function re(e){var t,n;return(n=(t=e?.matches)?.call(e,ne))??!1}function ie(e,t=e=>e){return e.slice().sort((e,n)=>{let r=t(e),i=t(n);if(r===null||i===null)return 0;let a=r.compareDocumentPosition(i);return a&Node.DOCUMENT_POSITION_FOLLOWING?-1:a&Node.DOCUMENT_POSITION_PRECEDING?1:0})}function I(e,t,{sorted:n=!0,relativeTo:r=null,skipElements:i=[]}={}){var a;let o=(a=Array.isArray(e)?e.length>0?e[0].ownerDocument:document:e?.ownerDocument)??document,s=Array.isArray(e)?n?ie(e):e:P(e);i.length>0&&s.length>1&&(s=s.filter(e=>!i.includes(e))),r??=o.activeElement;let c=(()=>{if(t&5)return 1;if(t&10)return-1;throw Error(`Missing Focus.First, Focus.Previous, Focus.Next or Focus.Last`)})(),l=(()=>{if(t&1)return 0;if(t&2)return Math.max(0,s.indexOf(r))-1;if(t&4)return Math.max(0,s.indexOf(r))+1;if(t&8)return s.length-1;throw Error(`Missing Focus.First, Focus.Previous, Focus.Next or Focus.Last`)})(),u=t&32?{preventScroll:!0}:{},d=0,f=s.length,p;do{if(d>=f||d+f<=0)return 0;let e=l+d;if(t&16)e=(e+f)%f;else{if(e<0)return 3;if(e>=f)return 1}p=s[e],p?.focus(u),d+=c}while(p!==o.activeElement);return t&6&&re(p)&&p.select(),2}function ae(){return/iPhone/gi.test(window.navigator.platform)||/Mac/gi.test(window.navigator.platform)&&window.navigator.maxTouchPoints>0}function oe(){return/Android/gi.test(window.navigator.userAgent)}function se(){return ae()||oe()}function L(e,t,n){O.isServer||_(r=>{document.addEventListener(e,t,n),r(()=>document.removeEventListener(e,t,n))})}function ce(e,t,n){O.isServer||_(r=>{window.addEventListener(e,t,n),r(()=>window.removeEventListener(e,t,n))})}function le(e,t,n=a(()=>!0)){function r(r,i){if(!n.value||r.defaultPrevented)return;let a=i(r);if(a===null||!a.getRootNode().contains(a))return;let o=function e(t){return typeof t==`function`?e(t()):Array.isArray(t)||t instanceof Set?t:[t]}(e);for(let e of o){if(e===null)continue;let t=e instanceof HTMLElement?e:S(e);if(t!=null&&t.contains(a)||r.composed&&r.composedPath().includes(t))return}return!ee(a,F.Loose)&&a.tabIndex!==-1&&r.preventDefault(),t(r,a)}let i=m(null);L(`pointerdown`,e=>{var t,r;n.value&&(i.value=(r=(t=e.composedPath)?.call(e))?.[0]||e.target)},!0),L(`mousedown`,e=>{var t,r;n.value&&(i.value=(r=(t=e.composedPath)?.call(e))?.[0]||e.target)},!0),L(`click`,e=>{se()||i.value&&(r(e,()=>i.value),i.value=null)},!0),L(`touchend`,e=>r(e,()=>e.target instanceof HTMLElement?e.target:null),!0),ce(`blur`,e=>r(e,()=>window.document.activeElement instanceof HTMLIFrameElement?window.document.activeElement:null),!0)}function ue(e,t){if(e)return e;let n=t??`button`;if(typeof n==`string`&&n.toLowerCase()===`button`)return`button`}function de(e,t){let n=m(ue(e.value.type,e.value.as));return u(()=>{n.value=ue(e.value.type,e.value.as)}),_(()=>{var e;n.value||S(t)&&S(t)instanceof HTMLButtonElement&&!((e=S(t))!=null&&e.hasAttribute(`type`))&&(n.value=`button`)}),n}var R=(e=>(e[e.None=0]=`None`,e[e.RenderStrategy=1]=`RenderStrategy`,e[e.Static=2]=`Static`,e))(R||{}),fe=(e=>(e[e.Unmount=0]=`Unmount`,e[e.Hidden=1]=`Hidden`,e))(fe||{});function z({visible:e=!0,features:t=0,ourProps:n,theirProps:r,...i}){var a;let o=H(r,n),s=Object.assign(i,{props:o});if(e||t&2&&o.static)return B(s);if(t&1){let e=(a=o.unmount)==null||a?0:1;return C(e,{0(){return null},1(){return B({...i,props:{...o,hidden:!0,style:{display:`none`}}})}})}return B(s)}function B({props:e,attrs:t,slots:n,slot:r,name:a}){var o,s;let{as:l,...u}=pe(e,[`unmount`,`static`]),d=(o=n.default)?.call(n,r),f={};if(r){let e=!1,t=[];for(let[n,i]of Object.entries(r))typeof i==`boolean`&&(e=!0),i===!0&&t.push(n);e&&(f[`data-headlessui-state`]=t.join(` `))}if(l===`template`){if(d=V(d??[]),Object.keys(u).length>0||Object.keys(t).length>0){let[e,...n]=d??[];if(!me(e)||n.length>0)throw Error([`Passing props on "template"!`,``,`The current component <${a} /> is rendering a "template".`,`However we need to passthrough the following props:`,Object.keys(u).concat(Object.keys(t)).map(e=>e.trim()).filter((e,t,n)=>n.indexOf(e)===t).sort((e,t)=>e.localeCompare(t)).map(e=>`  - ${e}`).join(`
-`),``,`You can apply a few solutions:`,['Add an `as="..."` prop, to ensure that we render an actual element instead of a "template".',`Render a single element as the child so that we can forward the props onto that element.`].map(e=>`  - ${e}`).join(`
-`)].join(`
-`));let r=H((s=e.props)??{},u,f),o=i(e,r,!0);for(let e in r)e.startsWith(`on`)&&(o.props||={},o.props[e]=r[e]);return o}return Array.isArray(d)&&d.length===1?d[0]:d}return c(l,Object.assign({},u,f),{default:()=>d})}function V(e){return e.flatMap(e=>e.type===n?V(e.children):[e])}function H(...e){var t;if(e.length===0)return{};if(e.length===1)return e[0];let n={},r={};for(let i of e)for(let e in i)e.startsWith(`on`)&&typeof i[e]==`function`?((t=r[e])??(r[e]=[]),r[e].push(i[e])):n[e]=i[e];if(n.disabled||n[`aria-disabled`])return Object.assign(n,Object.fromEntries(Object.keys(r).map(e=>[e,void 0])));for(let e in r)Object.assign(n,{[e](t,...n){let i=r[e];for(let e of i){if(t instanceof Event&&t.defaultPrevented)return;e(t,...n)}}});return n}function pe(e,t=[]){let n=Object.assign({},e);for(let e of t)e in n&&delete n[e];return n}function me(e){return e==null?!1:typeof e.type==`string`||typeof e.type==`object`||typeof e.type==`function`}var U=(e=>(e[e.None=1]=`None`,e[e.Focusable=2]=`Focusable`,e[e.Hidden=4]=`Hidden`,e))(U||{});let W=o({name:`Hidden`,props:{as:{type:[Object,String],default:`div`},features:{type:Number,default:1}},setup(e,{slots:t,attrs:n}){return()=>{var r;let{features:i,...a}=e,o={"aria-hidden":(i&2)==2?!0:(r=a[`aria-hidden`])??void 0,hidden:(i&4)==4?!0:void 0,style:{position:`fixed`,top:1,left:1,width:1,height:0,padding:0,margin:-1,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,borderWidth:`0`,...(i&4)==4&&(i&2)!=2&&{display:`none`}}};return z({ourProps:o,theirProps:a,slot:{},attrs:n,slots:t,name:`Hidden`})}}}),G=Symbol(`Context`);var K=(e=>(e[e.Open=1]=`Open`,e[e.Closed=2]=`Closed`,e[e.Closing=4]=`Closing`,e[e.Opening=8]=`Opening`,e))(K||{});function he(){return l(G,null)}function ge(e){f(G,e)}var q=(e=>(e.Space=` `,e.Enter=`Enter`,e.Escape=`Escape`,e.Backspace=`Backspace`,e.Delete=`Delete`,e.ArrowLeft=`ArrowLeft`,e.ArrowUp=`ArrowUp`,e.ArrowRight=`ArrowRight`,e.ArrowDown=`ArrowDown`,e.Home=`Home`,e.End=`End`,e.PageUp=`PageUp`,e.PageDown=`PageDown`,e.Tab=`Tab`,e))(q||{});function _e(e,t,n,r){O.isServer||_(i=>{e??=window,e.addEventListener(t,n,r),i(()=>e.removeEventListener(t,n,r))})}var J=(e=>(e[e.Forwards=0]=`Forwards`,e[e.Backwards=1]=`Backwards`,e))(J||{});function ve(){let e=m(0);return ce(`keydown`,t=>{t.key===`Tab`&&(e.value=t.shiftKey?1:0)}),e}function ye({defaultContainers:e=[],portals:t,mainTreeNodeRef:n}={}){let r=m(null),i=k(r);function a(){var n,a,o;let s=[];for(let t of e)t!==null&&(t instanceof HTMLElement?s.push(t):`value`in t&&t.value instanceof HTMLElement&&s.push(t.value));if(t!=null&&t.value)for(let e of t.value)s.push(e);for(let e of(n=i?.querySelectorAll(`html > *, body > *`))??[])e!==document.body&&e!==document.head&&e instanceof HTMLElement&&e.id!==`headlessui-portal-root`&&(e.contains(S(r))||e.contains((o=(a=S(r))?.getRootNode())?.host)||s.some(t=>e.contains(t))||s.push(e));return s}return{resolveContainers:a,contains(e){return a().some(t=>t.contains(e))},mainTreeNodeRef:r,MainTreeNode(){return n==null?c(W,{features:U.Hidden,ref:r}):null}}}function be(){let e=m(null);return{mainTreeNodeRef:e,MainTreeNode(){return c(W,{features:U.Hidden,ref:e})}}}let xe=Symbol(`ForcePortalRootContext`);function Se(){return l(xe,!1)}let Ce=o({name:`ForcePortalRoot`,props:{as:{type:[Object,String],default:`template`},force:{type:Boolean,default:!1}},setup(e,{slots:t,attrs:n}){return f(xe,e.force),()=>{let{force:r,...i}=e;return z({theirProps:i,ourProps:{},slot:{},slots:t,attrs:n,name:`ForcePortalRoot`})}}});function we(e){let t=k(e);if(!t){if(e===null)return null;throw Error(`[Headless UI]: Cannot find ownerDocument for contextElement: ${e}`)}let n=t.getElementById(`headlessui-portal-root`);if(n)return n;let r=t.createElement(`div`);return r.setAttribute(`id`,`headlessui-portal-root`),t.body.appendChild(r)}const Y=new WeakMap;function Te(e){var t;return(t=Y.get(e))??0}function Ee(e,t){let n=t(Te(e));return n<=0?Y.delete(e):Y.set(e,n),n}let De=o({name:`Portal`,props:{as:{type:[Object,String],default:`div`}},setup(e,{slots:t,attrs:n}){let i=m(null),o=a(()=>k(i)),f=Se(),p=l(ke,null),h=m(f===!0||p==null?we(i.value):p.resolveTarget());h.value&&Ee(h.value,e=>e+1);let v=m(!1);u(()=>{v.value=!0}),_(()=>{f||p!=null&&(h.value=p.resolveTarget())});let y=l(X,null),b=!1,x=s();return g(i,()=>{if(b||!y)return;let e=S(i);e&&(d(y.register(e),x),b=!0)}),d(()=>{var e,t;let n=(e=o.value)?.getElementById(`headlessui-portal-root`);!n||h.value!==n||Ee(h.value,e=>e-1)||h.value.children.length>0||(t=h.value.parentElement)==null||t.removeChild(h.value)}),()=>{if(!v.value||h.value===null)return null;let a={ref:i,"data-headlessui-portal":``};return c(r,{to:h.value},z({ourProps:a,theirProps:e,slot:{},attrs:n,slots:t,name:`Portal`}))}}}),X=Symbol(`PortalParentContext`);function Oe(){let e=l(X,null),t=m([]);function n(n){return t.value.push(n),e&&e.register(n),()=>r(n)}function r(n){let r=t.value.indexOf(n);r!==-1&&t.value.splice(r,1),e&&e.unregister(n)}let i={register:n,unregister:r,portals:t};return[t,o({name:`PortalWrapper`,setup(e,{slots:t}){return f(X,i),()=>{var e;return(e=t.default)?.call(t)}}})]}let ke=Symbol(`PortalGroupContext`),Ae=o({name:`PortalGroup`,props:{as:{type:[Object,String],default:`template`},target:{type:Object,default:null}},setup(e,{attrs:t,slots:n}){let r=p({resolveTarget(){return e.target}});return f(ke,r),()=>{let{target:r,...i}=e;return z({theirProps:i,ourProps:{},slot:{},attrs:t,slots:n,name:`PortalGroup`})}}});var je=(e=>(e[e.Open=0]=`Open`,e[e.Closed=1]=`Closed`,e))(je||{});let Me=Symbol(`PopoverContext`);function Z(e){let t=l(Me,null);if(t===null){let t=Error(`<${e} /> is missing a parent <${Q.name} /> component.`);throw Error.captureStackTrace&&Error.captureStackTrace(t,Z),t}return t}let Ne=Symbol(`PopoverGroupContext`);function Pe(){return l(Ne,null)}let Fe=Symbol(`PopoverPanelContext`);function Ie(){return l(Fe,null)}let Q=o({name:`Popover`,inheritAttrs:!1,props:{as:{type:[Object,String],default:`div`}},setup(e,{slots:t,attrs:r,expose:i}){var o;let s=m(null);i({el:s,$el:s});let l=m(1),u=m(null),d=m(null),p=m(null),h=m(null),g=a(()=>k(s)),v=a(()=>{var e,t;if(!S(u)||!S(h))return!1;for(let e of document.querySelectorAll(`body > *`))if(Number(e?.contains(S(u)))^Number(e?.contains(S(h))))return!0;let n=P(),r=n.indexOf(S(u)),i=(r+n.length-1)%n.length,a=(r+1)%n.length,o=n[i],s=n[a];return!((e=S(h))!=null&&e.contains(o))&&!((t=S(h))!=null&&t.contains(s))}),y={popoverState:l,buttonId:m(null),panelId:m(null),panel:h,button:u,isPortalled:v,beforePanelSentinel:d,afterPanelSentinel:p,togglePopover(){l.value=C(l.value,{0:1,1:0})},closePopover(){l.value!==1&&(l.value=1)},close(e){y.closePopover();let t=(()=>e?e instanceof HTMLElement?e:e.value instanceof HTMLElement?S(e):S(y.button):S(y.button))();t?.focus()}};f(Me,y),ge(a(()=>C(l.value,{0:K.Open,1:K.Closed})));let b={buttonId:y.buttonId,panelId:y.panelId,close(){y.closePopover()}},x=Pe(),w=x?.registerPopover,[T,E]=Oe(),D=ye({mainTreeNodeRef:x?.mainTreeNodeRef,portals:T,defaultContainers:[u,h]});function O(){var e,t,n,r;return(r=x?.isFocusWithinPopoverGroup())??((e=g.value)?.activeElement&&((t=S(u))?.contains(g.value.activeElement)||(n=S(h))?.contains(g.value.activeElement)))}return _(()=>w?.(b)),_e((o=g.value)?.defaultView,`focus`,e=>{var t,n;e.target!==window&&e.target instanceof HTMLElement&&l.value===0&&(O()||u&&h&&(D.contains(e.target)||(t=S(y.beforePanelSentinel))!=null&&t.contains(e.target)||(n=S(y.afterPanelSentinel))!=null&&n.contains(e.target)||y.closePopover()))},!0),le(D.resolveContainers,(e,t)=>{var n;y.closePopover(),ee(t,F.Loose)||(e.preventDefault(),(n=S(u))==null||n.focus())},a(()=>l.value===0)),()=>{let i={open:l.value===0,close:y.close};return c(n,[c(E,{},()=>z({theirProps:{...e,...r},ourProps:{ref:s},slot:i,slots:t,attrs:r,name:`Popover`})),c(D.MainTreeNode)])}}}),Le=o({name:`PopoverButton`,props:{as:{type:[Object,String],default:`button`},disabled:{type:[Boolean],default:!1},id:{type:String,default:null}},inheritAttrs:!1,setup(e,{attrs:t,slots:r,expose:i}){var o;let s=(o=e.id)??`headlessui-popover-button-${x()}`,l=Z(`PopoverButton`),f=a(()=>k(l.button));i({el:l.button,$el:l.button}),u(()=>{l.buttonId.value=s}),d(()=>{l.buttonId.value=null});let p=Pe(),h=p?.closeOthers,g=Ie(),v=a(()=>g===null?!1:g.value===l.panelId.value),y=m(null),b=`headlessui-focus-sentinel-${x()}`;v.value||_(()=>{l.button.value=S(y)});let w=de(a(()=>({as:e.as,type:t.type})),y);function T(e){var t,n,r,i,a;if(v.value){if(l.popoverState.value===1)return;switch(e.key){case q.Space:case q.Enter:e.preventDefault(),(n=(t=e.target).click)==null||n.call(t),l.closePopover(),(r=S(l.button))==null||r.focus();break}}else switch(e.key){case q.Space:case q.Enter:e.preventDefault(),e.stopPropagation(),l.popoverState.value===1&&h?.(l.buttonId.value),l.togglePopover();break;case q.Escape:if(l.popoverState.value!==0)return h?.(l.buttonId.value);if(!S(l.button)||(i=f.value)!=null&&i.activeElement&&!((a=S(l.button))!=null&&a.contains(f.value.activeElement)))return;e.preventDefault(),e.stopPropagation(),l.closePopover();break}}function E(e){v.value||e.key===q.Space&&e.preventDefault()}function D(t){var n,r;e.disabled||(v.value?(l.closePopover(),(n=S(l.button))==null||n.focus()):(t.preventDefault(),t.stopPropagation(),l.popoverState.value===1&&h?.(l.buttonId.value),l.togglePopover(),(r=S(l.button))==null||r.focus()))}function O(e){e.preventDefault(),e.stopPropagation()}let A=ve();function N(){let e=S(l.panel);if(!e)return;function t(){C(A.value,{[J.Forwards]:()=>I(e,j.First),[J.Backwards]:()=>I(e,j.Last)})===M.Error&&I(P().filter(e=>e.dataset.headlessuiFocusGuard!==`true`),C(A.value,{[J.Forwards]:j.Next,[J.Backwards]:j.Previous}),{relativeTo:S(l.button)})}t()}return()=>{let i=l.popoverState.value===0,a={open:i},{...o}=e,u=v.value?{ref:y,type:w.value,onKeydown:T,onClick:D}:{ref:y,id:s,type:w.value,"aria-expanded":l.popoverState.value===0,"aria-controls":S(l.panel)?l.panelId.value:void 0,disabled:e.disabled?!0:void 0,onKeydown:T,onKeyup:E,onClick:D,onMousedown:O};return c(n,[z({ourProps:u,theirProps:{...t,...o},slot:a,attrs:t,slots:r,name:`PopoverButton`}),i&&!v.value&&l.isPortalled.value&&c(W,{id:b,features:U.Focusable,"data-headlessui-focus-guard":!0,as:`button`,type:`button`,onFocus:N})])}}}),Re=o({name:`PopoverOverlay`,props:{as:{type:[Object,String],default:`div`},static:{type:Boolean,default:!1},unmount:{type:Boolean,default:!0}},setup(e,{attrs:t,slots:n}){let r=Z(`PopoverOverlay`),i=`headlessui-popover-overlay-${x()}`,o=he(),s=a(()=>o===null?r.popoverState.value===0:(o.value&K.Open)===K.Open);function c(){r.closePopover()}return()=>{let a={open:r.popoverState.value===0};return z({ourProps:{id:i,"aria-hidden":!0,onClick:c},theirProps:e,slot:a,attrs:t,slots:n,features:R.RenderStrategy|R.Static,visible:s.value,name:`PopoverOverlay`})}}}),$=o({name:`PopoverPanel`,props:{as:{type:[Object,String],default:`div`},static:{type:Boolean,default:!1},unmount:{type:Boolean,default:!0},focus:{type:Boolean,default:!1},id:{type:String,default:null}},inheritAttrs:!1,setup(e,{attrs:t,slots:r,expose:i}){var o;let s=(o=e.id)??`headlessui-popover-panel-${x()}`,{focus:l}=e,p=Z(`PopoverPanel`),m=a(()=>k(p.panel)),h=`headlessui-focus-sentinel-before-${x()}`,g=`headlessui-focus-sentinel-after-${x()}`;i({el:p.panel,$el:p.panel}),u(()=>{p.panelId.value=s}),d(()=>{p.panelId.value=null}),f(Fe,p.panelId),_(()=>{var e,t;if(!l||p.popoverState.value!==0||!p.panel)return;let n=(e=m.value)?.activeElement;(t=S(p.panel))!=null&&t.contains(n)||I(S(p.panel),j.First)});let v=he(),y=a(()=>v===null?p.popoverState.value===0:(v.value&K.Open)===K.Open);function b(e){var t,n;switch(e.key){case q.Escape:if(p.popoverState.value!==0||!S(p.panel)||m.value&&!((t=S(p.panel))!=null&&t.contains(m.value.activeElement)))return;e.preventDefault(),e.stopPropagation(),p.closePopover(),(n=S(p.button))==null||n.focus();break}}function w(e){var t,n,r,i,a;let o=e.relatedTarget;o&&S(p.panel)&&((t=S(p.panel))!=null&&t.contains(o)||(p.closePopover(),((r=(n=S(p.beforePanelSentinel))?.contains)!=null&&r.call(n,o)||(a=(i=S(p.afterPanelSentinel))?.contains)!=null&&a.call(i,o))&&o.focus({preventScroll:!0})))}let T=ve();function E(){let e=S(p.panel);if(!e)return;function t(){C(T.value,{[J.Forwards]:()=>{var t;I(e,j.First)===M.Error&&((t=S(p.afterPanelSentinel))==null||t.focus())},[J.Backwards]:()=>{var e;(e=S(p.button))==null||e.focus({preventScroll:!0})}})}t()}function D(){let e=S(p.panel);if(!e)return;function t(){C(T.value,{[J.Forwards]:()=>{let e=S(p.button),t=S(p.panel);if(!e)return;let n=P(),r=n.indexOf(e),i=n.slice(0,r+1),a=[...n.slice(r+1),...i];for(let e of a.slice())if(e.dataset.headlessuiFocusGuard===`true`||t!=null&&t.contains(e)){let t=a.indexOf(e);t!==-1&&a.splice(t,1)}I(a,j.First,{sorted:!1})},[J.Backwards]:()=>{var t;I(e,j.Previous)===M.Error&&((t=S(p.button))==null||t.focus())}})}t()}return()=>{let i={open:p.popoverState.value===0,close:p.close},{focus:a,...o}=e,u={ref:p.panel,id:s,onKeydown:b,onFocusout:l&&p.popoverState.value===0?w:void 0,tabIndex:-1};return z({ourProps:u,theirProps:{...t,...o},attrs:t,slot:i,slots:{...r,default:(...e)=>{var t;return[c(n,[y.value&&p.isPortalled.value&&c(W,{id:h,ref:p.beforePanelSentinel,features:U.Focusable,"data-headlessui-focus-guard":!0,as:`button`,type:`button`,onFocus:E}),(t=r.default)?.call(r,...e),y.value&&p.isPortalled.value&&c(W,{id:g,ref:p.afterPanelSentinel,features:U.Focusable,"data-headlessui-focus-guard":!0,as:`button`,type:`button`,onFocus:D})])]}},features:R.RenderStrategy|R.Static,visible:y.value,name:`PopoverPanel`})}}}),ze=o({name:`PopoverGroup`,inheritAttrs:!1,props:{as:{type:[Object,String],default:`div`}},setup(e,{attrs:t,slots:r,expose:i}){let o=m(null),s=h([]),l=a(()=>k(o)),u=be();i({el:o,$el:o});function d(e){let t=s.value.indexOf(e);t!==-1&&s.value.splice(t,1)}function p(e){return s.value.push(e),()=>{d(e)}}function g(){var e;let t=l.value;if(!t)return!1;let n=t.activeElement;return(e=S(o))!=null&&e.contains(n)?!0:s.value.some(e=>{var r,i;return(r=t.getElementById(e.buttonId.value))?.contains(n)||(i=t.getElementById(e.panelId.value))?.contains(n)})}function _(e){for(let t of s.value)t.buttonId.value!==e&&t.close()}return f(Ne,{registerPopover:p,unregisterPopover:d,isFocusWithinPopoverGroup:g,closeOthers:_,mainTreeNodeRef:u.mainTreeNodeRef}),()=>c(n,[z({ourProps:{ref:o},theirProps:{...e,...t},slot:{},attrs:t,slots:r,name:`PopoverGroup`}),c(u.MainTreeNode)])}});const Be={install(e){Object.entries({Popover:Q,PopoverButton:Le,PopoverPanel:$}).forEach(([t,n])=>{e.component(t,n)})}};var Ve=Be;export{Q as Popover,Le as PopoverButton,$ as PopoverPanel,Ve as default};
+function e(e) {
+	if (!e || typeof document > "u") return;
+	let t = document.head || document.getElementsByTagName("head")[0], n = document.createElement("style");
+	n.type = "text/css", t.appendChild(n), n.styleSheet ? n.styleSheet.cssText = e : n.appendChild(document.createTextNode(e));
+}
+e("");
+import * as t from "vue";
+import { Fragment as n, Teleport as r, cloneVNode as i, computed as a, defineComponent as o, getCurrentInstance as s, h as c, inject as l, onMounted as u, onUnmounted as d, provide as f, reactive as p, ref as m, shallowRef as h, watch as g, watchEffect as _ } from "vue";
+var v;
+let y = Symbol("headlessui.useid"), b = 0;
+const x = (v = t.useId) ?? function() {
+	return t.inject(y, () => `${++b}`)();
+};
+function S(e) {
+	var t;
+	if (e == null || e.value == null) return null;
+	let n = (t = e.value.$el) ?? e.value;
+	return n instanceof Node ? n : null;
+}
+function C(e, t, ...n) {
+	if (e in t) {
+		let r = t[e];
+		return typeof r == "function" ? r(...n) : r;
+	}
+	let r = /* @__PURE__ */ Error(`Tried to handle "${e}" but there is no handler defined. Only defined handlers are: ${Object.keys(t).map((e) => `"${e}"`).join(", ")}.`);
+	throw Error.captureStackTrace && Error.captureStackTrace(r, C), r;
+}
+var w = Object.defineProperty, T = (e, t, n) => t in e ? w(e, t, {
+	enumerable: !0,
+	configurable: !0,
+	writable: !0,
+	value: n
+}) : e[t] = n, E = (e, t, n) => (T(e, typeof t == "symbol" ? t : t + "", n), n), D = class {
+	constructor() {
+		E(this, "current", this.detect()), E(this, "currentId", 0);
+	}
+	set(e) {
+		this.current !== e && (this.currentId = 0, this.current = e);
+	}
+	reset() {
+		this.set(this.detect());
+	}
+	nextId() {
+		return ++this.currentId;
+	}
+	get isServer() {
+		return this.current === "server";
+	}
+	get isClient() {
+		return this.current === "client";
+	}
+	detect() {
+		return typeof window > "u" || typeof document > "u" ? "server" : "client";
+	}
+};
+let O = new D();
+function k(e) {
+	if (O.isServer) return null;
+	if (e instanceof Node) return e.ownerDocument;
+	if (e != null && e.hasOwnProperty("value")) {
+		let t = S(e);
+		if (t) return t.ownerDocument;
+	}
+	return document;
+}
+let A = [
+	"[contentEditable=true]",
+	"[tabindex]",
+	"a[href]",
+	"area[href]",
+	"button:not([disabled])",
+	"iframe",
+	"input:not([disabled])",
+	"select:not([disabled])",
+	"textarea:not([disabled])"
+].map((e) => `${e}:not([tabindex='-1'])`).join(",");
+var j = ((e) => (e[e.First = 1] = "First", e[e.Previous = 2] = "Previous", e[e.Next = 4] = "Next", e[e.Last = 8] = "Last", e[e.WrapAround = 16] = "WrapAround", e[e.NoScroll = 32] = "NoScroll", e))(j || {}), M = ((e) => (e[e.Error = 0] = "Error", e[e.Overflow = 1] = "Overflow", e[e.Success = 2] = "Success", e[e.Underflow = 3] = "Underflow", e))(M || {}), N = ((e) => (e[e.Previous = -1] = "Previous", e[e.Next = 1] = "Next", e))(N || {});
+function P(e = document.body) {
+	return e == null ? [] : Array.from(e.querySelectorAll(A)).sort((e, t) => Math.sign((e.tabIndex || 2 ** 53 - 1) - (t.tabIndex || 2 ** 53 - 1)));
+}
+var F = ((e) => (e[e.Strict = 0] = "Strict", e[e.Loose = 1] = "Loose", e))(F || {});
+function ee(e, t = 0) {
+	var n;
+	return e === (n = k(e))?.body ? !1 : C(t, {
+		0() {
+			return e.matches(A);
+		},
+		1() {
+			let t = e;
+			for (; t !== null;) {
+				if (t.matches(A)) return !0;
+				t = t.parentElement;
+			}
+			return !1;
+		}
+	});
+}
+var te = ((e) => (e[e.Keyboard = 0] = "Keyboard", e[e.Mouse = 1] = "Mouse", e))(te || {});
+typeof window < "u" && typeof document < "u" && (document.addEventListener("keydown", (e) => {
+	e.metaKey || e.altKey || e.ctrlKey || (document.documentElement.dataset.headlessuiFocusVisible = "");
+}, !0), document.addEventListener("click", (e) => {
+	e.detail === 1 ? delete document.documentElement.dataset.headlessuiFocusVisible : e.detail === 0 && (document.documentElement.dataset.headlessuiFocusVisible = "");
+}, !0));
+let ne = ["textarea", "input"].join(",");
+function re(e) {
+	var t, n;
+	return (n = (t = e?.matches)?.call(e, ne)) ?? !1;
+}
+function ie(e, t = (e) => e) {
+	return e.slice().sort((e, n) => {
+		let r = t(e), i = t(n);
+		if (r === null || i === null) return 0;
+		let a = r.compareDocumentPosition(i);
+		return a & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : a & Node.DOCUMENT_POSITION_PRECEDING ? 1 : 0;
+	});
+}
+function I(e, t, { sorted: n = !0, relativeTo: r = null, skipElements: i = [] } = {}) {
+	var a;
+	let o = (a = Array.isArray(e) ? e.length > 0 ? e[0].ownerDocument : document : e?.ownerDocument) ?? document, s = Array.isArray(e) ? n ? ie(e) : e : P(e);
+	i.length > 0 && s.length > 1 && (s = s.filter((e) => !i.includes(e))), r ??= o.activeElement;
+	let c = (() => {
+		if (t & 5) return 1;
+		if (t & 10) return -1;
+		throw Error("Missing Focus.First, Focus.Previous, Focus.Next or Focus.Last");
+	})(), l = (() => {
+		if (t & 1) return 0;
+		if (t & 2) return Math.max(0, s.indexOf(r)) - 1;
+		if (t & 4) return Math.max(0, s.indexOf(r)) + 1;
+		if (t & 8) return s.length - 1;
+		throw Error("Missing Focus.First, Focus.Previous, Focus.Next or Focus.Last");
+	})(), u = t & 32 ? { preventScroll: !0 } : {}, d = 0, f = s.length, p;
+	do {
+		if (d >= f || d + f <= 0) return 0;
+		let e = l + d;
+		if (t & 16) e = (e + f) % f;
+		else {
+			if (e < 0) return 3;
+			if (e >= f) return 1;
+		}
+		p = s[e], p?.focus(u), d += c;
+	} while (p !== o.activeElement);
+	return t & 6 && re(p) && p.select(), 2;
+}
+function ae() {
+	return /iPhone/gi.test(window.navigator.platform) || /Mac/gi.test(window.navigator.platform) && window.navigator.maxTouchPoints > 0;
+}
+function oe() {
+	return /Android/gi.test(window.navigator.userAgent);
+}
+function se() {
+	return ae() || oe();
+}
+function L(e, t, n) {
+	O.isServer || _((r) => {
+		document.addEventListener(e, t, n), r(() => document.removeEventListener(e, t, n));
+	});
+}
+function ce(e, t, n) {
+	O.isServer || _((r) => {
+		window.addEventListener(e, t, n), r(() => window.removeEventListener(e, t, n));
+	});
+}
+function le(e, t, n = a(() => !0)) {
+	function r(r, i) {
+		if (!n.value || r.defaultPrevented) return;
+		let a = i(r);
+		if (a === null || !a.getRootNode().contains(a)) return;
+		let o = function e(t) {
+			return typeof t == "function" ? e(t()) : Array.isArray(t) || t instanceof Set ? t : [t];
+		}(e);
+		for (let e of o) {
+			if (e === null) continue;
+			let t = e instanceof HTMLElement ? e : S(e);
+			if (t != null && t.contains(a) || r.composed && r.composedPath().includes(t)) return;
+		}
+		return !ee(a, F.Loose) && a.tabIndex !== -1 && r.preventDefault(), t(r, a);
+	}
+	let i = m(null);
+	L("pointerdown", (e) => {
+		var t, r;
+		n.value && (i.value = (r = (t = e.composedPath)?.call(e))?.[0] || e.target);
+	}, !0), L("mousedown", (e) => {
+		var t, r;
+		n.value && (i.value = (r = (t = e.composedPath)?.call(e))?.[0] || e.target);
+	}, !0), L("click", (e) => {
+		se() || i.value && (r(e, () => i.value), i.value = null);
+	}, !0), L("touchend", (e) => r(e, () => e.target instanceof HTMLElement ? e.target : null), !0), ce("blur", (e) => r(e, () => window.document.activeElement instanceof HTMLIFrameElement ? window.document.activeElement : null), !0);
+}
+function ue(e, t) {
+	if (e) return e;
+	let n = t ?? "button";
+	if (typeof n == "string" && n.toLowerCase() === "button") return "button";
+}
+function de(e, t) {
+	let n = m(ue(e.value.type, e.value.as));
+	return u(() => {
+		n.value = ue(e.value.type, e.value.as);
+	}), _(() => {
+		var e;
+		n.value || S(t) && S(t) instanceof HTMLButtonElement && !((e = S(t)) != null && e.hasAttribute("type")) && (n.value = "button");
+	}), n;
+}
+var R = ((e) => (e[e.None = 0] = "None", e[e.RenderStrategy = 1] = "RenderStrategy", e[e.Static = 2] = "Static", e))(R || {}), fe = ((e) => (e[e.Unmount = 0] = "Unmount", e[e.Hidden = 1] = "Hidden", e))(fe || {});
+function z({ visible: e = !0, features: t = 0, ourProps: n, theirProps: r,...i }) {
+	var a;
+	let o = H(r, n), s = Object.assign(i, { props: o });
+	if (e || t & 2 && o.static) return B(s);
+	if (t & 1) {
+		let e = (a = o.unmount) == null || a ? 0 : 1;
+		return C(e, {
+			0() {
+				return null;
+			},
+			1() {
+				return B({
+					...i,
+					props: {
+						...o,
+						hidden: !0,
+						style: { display: "none" }
+					}
+				});
+			}
+		});
+	}
+	return B(s);
+}
+function B({ props: e, attrs: t, slots: n, slot: r, name: a }) {
+	var o, s;
+	let { as: l,...u } = pe(e, ["unmount", "static"]), d = (o = n.default)?.call(n, r), f = {};
+	if (r) {
+		let e = !1, t = [];
+		for (let [n, i] of Object.entries(r)) typeof i == "boolean" && (e = !0), i === !0 && t.push(n);
+		e && (f["data-headlessui-state"] = t.join(" "));
+	}
+	if (l === "template") {
+		if (d = V(d ?? []), Object.keys(u).length > 0 || Object.keys(t).length > 0) {
+			let [e, ...n] = d ?? [];
+			if (!me(e) || n.length > 0) throw Error([
+				"Passing props on \"template\"!",
+				"",
+				`The current component <${a} /> is rendering a "template".`,
+				"However we need to passthrough the following props:",
+				Object.keys(u).concat(Object.keys(t)).map((e) => e.trim()).filter((e, t, n) => n.indexOf(e) === t).sort((e, t) => e.localeCompare(t)).map((e) => `  - ${e}`).join("\n"),
+				"",
+				"You can apply a few solutions:",
+				["Add an `as=\"...\"` prop, to ensure that we render an actual element instead of a \"template\".", "Render a single element as the child so that we can forward the props onto that element."].map((e) => `  - ${e}`).join("\n")
+			].join("\n"));
+			let r = H((s = e.props) ?? {}, u, f), o = i(e, r, !0);
+			for (let e in r) e.startsWith("on") && (o.props ||= {}, o.props[e] = r[e]);
+			return o;
+		}
+		return Array.isArray(d) && d.length === 1 ? d[0] : d;
+	}
+	return c(l, Object.assign({}, u, f), { default: () => d });
+}
+function V(e) {
+	return e.flatMap((e) => e.type === n ? V(e.children) : [e]);
+}
+function H(...e) {
+	var t;
+	if (e.length === 0) return {};
+	if (e.length === 1) return e[0];
+	let n = {}, r = {};
+	for (let i of e) for (let e in i) e.startsWith("on") && typeof i[e] == "function" ? ((t = r[e]) ?? (r[e] = []), r[e].push(i[e])) : n[e] = i[e];
+	if (n.disabled || n["aria-disabled"]) return Object.assign(n, Object.fromEntries(Object.keys(r).map((e) => [e, void 0])));
+	for (let e in r) Object.assign(n, { [e](t, ...n) {
+		let i = r[e];
+		for (let e of i) {
+			if (t instanceof Event && t.defaultPrevented) return;
+			e(t, ...n);
+		}
+	} });
+	return n;
+}
+function pe(e, t = []) {
+	let n = Object.assign({}, e);
+	for (let e of t) e in n && delete n[e];
+	return n;
+}
+function me(e) {
+	return e == null ? !1 : typeof e.type == "string" || typeof e.type == "object" || typeof e.type == "function";
+}
+var U = ((e) => (e[e.None = 1] = "None", e[e.Focusable = 2] = "Focusable", e[e.Hidden = 4] = "Hidden", e))(U || {});
+let W = o({
+	name: "Hidden",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "div"
+		},
+		features: {
+			type: Number,
+			default: 1
+		}
+	},
+	setup(e, { slots: t, attrs: n }) {
+		return () => {
+			var r;
+			let { features: i,...a } = e, o = {
+				"aria-hidden": (i & 2) == 2 ? !0 : (r = a["aria-hidden"]) ?? void 0,
+				hidden: (i & 4) == 4 ? !0 : void 0,
+				style: {
+					position: "fixed",
+					top: 1,
+					left: 1,
+					width: 1,
+					height: 0,
+					padding: 0,
+					margin: -1,
+					overflow: "hidden",
+					clip: "rect(0, 0, 0, 0)",
+					whiteSpace: "nowrap",
+					borderWidth: "0",
+					...(i & 4) == 4 && (i & 2) != 2 && { display: "none" }
+				}
+			};
+			return z({
+				ourProps: o,
+				theirProps: a,
+				slot: {},
+				attrs: n,
+				slots: t,
+				name: "Hidden"
+			});
+		};
+	}
+}), he = Symbol("Context");
+var G = ((e) => (e[e.Open = 1] = "Open", e[e.Closed = 2] = "Closed", e[e.Closing = 4] = "Closing", e[e.Opening = 8] = "Opening", e))(G || {});
+function ge() {
+	return l(he, null);
+}
+function _e(e) {
+	f(he, e);
+}
+var K = ((e) => (e.Space = " ", e.Enter = "Enter", e.Escape = "Escape", e.Backspace = "Backspace", e.Delete = "Delete", e.ArrowLeft = "ArrowLeft", e.ArrowUp = "ArrowUp", e.ArrowRight = "ArrowRight", e.ArrowDown = "ArrowDown", e.Home = "Home", e.End = "End", e.PageUp = "PageUp", e.PageDown = "PageDown", e.Tab = "Tab", e))(K || {});
+function ve(e, t, n, r) {
+	O.isServer || _((i) => {
+		e ??= window, e.addEventListener(t, n, r), i(() => e.removeEventListener(t, n, r));
+	});
+}
+var q = ((e) => (e[e.Forwards = 0] = "Forwards", e[e.Backwards = 1] = "Backwards", e))(q || {});
+function ye() {
+	let e = m(0);
+	return ce("keydown", (t) => {
+		t.key === "Tab" && (e.value = t.shiftKey ? 1 : 0);
+	}), e;
+}
+function be({ defaultContainers: e = [], portals: t, mainTreeNodeRef: n } = {}) {
+	let r = m(null), i = k(r);
+	function a() {
+		var n, a, o;
+		let s = [];
+		for (let t of e) t !== null && (t instanceof HTMLElement ? s.push(t) : "value" in t && t.value instanceof HTMLElement && s.push(t.value));
+		if (t != null && t.value) for (let e of t.value) s.push(e);
+		for (let e of (n = i?.querySelectorAll("html > *, body > *")) ?? []) e !== document.body && e !== document.head && e instanceof HTMLElement && e.id !== "headlessui-portal-root" && (e.contains(S(r)) || e.contains((o = (a = S(r))?.getRootNode())?.host) || s.some((t) => e.contains(t)) || s.push(e));
+		return s;
+	}
+	return {
+		resolveContainers: a,
+		contains(e) {
+			return a().some((t) => t.contains(e));
+		},
+		mainTreeNodeRef: r,
+		MainTreeNode() {
+			return n == null ? c(W, {
+				features: U.Hidden,
+				ref: r
+			}) : null;
+		}
+	};
+}
+function xe() {
+	let e = m(null);
+	return {
+		mainTreeNodeRef: e,
+		MainTreeNode() {
+			return c(W, {
+				features: U.Hidden,
+				ref: e
+			});
+		}
+	};
+}
+let Se = Symbol("ForcePortalRootContext");
+function Ce() {
+	return l(Se, !1);
+}
+o({
+	name: "ForcePortalRoot",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "template"
+		},
+		force: {
+			type: Boolean,
+			default: !1
+		}
+	},
+	setup(e, { slots: t, attrs: n }) {
+		return f(Se, e.force), () => {
+			let { force: r,...i } = e;
+			return z({
+				theirProps: i,
+				ourProps: {},
+				slot: {},
+				slots: t,
+				attrs: n,
+				name: "ForcePortalRoot"
+			});
+		};
+	}
+});
+function we(e) {
+	let t = k(e);
+	if (!t) {
+		if (e === null) return null;
+		throw Error(`[Headless UI]: Cannot find ownerDocument for contextElement: ${e}`);
+	}
+	let n = t.getElementById("headlessui-portal-root");
+	if (n) return n;
+	let r = t.createElement("div");
+	return r.setAttribute("id", "headlessui-portal-root"), t.body.appendChild(r);
+}
+const J = /* @__PURE__ */ new WeakMap();
+function Te(e) {
+	var t;
+	return (t = J.get(e)) ?? 0;
+}
+function Ee(e, t) {
+	let n = t(Te(e));
+	return n <= 0 ? J.delete(e) : J.set(e, n), n;
+}
+o({
+	name: "Portal",
+	props: { as: {
+		type: [Object, String],
+		default: "div"
+	} },
+	setup(e, { slots: t, attrs: n }) {
+		let i = m(null), o = a(() => k(i)), f = Ce(), p = l(Oe, null), h = m(f === !0 || p == null ? we(i.value) : p.resolveTarget());
+		h.value && Ee(h.value, (e) => e + 1);
+		let v = m(!1);
+		u(() => {
+			v.value = !0;
+		}), _(() => {
+			f || p != null && (h.value = p.resolveTarget());
+		});
+		let y = l(Y, null), b = !1, x = s();
+		return g(i, () => {
+			if (b || !y) return;
+			let e = S(i);
+			e && (d(y.register(e), x), b = !0);
+		}), d(() => {
+			var e, t;
+			let n = (e = o.value)?.getElementById("headlessui-portal-root");
+			!n || h.value !== n || Ee(h.value, (e) => e - 1) || h.value.children.length > 0 || (t = h.value.parentElement) == null || t.removeChild(h.value);
+		}), () => {
+			if (!v.value || h.value === null) return null;
+			let a = {
+				ref: i,
+				"data-headlessui-portal": ""
+			};
+			return c(r, { to: h.value }, z({
+				ourProps: a,
+				theirProps: e,
+				slot: {},
+				attrs: n,
+				slots: t,
+				name: "Portal"
+			}));
+		};
+	}
+});
+let Y = Symbol("PortalParentContext");
+function De() {
+	let e = l(Y, null), t = m([]);
+	function n(n) {
+		return t.value.push(n), e && e.register(n), () => r(n);
+	}
+	function r(n) {
+		let r = t.value.indexOf(n);
+		r !== -1 && t.value.splice(r, 1), e && e.unregister(n);
+	}
+	let i = {
+		register: n,
+		unregister: r,
+		portals: t
+	};
+	return [t, o({
+		name: "PortalWrapper",
+		setup(e, { slots: t }) {
+			return f(Y, i), () => {
+				var e;
+				return (e = t.default)?.call(t);
+			};
+		}
+	})];
+}
+let Oe = Symbol("PortalGroupContext");
+o({
+	name: "PortalGroup",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "template"
+		},
+		target: {
+			type: Object,
+			default: null
+		}
+	},
+	setup(e, { attrs: t, slots: n }) {
+		let r = p({ resolveTarget() {
+			return e.target;
+		} });
+		return f(Oe, r), () => {
+			let { target: r,...i } = e;
+			return z({
+				theirProps: i,
+				ourProps: {},
+				slot: {},
+				attrs: t,
+				slots: n,
+				name: "PortalGroup"
+			});
+		};
+	}
+});
+var ke = ((e) => (e[e.Open = 0] = "Open", e[e.Closed = 1] = "Closed", e))(ke || {});
+let Ae = Symbol("PopoverContext");
+function X(e) {
+	let t = l(Ae, null);
+	if (t === null) {
+		let t = /* @__PURE__ */ Error(`<${e} /> is missing a parent <${Q.name} /> component.`);
+		throw Error.captureStackTrace && Error.captureStackTrace(t, X), t;
+	}
+	return t;
+}
+let je = Symbol("PopoverGroupContext");
+function Me() {
+	return l(je, null);
+}
+let Z = Symbol("PopoverPanelContext");
+function Ne() {
+	return l(Z, null);
+}
+let Q = o({
+	name: "Popover",
+	inheritAttrs: !1,
+	props: { as: {
+		type: [Object, String],
+		default: "div"
+	} },
+	setup(e, { slots: t, attrs: r, expose: i }) {
+		var o;
+		let s = m(null);
+		i({
+			el: s,
+			$el: s
+		});
+		let l = m(1), u = m(null), d = m(null), p = m(null), h = m(null), g = a(() => k(s)), v = a(() => {
+			var e, t;
+			if (!S(u) || !S(h)) return !1;
+			for (let e of document.querySelectorAll("body > *")) if (Number(e?.contains(S(u))) ^ Number(e?.contains(S(h)))) return !0;
+			let n = P(), r = n.indexOf(S(u)), i = (r + n.length - 1) % n.length, a = (r + 1) % n.length, o = n[i], s = n[a];
+			return !((e = S(h)) != null && e.contains(o)) && !((t = S(h)) != null && t.contains(s));
+		}), y = {
+			popoverState: l,
+			buttonId: m(null),
+			panelId: m(null),
+			panel: h,
+			button: u,
+			isPortalled: v,
+			beforePanelSentinel: d,
+			afterPanelSentinel: p,
+			togglePopover() {
+				l.value = C(l.value, {
+					0: 1,
+					1: 0
+				});
+			},
+			closePopover() {
+				l.value !== 1 && (l.value = 1);
+			},
+			close(e) {
+				y.closePopover();
+				let t = (() => e ? e instanceof HTMLElement ? e : e.value instanceof HTMLElement ? S(e) : S(y.button) : S(y.button))();
+				t?.focus();
+			}
+		};
+		f(Ae, y), _e(a(() => C(l.value, {
+			0: G.Open,
+			1: G.Closed
+		})));
+		let b = {
+			buttonId: y.buttonId,
+			panelId: y.panelId,
+			close() {
+				y.closePopover();
+			}
+		}, x = Me(), w = x?.registerPopover, [T, E] = De(), D = be({
+			mainTreeNodeRef: x?.mainTreeNodeRef,
+			portals: T,
+			defaultContainers: [u, h]
+		});
+		function O() {
+			var e, t, n, r;
+			return (r = x?.isFocusWithinPopoverGroup()) ?? ((e = g.value)?.activeElement && ((t = S(u))?.contains(g.value.activeElement) || (n = S(h))?.contains(g.value.activeElement)));
+		}
+		return _(() => w?.(b)), ve((o = g.value)?.defaultView, "focus", (e) => {
+			var t, n;
+			e.target !== window && e.target instanceof HTMLElement && l.value === 0 && (O() || u && h && (D.contains(e.target) || (t = S(y.beforePanelSentinel)) != null && t.contains(e.target) || (n = S(y.afterPanelSentinel)) != null && n.contains(e.target) || y.closePopover()));
+		}, !0), le(D.resolveContainers, (e, t) => {
+			var n;
+			y.closePopover(), ee(t, F.Loose) || (e.preventDefault(), (n = S(u)) == null || n.focus());
+		}, a(() => l.value === 0)), () => {
+			let i = {
+				open: l.value === 0,
+				close: y.close
+			};
+			return c(n, [c(E, {}, () => z({
+				theirProps: {
+					...e,
+					...r
+				},
+				ourProps: { ref: s },
+				slot: i,
+				slots: t,
+				attrs: r,
+				name: "Popover"
+			})), c(D.MainTreeNode)]);
+		};
+	}
+}), Pe = o({
+	name: "PopoverButton",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "button"
+		},
+		disabled: {
+			type: [Boolean],
+			default: !1
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	inheritAttrs: !1,
+	setup(e, { attrs: t, slots: r, expose: i }) {
+		var o;
+		let s = (o = e.id) ?? `headlessui-popover-button-${x()}`, l = X("PopoverButton"), f = a(() => k(l.button));
+		i({
+			el: l.button,
+			$el: l.button
+		}), u(() => {
+			l.buttonId.value = s;
+		}), d(() => {
+			l.buttonId.value = null;
+		});
+		let p = Me(), h = p?.closeOthers, g = Ne(), v = a(() => g === null ? !1 : g.value === l.panelId.value), y = m(null), b = `headlessui-focus-sentinel-${x()}`;
+		v.value || _(() => {
+			l.button.value = S(y);
+		});
+		let w = de(a(() => ({
+			as: e.as,
+			type: t.type
+		})), y);
+		function T(e) {
+			var t, n, r, i, a;
+			if (v.value) {
+				if (l.popoverState.value === 1) return;
+				switch (e.key) {
+					case K.Space:
+					case K.Enter:
+						e.preventDefault(), (n = (t = e.target).click) == null || n.call(t), l.closePopover(), (r = S(l.button)) == null || r.focus();
+						break;
+				}
+			} else switch (e.key) {
+				case K.Space:
+				case K.Enter:
+					e.preventDefault(), e.stopPropagation(), l.popoverState.value === 1 && h?.(l.buttonId.value), l.togglePopover();
+					break;
+				case K.Escape:
+					if (l.popoverState.value !== 0) return h?.(l.buttonId.value);
+					if (!S(l.button) || (i = f.value) != null && i.activeElement && !((a = S(l.button)) != null && a.contains(f.value.activeElement))) return;
+					e.preventDefault(), e.stopPropagation(), l.closePopover();
+					break;
+			}
+		}
+		function E(e) {
+			v.value || e.key === K.Space && e.preventDefault();
+		}
+		function D(t) {
+			var n, r;
+			e.disabled || (v.value ? (l.closePopover(), (n = S(l.button)) == null || n.focus()) : (t.preventDefault(), t.stopPropagation(), l.popoverState.value === 1 && h?.(l.buttonId.value), l.togglePopover(), (r = S(l.button)) == null || r.focus()));
+		}
+		function O(e) {
+			e.preventDefault(), e.stopPropagation();
+		}
+		let A = ye();
+		function N() {
+			let e = S(l.panel);
+			if (!e) return;
+			function t() {
+				C(A.value, {
+					[q.Forwards]: () => I(e, j.First),
+					[q.Backwards]: () => I(e, j.Last)
+				}) === M.Error && I(P().filter((e) => e.dataset.headlessuiFocusGuard !== "true"), C(A.value, {
+					[q.Forwards]: j.Next,
+					[q.Backwards]: j.Previous
+				}), { relativeTo: S(l.button) });
+			}
+			t();
+		}
+		return () => {
+			let i = l.popoverState.value === 0, a = { open: i }, { ...o } = e, u = v.value ? {
+				ref: y,
+				type: w.value,
+				onKeydown: T,
+				onClick: D
+			} : {
+				ref: y,
+				id: s,
+				type: w.value,
+				"aria-expanded": l.popoverState.value === 0,
+				"aria-controls": S(l.panel) ? l.panelId.value : void 0,
+				disabled: e.disabled ? !0 : void 0,
+				onKeydown: T,
+				onKeyup: E,
+				onClick: D,
+				onMousedown: O
+			};
+			return c(n, [z({
+				ourProps: u,
+				theirProps: {
+					...t,
+					...o
+				},
+				slot: a,
+				attrs: t,
+				slots: r,
+				name: "PopoverButton"
+			}), i && !v.value && l.isPortalled.value && c(W, {
+				id: b,
+				features: U.Focusable,
+				"data-headlessui-focus-guard": !0,
+				as: "button",
+				type: "button",
+				onFocus: N
+			})]);
+		};
+	}
+});
+o({
+	name: "PopoverOverlay",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "div"
+		},
+		static: {
+			type: Boolean,
+			default: !1
+		},
+		unmount: {
+			type: Boolean,
+			default: !0
+		}
+	},
+	setup(e, { attrs: t, slots: n }) {
+		let r = X("PopoverOverlay"), i = `headlessui-popover-overlay-${x()}`, o = ge(), s = a(() => o === null ? r.popoverState.value === 0 : (o.value & G.Open) === G.Open);
+		function c() {
+			r.closePopover();
+		}
+		return () => {
+			let a = { open: r.popoverState.value === 0 };
+			return z({
+				ourProps: {
+					id: i,
+					"aria-hidden": !0,
+					onClick: c
+				},
+				theirProps: e,
+				slot: a,
+				attrs: t,
+				slots: n,
+				features: R.RenderStrategy | R.Static,
+				visible: s.value,
+				name: "PopoverOverlay"
+			});
+		};
+	}
+});
+let $ = o({
+	name: "PopoverPanel",
+	props: {
+		as: {
+			type: [Object, String],
+			default: "div"
+		},
+		static: {
+			type: Boolean,
+			default: !1
+		},
+		unmount: {
+			type: Boolean,
+			default: !0
+		},
+		focus: {
+			type: Boolean,
+			default: !1
+		},
+		id: {
+			type: String,
+			default: null
+		}
+	},
+	inheritAttrs: !1,
+	setup(e, { attrs: t, slots: r, expose: i }) {
+		var o;
+		let s = (o = e.id) ?? `headlessui-popover-panel-${x()}`, { focus: l } = e, p = X("PopoverPanel"), m = a(() => k(p.panel)), h = `headlessui-focus-sentinel-before-${x()}`, g = `headlessui-focus-sentinel-after-${x()}`;
+		i({
+			el: p.panel,
+			$el: p.panel
+		}), u(() => {
+			p.panelId.value = s;
+		}), d(() => {
+			p.panelId.value = null;
+		}), f(Z, p.panelId), _(() => {
+			var e, t;
+			if (!l || p.popoverState.value !== 0 || !p.panel) return;
+			let n = (e = m.value)?.activeElement;
+			(t = S(p.panel)) != null && t.contains(n) || I(S(p.panel), j.First);
+		});
+		let v = ge(), y = a(() => v === null ? p.popoverState.value === 0 : (v.value & G.Open) === G.Open);
+		function b(e) {
+			var t, n;
+			switch (e.key) {
+				case K.Escape:
+					if (p.popoverState.value !== 0 || !S(p.panel) || m.value && !((t = S(p.panel)) != null && t.contains(m.value.activeElement))) return;
+					e.preventDefault(), e.stopPropagation(), p.closePopover(), (n = S(p.button)) == null || n.focus();
+					break;
+			}
+		}
+		function w(e) {
+			var t, n, r, i, a;
+			let o = e.relatedTarget;
+			o && S(p.panel) && ((t = S(p.panel)) != null && t.contains(o) || (p.closePopover(), ((r = (n = S(p.beforePanelSentinel))?.contains) != null && r.call(n, o) || (a = (i = S(p.afterPanelSentinel))?.contains) != null && a.call(i, o)) && o.focus({ preventScroll: !0 })));
+		}
+		let T = ye();
+		function E() {
+			let e = S(p.panel);
+			if (!e) return;
+			function t() {
+				C(T.value, {
+					[q.Forwards]: () => {
+						var t;
+						I(e, j.First) === M.Error && ((t = S(p.afterPanelSentinel)) == null || t.focus());
+					},
+					[q.Backwards]: () => {
+						var e;
+						(e = S(p.button)) == null || e.focus({ preventScroll: !0 });
+					}
+				});
+			}
+			t();
+		}
+		function D() {
+			let e = S(p.panel);
+			if (!e) return;
+			function t() {
+				C(T.value, {
+					[q.Forwards]: () => {
+						let e = S(p.button), t = S(p.panel);
+						if (!e) return;
+						let n = P(), r = n.indexOf(e), i = n.slice(0, r + 1), a = [...n.slice(r + 1), ...i];
+						for (let e of a.slice()) if (e.dataset.headlessuiFocusGuard === "true" || t != null && t.contains(e)) {
+							let t = a.indexOf(e);
+							t !== -1 && a.splice(t, 1);
+						}
+						I(a, j.First, { sorted: !1 });
+					},
+					[q.Backwards]: () => {
+						var t;
+						I(e, j.Previous) === M.Error && ((t = S(p.button)) == null || t.focus());
+					}
+				});
+			}
+			t();
+		}
+		return () => {
+			let i = {
+				open: p.popoverState.value === 0,
+				close: p.close
+			}, { focus: a,...o } = e, u = {
+				ref: p.panel,
+				id: s,
+				onKeydown: b,
+				onFocusout: l && p.popoverState.value === 0 ? w : void 0,
+				tabIndex: -1
+			};
+			return z({
+				ourProps: u,
+				theirProps: {
+					...t,
+					...o
+				},
+				attrs: t,
+				slot: i,
+				slots: {
+					...r,
+					default: (...e) => {
+						var t;
+						return [c(n, [
+							y.value && p.isPortalled.value && c(W, {
+								id: h,
+								ref: p.beforePanelSentinel,
+								features: U.Focusable,
+								"data-headlessui-focus-guard": !0,
+								as: "button",
+								type: "button",
+								onFocus: E
+							}),
+							(t = r.default)?.call(r, ...e),
+							y.value && p.isPortalled.value && c(W, {
+								id: g,
+								ref: p.afterPanelSentinel,
+								features: U.Focusable,
+								"data-headlessui-focus-guard": !0,
+								as: "button",
+								type: "button",
+								onFocus: D
+							})
+						])];
+					}
+				},
+				features: R.RenderStrategy | R.Static,
+				visible: y.value,
+				name: "PopoverPanel"
+			});
+		};
+	}
+});
+o({
+	name: "PopoverGroup",
+	inheritAttrs: !1,
+	props: { as: {
+		type: [Object, String],
+		default: "div"
+	} },
+	setup(e, { attrs: t, slots: r, expose: i }) {
+		let o = m(null), s = h([]), l = a(() => k(o)), u = xe();
+		i({
+			el: o,
+			$el: o
+		});
+		function d(e) {
+			let t = s.value.indexOf(e);
+			t !== -1 && s.value.splice(t, 1);
+		}
+		function p(e) {
+			return s.value.push(e), () => {
+				d(e);
+			};
+		}
+		function g() {
+			var e;
+			let t = l.value;
+			if (!t) return !1;
+			let n = t.activeElement;
+			return (e = S(o)) != null && e.contains(n) ? !0 : s.value.some((e) => {
+				var r, i;
+				return (r = t.getElementById(e.buttonId.value))?.contains(n) || (i = t.getElementById(e.panelId.value))?.contains(n);
+			});
+		}
+		function _(e) {
+			for (let t of s.value) t.buttonId.value !== e && t.close();
+		}
+		return f(je, {
+			registerPopover: p,
+			unregisterPopover: d,
+			isFocusWithinPopoverGroup: g,
+			closeOthers: _,
+			mainTreeNodeRef: u.mainTreeNodeRef
+		}), () => c(n, [z({
+			ourProps: { ref: o },
+			theirProps: {
+				...e,
+				...t
+			},
+			slot: {},
+			attrs: t,
+			slots: r,
+			name: "PopoverGroup"
+		}), c(u.MainTreeNode)]);
+	}
+});
+const Fe = { install(e) {
+	Object.entries({
+		Popover: Q,
+		PopoverButton: Pe,
+		PopoverPanel: $
+	}).forEach(([t, n]) => {
+		e.component(t, n);
+	});
+} };
+var Ie = Fe;
+export { Q as Popover, Pe as PopoverButton, $ as PopoverPanel, Ie as default };
+
 //# sourceMappingURL=index.js.map

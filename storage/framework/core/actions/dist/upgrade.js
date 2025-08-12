@@ -1,5 +1,5 @@
 // @bun
-import"./chunk-1j66gxht.js";
+import"./chunk-tsfemdz5.js";
 
 // src/upgrade.ts
 import process from "process";
